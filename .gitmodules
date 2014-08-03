@@ -1,0 +1,6 @@
+[submodule "externals/ssdtPRgen"]
+	path = externals/ssdtPRgen
+	url = https://github.com/Piker-Alpha/ssdtPRGen.sh.git
+[submodule "externals/Laptop-DSDT-Patch"]
+	path = externals/Laptop-DSDT-Patch
+	url = https://github.com/RehabMan/Laptop-DSDT-Patch

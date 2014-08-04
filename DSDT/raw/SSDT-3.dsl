@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-3.aml, Sun Aug  3 21:26:00 2014
+ * Disassembly of ./DSDT/raw/SSDT-3.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -137,14 +137,10 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
             CreateField (Arg0, 0x40, Multiply (Local1, 0x08), TEMP)
             Name (STS0, Buffer (0x04)
             {
-                 0x00, 0x00, 0x00, 0x00
+                 0x00, 0x00, 0x00, 0x00                           /* .... */
             })
             Concatenate (STS0, TEMP, Local2)
-            Return (COSC (Buffer (0x10)
-                {
-                    /* 0000 */   0x16, 0xA6, 0x77, 0x40, 0x0C, 0x29, 0xBE, 0x47,
-                    /* 0008 */   0x9E, 0xBD, 0xD8, 0x70, 0x58, 0x71, 0x39, 0x53
-                }, REVS, SIZE, Local2))
+            Return (COSC (ToUUID ("4077a616-290c-47be-9ebd-d87058713953"), REVS, SIZE, Local2))
         }
 
         Method (COSC, 4, NotSerialized)
@@ -155,11 +151,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
             CreateDWordField (Arg0, 0x04, IID1)
             CreateDWordField (Arg0, 0x08, IID2)
             CreateDWordField (Arg0, 0x0C, IID3)
-            Name (UID0, Buffer (0x10)
-            {
-                /* 0000 */   0x16, 0xA6, 0x77, 0x40, 0x0C, 0x29, 0xBE, 0x47,
-                /* 0008 */   0x9E, 0xBD, 0xD8, 0x70, 0x58, 0x71, 0x39, 0x53
-            })
+            Name (UID0, ToUUID ("4077a616-290c-47be-9ebd-d87058713953"))
             CreateDWordField (UID0, Zero, EID0)
             CreateDWordField (UID0, 0x04, EID1)
             CreateDWordField (UID0, 0x08, EID2)
@@ -167,13 +159,13 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
             If (LNot (LAnd (LAnd (LEqual (IID0, EID0), LEqual (IID1, EID1)), 
                 LAnd (LEqual (IID2, EID2), LEqual (IID3, EID3)))))
             {
-                Store (0x06, STS0)
+                Store (0x06, STS0) /* \_PR_.CPU0.COSC.STS0 */
                 Return (Arg3)
             }
 
             If (LNotEqual (Arg1, One))
             {
-                Store (0x0A, STS0)
+                Store (0x0A, STS0) /* \_PR_.CPU0.COSC.STS0 */
                 Return (Arg3)
             }
 
@@ -191,20 +183,20 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS0, One))
             {
-                And (CAP0, 0x0BFF, CAP0)
+                And (CAP0, 0x0BFF, CAP0) /* \_PR_.CPU0.GCAP.CAP0 */
                 Return (Zero)
             }
 
-            Or (And (PDC0, 0x7FFFFFFF), CAP0, PDC0)
+            Or (And (PDC0, 0x7FFFFFFF), CAP0, PDC0) /* \PDC0 */
             If (And (CFGD, 0x7A))
             {
                 If (LAnd (LAnd (And (CFGD, 0x0200), And (PDC0, 0x18
                     )), LNot (And (SDTL, 0x02))))
                 {
-                    Or (SDTL, 0x02, SDTL)
+                    Or (SDTL, 0x02, SDTL) /* \SDTL */
                     OperationRegion (CST0, SystemMemory, DerefOf (Index (SSDT, 0x07)), DerefOf (Index (SSDT, 0x08
                         )))
-                    Load (CST0, HC0)
+                    Load (CST0, HC0) /* \_PR_.CPU0.HC0_ */
                 }
             }
 
@@ -241,11 +233,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS1, One))
             {
-                And (CAP1, 0x0BFF, CAP1)
+                And (CAP1, 0x0BFF, CAP1) /* \_PR_.CPU1.GCAP.CAP1 */
                 Return (Zero)
             }
 
-            Or (And (PDC1, 0x7FFFFFFF), CAP1, PDC1)
+            Or (And (PDC1, 0x7FFFFFFF), CAP1, PDC1) /* \PDC1 */
             If (LEqual (And (PDC1, 0x09), 0x09))
             {
                 APPT ()
@@ -256,7 +248,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 APCT ()
             }
 
-            Store (PDC1, PDC0)
+            Store (PDC1, PDC0) /* \PDC0 */
             Return (Zero)
         }
 
@@ -265,10 +257,10 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
             If (LAnd (And (CFGD, 0x7A), LNot (And (SDTL, 0x20
                 ))))
             {
-                Or (SDTL, 0x20, SDTL)
+                Or (SDTL, 0x20, SDTL) /* \SDTL */
                 OperationRegion (CST1, SystemMemory, DerefOf (Index (SSDT, 0x0A)), DerefOf (Index (SSDT, 0x0B
                     )))
-                Load (CST1, HC1)
+                Load (CST1, HC1) /* \_PR_.CPU1.HC1_ */
             }
         }
 
@@ -277,10 +269,10 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
             If (LAnd (And (CFGD, One), LNot (And (SDTL, 0x10
                 ))))
             {
-                Or (SDTL, 0x10, SDTL)
+                Or (SDTL, 0x10, SDTL) /* \SDTL */
                 OperationRegion (IST1, SystemMemory, DerefOf (Index (SSDT, 0x04)), DerefOf (Index (SSDT, 0x05
                     )))
-                Load (IST1, HI1)
+                Load (IST1, HI1) /* \_PR_.CPU1.HI1_ */
             }
         }
     }
@@ -312,11 +304,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS2, One))
             {
-                And (CAP2, 0x0BFF, CAP2)
+                And (CAP2, 0x0BFF, CAP2) /* \_PR_.CPU2.GCAP.CAP2 */
                 Return (Zero)
             }
 
-            Or (And (PDC2, 0x7FFFFFFF), CAP2, PDC2)
+            Or (And (PDC2, 0x7FFFFFFF), CAP2, PDC2) /* \PDC2 */
             If (LEqual (And (PDC2, 0x09), 0x09))
             {
                 \_PR.CPU1.APPT ()
@@ -327,7 +319,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 \_PR.CPU1.APCT ()
             }
 
-            Store (PDC2, PDC0)
+            Store (PDC2, PDC0) /* \PDC0 */
             Return (Zero)
         }
     }
@@ -359,11 +351,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS3, One))
             {
-                And (CAP3, 0x0BFF, CAP3)
+                And (CAP3, 0x0BFF, CAP3) /* \_PR_.CPU3.GCAP.CAP3 */
                 Return (Zero)
             }
 
-            Or (And (PDC3, 0x7FFFFFFF), CAP3, PDC3)
+            Or (And (PDC3, 0x7FFFFFFF), CAP3, PDC3) /* \PDC3 */
             If (LEqual (And (PDC3, 0x09), 0x09))
             {
                 \_PR.CPU1.APPT ()
@@ -374,7 +366,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 \_PR.CPU1.APCT ()
             }
 
-            Store (PDC3, PDC0)
+            Store (PDC3, PDC0) /* \PDC0 */
             Return (Zero)
         }
     }
@@ -406,11 +398,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS4, One))
             {
-                And (CAP4, 0x0BFF, CAP4)
+                And (CAP4, 0x0BFF, CAP4) /* \_PR_.CPU4.GCAP.CAP4 */
                 Return (Zero)
             }
 
-            Or (And (PDC4, 0x7FFFFFFF), CAP4, PDC4)
+            Or (And (PDC4, 0x7FFFFFFF), CAP4, PDC4) /* \PDC4 */
             If (LEqual (And (PDC4, 0x09), 0x09))
             {
                 \_PR.CPU1.APPT ()
@@ -421,7 +413,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 \_PR.CPU1.APCT ()
             }
 
-            Store (PDC4, PDC0)
+            Store (PDC4, PDC0) /* \PDC0 */
             Return (Zero)
         }
     }
@@ -453,11 +445,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS5, One))
             {
-                And (CAP5, 0x0BFF, CAP5)
+                And (CAP5, 0x0BFF, CAP5) /* \_PR_.CPU5.GCAP.CAP5 */
                 Return (Zero)
             }
 
-            Or (And (PDC5, 0x7FFFFFFF), CAP5, PDC5)
+            Or (And (PDC5, 0x7FFFFFFF), CAP5, PDC5) /* \PDC5 */
             If (LEqual (And (PDC5, 0x09), 0x09))
             {
                 \_PR.CPU1.APPT ()
@@ -468,7 +460,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 \_PR.CPU1.APCT ()
             }
 
-            Store (PDC5, PDC0)
+            Store (PDC5, PDC0) /* \PDC0 */
             Return (Zero)
         }
     }
@@ -500,11 +492,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS6, One))
             {
-                And (CAP6, 0x0BFF, CAP6)
+                And (CAP6, 0x0BFF, CAP6) /* \_PR_.CPU6.GCAP.CAP6 */
                 Return (Zero)
             }
 
-            Or (And (PDC6, 0x7FFFFFFF), CAP6, PDC6)
+            Or (And (PDC6, 0x7FFFFFFF), CAP6, PDC6) /* \PDC6 */
             If (LEqual (And (PDC6, 0x09), 0x09))
             {
                 \_PR.CPU1.APPT ()
@@ -515,7 +507,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 \_PR.CPU1.APCT ()
             }
 
-            Store (PDC6, PDC0)
+            Store (PDC6, PDC0) /* \PDC0 */
             Return (Zero)
         }
     }
@@ -547,11 +539,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
 
             If (And (STS7, One))
             {
-                And (CAP7, 0x0BFF, CAP7)
+                And (CAP7, 0x0BFF, CAP7) /* \_PR_.CPU7.GCAP.CAP7 */
                 Return (Zero)
             }
 
-            Or (And (PDC7, 0x7FFFFFFF), CAP7, PDC7)
+            Or (And (PDC7, 0x7FFFFFFF), CAP7, PDC7) /* \PDC7 */
             If (LEqual (And (PDC7, 0x09), 0x09))
             {
                 \_PR.CPU1.APPT ()
@@ -562,7 +554,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-3.aml", "SSDT", 1, "PmRef", "CpuPm", 0x0000300
                 \_PR.CPU1.APCT ()
             }
 
-            Store (PDC7, PDC0)
+            Store (PDC7, PDC0) /* \PDC0 */
             Return (Zero)
         }
     }

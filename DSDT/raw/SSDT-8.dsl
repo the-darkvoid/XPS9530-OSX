@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-8.aml, Sun Aug  3 21:26:00 2014
+ * Disassembly of ./DSDT/raw/SSDT-8.aml, Mon Aug  4 20:44:59 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"

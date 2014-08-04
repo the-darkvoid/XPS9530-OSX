@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-5x.aml, Sun Aug  3 21:26:00 2014
+ * Disassembly of ./DSDT/raw/SSDT-5x.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -19,18 +19,18 @@
 DefinitionBlock ("./DSDT/raw/SSDT-5x.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x00003001)
 {
 
+    External (_PR_.C3LT, FieldUnitObj)
+    External (_PR_.C3MW, FieldUnitObj)
+    External (_PR_.C6LT, FieldUnitObj)
+    External (_PR_.C6MW, FieldUnitObj)
+    External (_PR_.C7LT, FieldUnitObj)
+    External (_PR_.C7MW, FieldUnitObj)
+    External (_PR_.CDLT, FieldUnitObj)
+    External (_PR_.CDLV, FieldUnitObj)
+    External (_PR_.CDMW, FieldUnitObj)
+    External (_PR_.CDPW, FieldUnitObj)
+    External (_PR_.CFGD, FieldUnitObj)
     External (_PR_.CPU0, ProcessorObj)
-    External (C3LT, FieldUnitObj)
-    External (C3MW, FieldUnitObj)
-    External (C6LT, FieldUnitObj)
-    External (C6MW, FieldUnitObj)
-    External (C7LT, FieldUnitObj)
-    External (C7MW, FieldUnitObj)
-    External (CDLT, FieldUnitObj)
-    External (CDLV, FieldUnitObj)
-    External (CDMW, FieldUnitObj)
-    External (CDPW, FieldUnitObj)
-    External (CFGD, FieldUnitObj)
     External (PDC0, IntObj)
 
     Scope (\_PR.CPU0)
@@ -171,30 +171,30 @@ DefinitionBlock ("./DSDT/raw/SSDT-5x.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x0000
                     }
                 }
 
-                Store (Ones, CSTF)
+                Store (Ones, CSTF) /* \_PR_.CPU0.CSTF */
             }
 
-            Store (Zero, AC2V)
-            Store (Zero, AC3V)
+            Store (Zero, AC2V) /* \_PR_.CPU0.AC2V */
+            Store (Zero, AC3V) /* \_PR_.CPU0.AC3V */
             Store (C1TM, Index (C3ST, One))
             If (And (CFGD, 0x20))
             {
                 Store (C7TM, Index (C3ST, 0x02))
-                Store (Ones, AC2V)
+                Store (Ones, AC2V) /* \_PR_.CPU0.AC2V */
             }
             Else
             {
                 If (And (CFGD, 0x10))
                 {
                     Store (C6TM, Index (C3ST, 0x02))
-                    Store (Ones, AC2V)
+                    Store (Ones, AC2V) /* \_PR_.CPU0.AC2V */
                 }
                 Else
                 {
                     If (And (CFGD, 0x08))
                     {
                         Store (C3TM, Index (C3ST, 0x02))
-                        Store (Ones, AC2V)
+                        Store (Ones, AC2V) /* \_PR_.CPU0.AC2V */
                     }
                 }
             }
@@ -202,7 +202,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-5x.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x0000
             If (And (CFGD, 0x4000))
             {
                 Store (CDTM, Index (C3ST, 0x03))
-                Store (Ones, AC3V)
+                Store (Ones, AC3V) /* \_PR_.CPU0.AC3V */
             }
 
             If (LEqual (GEAR, One))
@@ -210,25 +210,25 @@ DefinitionBlock ("./DSDT/raw/SSDT-5x.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x0000
                 If (And (CFGD, 0x08))
                 {
                     Store (C3TM, Index (C3ST, 0x02))
-                    Store (Ones, AC2V)
-                    Store (Zero, AC3V)
+                    Store (Ones, AC2V) /* \_PR_.CPU0.AC2V */
+                    Store (Zero, AC3V) /* \_PR_.CPU0.AC3V */
                 }
                 Else
                 {
-                    Store (Zero, AC2V)
-                    Store (Zero, AC3V)
+                    Store (Zero, AC2V) /* \_PR_.CPU0.AC2V */
+                    Store (Zero, AC3V) /* \_PR_.CPU0.AC3V */
                 }
             }
 
             If (LEqual (GEAR, 0x02))
             {
-                Store (Zero, AC2V)
-                Store (Zero, AC3V)
+                Store (Zero, AC2V) /* \_PR_.CPU0.AC2V */
+                Store (Zero, AC3V) /* \_PR_.CPU0.AC3V */
             }
 
             If (LAnd (AC2V, AC3V))
             {
-                Return (C3ST)
+                Return (C3ST) /* \_PR_.CPU0.C3ST */
             }
             Else
             {
@@ -236,7 +236,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-5x.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x0000
                 {
                     Store (DerefOf (Index (C3ST, One)), Index (C2ST, One))
                     Store (DerefOf (Index (C3ST, 0x02)), Index (C2ST, 0x02))
-                    Return (C2ST)
+                    Return (C2ST) /* \_PR_.CPU0.C2ST */
                 }
                 Else
                 {
@@ -245,12 +245,12 @@ DefinitionBlock ("./DSDT/raw/SSDT-5x.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x0000
                         Store (DerefOf (Index (C3ST, One)), Index (C2ST, One))
                         Store (DerefOf (Index (C3ST, 0x03)), Index (C2ST, 0x02))
                         Store (0x02, Index (DerefOf (Index (C2ST, 0x02)), One))
-                        Return (C2ST)
+                        Return (C2ST) /* \_PR_.CPU0.C2ST */
                     }
                     Else
                     {
                         Store (DerefOf (Index (C3ST, One)), Index (C1ST, One))
-                        Return (C1ST)
+                        Return (C1ST) /* \_PR_.CPU0.C1ST */
                     }
                 }
             }

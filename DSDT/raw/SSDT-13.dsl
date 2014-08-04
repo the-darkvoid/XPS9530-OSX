@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-13.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-13.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -54,8 +54,8 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
 
         Method (SVAL, 1, NotSerialized)
         {
-            Store (ToInteger (Arg0), DAT)
-            Store (0xBC, INQ)
+            Store (ToInteger (Arg0), DAT) /* \TPM_.DAT_ */
+            Store (0xBC, INQ) /* \TPM_.INQ_ */
         }
     }
 
@@ -102,20 +102,16 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
             Name (_T_2, Zero)  // _T_x: Emitted by ASL Compiler
             Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
             Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-            If (LEqual (Arg0, Buffer (0x10)
-                    {
-                        /* 0000 */   0xA6, 0xFA, 0xDD, 0x3D, 0x1B, 0x36, 0xB4, 0x4E,
-                        /* 0008 */   0xA4, 0x24, 0x8D, 0x10, 0x08, 0x9D, 0x16, 0x53
-                    }))
+            If (LEqual (Arg0, ToUUID ("3dddfaa6-361b-4eb4-a424-8d10089d1653") /* Physical Presence Interface */))
             {
                 While (One)
                 {
-                    Store (ToInteger (Arg2), _T_0)
+                    Store (ToInteger (Arg2), _T_0) /* \TPM_._DSM._T_0 */
                     If (LEqual (_T_0, Zero))
                     {
                         Return (Buffer (0x02)
                         {
-                             0xFF, 0x01
+                             0xFF, 0x01                                       /* .. */
                         })
                     }
                     Else
@@ -133,16 +129,16 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
                                     Return (0x02)
                                 }
 
-                                ToInteger (DerefOf (Index (Arg3, Zero)), TMF2)
+                                ToInteger (DerefOf (Index (Arg3, Zero)), TMF2) /* \TPM_.TMF2 */
                                 If (LGreater (TMF2, 0x16))
                                 {
                                     Return (One)
                                 }
 
-                                Store (TMF2, P_PD)
-                                Store (TMF2, P_WR)
+                                Store (TMF2, P_PD) /* \TPM_.P_PD */
+                                Store (TMF2, P_WR) /* \TPM_.P_WR */
                                 SVAL (0xFF)
-                                Return (P_SR)
+                                Return (P_SR) /* \TPM_.P_SR */
                             }
                             Else
                             {
@@ -156,17 +152,17 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
                                     If (LEqual (P_AP, One))
                                     {
                                         Store (One, Index (PPI1, Zero))
-                                        Return (PPI1)
+                                        Return (PPI1) /* \TPM_._DSM.PPI1 */
                                     }
 
                                     If (LGreater (P_PD, 0x16))
                                     {
                                         Store (One, Index (PPI1, Zero))
-                                        Return (PPI1)
+                                        Return (PPI1) /* \TPM_._DSM.PPI1 */
                                     }
 
                                     Store (P_PD, Index (PPI1, One))
-                                    Return (PPI1)
+                                    Return (PPI1) /* \TPM_._DSM.PPI1 */
                                 }
                                 Else
                                 {
@@ -182,7 +178,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
                                             Return (Zero)
                                         }
 
-                                        Return (TRST)
+                                        Return (TRST) /* \TPM_.TRST */
                                     }
                                     Else
                                     {
@@ -197,18 +193,18 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
                                             If (LEqual (P_AP, One))
                                             {
                                                 Store (One, Index (PPI2, Zero))
-                                                Return (PPI2)
+                                                Return (PPI2) /* \TPM_._DSM.PPI2 */
                                             }
 
                                             If (LEqual (P_NR, 0xFF))
                                             {
                                                 Store (One, Index (PPI2, Zero))
-                                                Return (PPI2)
+                                                Return (PPI2) /* \TPM_._DSM.PPI2 */
                                             }
 
                                             Store (P_NR, Index (PPI2, One))
                                             Store (P_RC, Index (PPI2, 0x02))
-                                            Return (PPI2)
+                                            Return (PPI2) /* \TPM_._DSM.PPI2 */
                                         }
                                         Else
                                         {
@@ -225,16 +221,16 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
                                                         Return (0x03)
                                                     }
 
-                                                    ToInteger (DerefOf (Index (Arg3, Zero)), TMF2)
+                                                    ToInteger (DerefOf (Index (Arg3, Zero)), TMF2) /* \TPM_.TMF2 */
                                                     If (LGreater (TMF2, 0x16))
                                                     {
                                                         Return (One)
                                                     }
 
-                                                    Store (TMF2, P_PD)
-                                                    Store (TMF2, P_WR)
+                                                    Store (TMF2, P_PD) /* \TPM_.P_PD */
+                                                    Store (TMF2, P_WR) /* \TPM_.P_WR */
                                                     SVAL (0xFF)
-                                                    Return (P_SR)
+                                                    Return (P_SR) /* \TPM_.P_SR */
                                                 }
                                                 Else
                                                 {
@@ -245,145 +241,145 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
                                                             Return (0x02)
                                                         }
 
-                                                        ToInteger (DerefOf (Index (Arg3, Zero)), TMF2)
+                                                        ToInteger (DerefOf (Index (Arg3, Zero)), TMF2) /* \TPM_.TMF2 */
                                                         While (One)
                                                         {
-                                                            Store (TMF2, _T_1)
+                                                            Store (TMF2, _T_1) /* \TPM_._DSM._T_1 */
                                                             If (LEqual (_T_1, Zero))
                                                             {
-                                                                Return (RP00)
+                                                                Return (RP00) /* \TPM_.RP00 */
                                                             }
                                                             Else
                                                             {
                                                                 If (LEqual (_T_1, One))
                                                                 {
-                                                                    Return (RP01)
+                                                                    Return (RP01) /* \TPM_.RP01 */
                                                                 }
                                                                 Else
                                                                 {
                                                                     If (LEqual (_T_1, 0x02))
                                                                     {
-                                                                        Return (RP02)
+                                                                        Return (RP02) /* \TPM_.RP02 */
                                                                     }
                                                                     Else
                                                                     {
                                                                         If (LEqual (_T_1, 0x03))
                                                                         {
-                                                                            Return (RP03)
+                                                                            Return (RP03) /* \TPM_.RP03 */
                                                                         }
                                                                         Else
                                                                         {
                                                                             If (LEqual (_T_1, 0x04))
                                                                             {
-                                                                                Return (RP04)
+                                                                                Return (RP04) /* \TPM_.RP04 */
                                                                             }
                                                                             Else
                                                                             {
                                                                                 If (LEqual (_T_1, 0x05))
                                                                                 {
-                                                                                    Return (RP05)
+                                                                                    Return (RP05) /* \TPM_.RP05 */
                                                                                 }
                                                                                 Else
                                                                                 {
                                                                                     If (LEqual (_T_1, 0x06))
                                                                                     {
-                                                                                        Return (RP06)
+                                                                                        Return (RP06) /* \TPM_.RP06 */
                                                                                     }
                                                                                     Else
                                                                                     {
                                                                                         If (LEqual (_T_1, 0x07))
                                                                                         {
-                                                                                            Return (RP07)
+                                                                                            Return (RP07) /* \TPM_.RP07 */
                                                                                         }
                                                                                         Else
                                                                                         {
                                                                                             If (LEqual (_T_1, 0x08))
                                                                                             {
-                                                                                                Return (RP08)
+                                                                                                Return (RP08) /* \TPM_.RP08 */
                                                                                             }
                                                                                             Else
                                                                                             {
                                                                                                 If (LEqual (_T_1, 0x09))
                                                                                                 {
-                                                                                                    Return (RP09)
+                                                                                                    Return (RP09) /* \TPM_.RP09 */
                                                                                                 }
                                                                                                 Else
                                                                                                 {
                                                                                                     If (LEqual (_T_1, 0x0A))
                                                                                                     {
-                                                                                                        Return (RP10)
+                                                                                                        Return (RP10) /* \TPM_.RP10 */
                                                                                                     }
                                                                                                     Else
                                                                                                     {
                                                                                                         If (LEqual (_T_1, 0x0B))
                                                                                                         {
-                                                                                                            Return (RP11)
+                                                                                                            Return (RP11) /* \TPM_.RP11 */
                                                                                                         }
                                                                                                         Else
                                                                                                         {
                                                                                                             If (LEqual (_T_1, 0x0C))
                                                                                                             {
-                                                                                                                Return (RP12)
+                                                                                                                Return (RP12) /* \TPM_.RP12 */
                                                                                                             }
                                                                                                             Else
                                                                                                             {
                                                                                                                 If (LEqual (_T_1, 0x0D))
                                                                                                                 {
-                                                                                                                    Return (RP13)
+                                                                                                                    Return (RP13) /* \TPM_.RP13 */
                                                                                                                 }
                                                                                                                 Else
                                                                                                                 {
                                                                                                                     If (LEqual (_T_1, 0x0E))
                                                                                                                     {
-                                                                                                                        Return (RP14)
+                                                                                                                        Return (RP14) /* \TPM_.RP14 */
                                                                                                                     }
                                                                                                                     Else
                                                                                                                     {
                                                                                                                         If (LEqual (_T_1, 0x0F))
                                                                                                                         {
-                                                                                                                            Return (RP15)
+                                                                                                                            Return (RP15) /* \TPM_.RP15 */
                                                                                                                         }
                                                                                                                         Else
                                                                                                                         {
                                                                                                                             If (LEqual (_T_1, 0x10))
                                                                                                                             {
-                                                                                                                                Return (RP16)
+                                                                                                                                Return (RP16) /* \TPM_.RP16 */
                                                                                                                             }
                                                                                                                             Else
                                                                                                                             {
                                                                                                                                 If (LEqual (_T_1, 0x11))
                                                                                                                                 {
-                                                                                                                                    Return (RP17)
+                                                                                                                                    Return (RP17) /* \TPM_.RP17 */
                                                                                                                                 }
                                                                                                                                 Else
                                                                                                                                 {
                                                                                                                                     If (LEqual (_T_1, 0x12))
                                                                                                                                     {
-                                                                                                                                        Return (RP18)
+                                                                                                                                        Return (RP18) /* \TPM_.RP18 */
                                                                                                                                     }
                                                                                                                                     Else
                                                                                                                                     {
                                                                                                                                         If (LEqual (_T_1, 0x13))
                                                                                                                                         {
-                                                                                                                                            Return (RP19)
+                                                                                                                                            Return (RP19) /* \TPM_.RP19 */
                                                                                                                                         }
                                                                                                                                         Else
                                                                                                                                         {
                                                                                                                                             If (LEqual (_T_1, 0x14))
                                                                                                                                             {
-                                                                                                                                                Return (RP20)
+                                                                                                                                                Return (RP20) /* \TPM_.RP20 */
                                                                                                                                             }
                                                                                                                                             Else
                                                                                                                                             {
                                                                                                                                                 If (LEqual (_T_1, 0x15))
                                                                                                                                                 {
-                                                                                                                                                    Return (RP21)
+                                                                                                                                                    Return (RP21) /* \TPM_.RP21 */
                                                                                                                                                 }
                                                                                                                                                 Else
                                                                                                                                                 {
                                                                                                                                                     If (LEqual (_T_1, 0x16))
                                                                                                                                                     {
-                                                                                                                                                        Return (RP22)
+                                                                                                                                                        Return (RP22) /* \TPM_.RP22 */
                                                                                                                                                     }
                                                                                                                                                     Else
                                                                                                                                                     {
@@ -434,28 +430,24 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
             }
             Else
             {
-                If (LEqual (Arg0, Buffer (0x10)
-                        {
-                            /* 0000 */   0xED, 0x54, 0x60, 0x37, 0x13, 0xCC, 0x75, 0x46,
-                            /* 0008 */   0x90, 0x1C, 0x47, 0x56, 0xD7, 0xF2, 0xD4, 0x5D
-                        }))
+                If (LEqual (Arg0, ToUUID ("376054ed-cc13-4675-901c-4756d7f2d45d")))
                 {
                     While (One)
                     {
-                        Store (ToInteger (Arg2), _T_2)
+                        Store (ToInteger (Arg2), _T_2) /* \TPM_._DSM._T_2 */
                         If (LEqual (_T_2, Zero))
                         {
                             Return (Buffer (One)
                             {
-                                 0x03
+                                 0x03                                             /* . */
                             })
                         }
                         Else
                         {
                             If (LEqual (_T_2, One))
                             {
-                                ToInteger (DerefOf (Index (Arg3, Zero)), TMF1)
-                                Store (TMF1, PMOR)
+                                ToInteger (DerefOf (Index (Arg3, Zero)), TMF1) /* \TPM_.TMF1 */
+                                Store (TMF1, PMOR) /* \TPM_.PMOR */
                                 SVAL (0xFF)
                                 Return (Zero)
                             }
@@ -471,7 +463,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-13.aml", "SSDT", 1, "AMITCG", "PROC", 0x000000
 
             Return (Buffer (One)
             {
-                 0x00
+                 0x00                                             /* . */
             })
         }
     }

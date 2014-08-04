@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-4x.aml, Sun Aug  3 21:26:00 2014
+ * Disassembly of ./DSDT/raw/SSDT-4x.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -36,7 +36,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -46,7 +46,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -56,15 +56,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU1.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU1.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU1.SPSD */
         }
 
         Name (HPSD, Package (0x01)
@@ -95,7 +95,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -105,7 +105,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -115,15 +115,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU2.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU2.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU2.SPSD */
         }
 
         Name (HPSD, Package (0x01)
@@ -154,7 +154,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -164,7 +164,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -174,15 +174,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU3.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU3.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU3.SPSD */
         }
 
         Name (HPSD, Package (0x01)
@@ -213,7 +213,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -223,7 +223,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -233,15 +233,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU4.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU4.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU4.SPSD */
         }
 
         Name (HPSD, Package (0x01)
@@ -272,7 +272,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -282,7 +282,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -292,15 +292,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU5.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU5.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU5.SPSD */
         }
 
         Name (HPSD, Package (0x01)
@@ -331,7 +331,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -341,7 +341,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -351,15 +351,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU6.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU6.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU6.SPSD */
         }
 
         Name (HPSD, Package (0x01)
@@ -390,7 +390,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
     {
         Method (_PPC, 0, NotSerialized)  // _PPC: Performance Present Capabilites
         {
-            Return (\_PR.CPU0._PPC)
+            Return (\_PR.CPU0._PPC) /* External reference */
         }
 
         Method (_PCT, 0, NotSerialized)  // _PCT: Performance Control
@@ -400,7 +400,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
 
         Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
         {
-            Return (\_PR.CPU0._PSS)
+            Return (\_PR.CPU0._PSS) /* External reference */
         }
 
         Name (PSDF, Zero)
@@ -410,15 +410,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-4x.aml", "SSDT", 1, "PmRef", "ApIst", 0x000030
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU7.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU7.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU7.SPSD */
         }
 
         Name (HPSD, Package (0x01)

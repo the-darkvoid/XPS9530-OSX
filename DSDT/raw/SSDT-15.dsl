@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-15.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-15.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -71,7 +71,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-15.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00
                 LSTA,   1
             }
 
-            Name (_HID, "INT33A0")  // _HID: Hardware ID
+            Name (_HID, "INT33A0" /* Intel Smart Connect Technology Device */)  // _HID: Hardware ID
             Name (_UID, Zero)  // _UID: Unique ID
             Name (AOS1, Zero)
             Name (ANS1, Zero)
@@ -80,13 +80,13 @@ DefinitionBlock ("./DSDT/raw/SSDT-15.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00
             Name (ASDS, Zero)
             Method (GABS, 0, NotSerialized)
             {
-                Or (ICNF, 0x77, ICNF)
-                Return (ICNF)
+                Or (ICNF, 0x77, ICNF) /* \ICNF */
+                Return (ICNF) /* \ICNF */
             }
 
             Method (GAOS, 0, NotSerialized)
             {
-                Return (AOS1)
+                Return (AOS1) /* \_SB_.IAOE.AOS1 */
             }
 
             Method (SAOS, 1, NotSerialized)
@@ -97,17 +97,17 @@ DefinitionBlock ("./DSDT/raw/SSDT-15.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00
                     Store (Or (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), One), \_SB.PCI0.GFX0.STAT)
                     Store (And (\_SB.PCI0.GFX0.ASLC, 0xFFFFFEFF), \_SB.PCI0.GFX0.ASLC)
                     Store (One, \_SB.PCI0.GFX0.ASLE)
-                    Store (One, AOS1)
-                    Store (One, AAST)
-                    Store (One, AAEN)
+                    Store (One, AOS1) /* \_SB_.IAOE.AOS1 */
+                    Store (One, AAST) /* \_SB_.IAOE.AAST */
+                    Store (One, AAEN) /* \_SB_.IAOE.AAEN */
                     If (LEqual (And (Local0, 0x02), 0x02))
                     {
-                        Store (0x03, AOS1)
-                        Store (One, AAWM)
+                        Store (0x03, AOS1) /* \_SB_.IAOE.AOS1 */
+                        Store (One, AAWM) /* \_SB_.IAOE.AAWM */
                     }
                     Else
                     {
-                        Store (Zero, AAWM)
+                        Store (Zero, AAWM) /* \_SB_.IAOE.AAWM */
                     }
                 }
                 Else
@@ -115,57 +115,57 @@ DefinitionBlock ("./DSDT/raw/SSDT-15.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00
                     Store (And (\_SB.PCI0.GFX0.STAT, 0xFFFFFFFC), \_SB.PCI0.GFX0.STAT)
                     Store (Or (And (\_SB.PCI0.GFX0.ASLC, 0xFFFFFEFF), 0x0100), \_SB.PCI0.GFX0.ASLC)
                     Store (One, \_SB.PCI0.GFX0.ASLE)
-                    Store (Zero, AOS1)
-                    Store (Zero, AAST)
-                    Store (Zero, AAEN)
-                    Store (Zero, AAWM)
+                    Store (Zero, AOS1) /* \_SB_.IAOE.AOS1 */
+                    Store (Zero, AAST) /* \_SB_.IAOE.AAST */
+                    Store (Zero, AAEN) /* \_SB_.IAOE.AAEN */
+                    Store (Zero, AAWM) /* \_SB_.IAOE.AAWM */
                 }
             }
 
             Method (GANS, 0, NotSerialized)
             {
-                Return (ANS1)
+                Return (ANS1) /* \_SB_.IAOE.ANS1 */
             }
 
             Method (SANS, 1, NotSerialized)
             {
                 If (LEqual (And (Arg0, One), One))
                 {
-                    Store (One, ANS1)
+                    Store (One, ANS1) /* \_SB_.IAOE.ANS1 */
                 }
                 Else
                 {
-                    Store (Zero, ANS1)
+                    Store (Zero, ANS1) /* \_SB_.IAOE.ANS1 */
                 }
             }
 
             Method (GWLS, 0, NotSerialized)
             {
-                And (WLS1, 0x0E, WLS1)
-                Return (WLS1)
+                And (WLS1, 0x0E, WLS1) /* \_SB_.IAOE.WLS1 */
+                Return (WLS1) /* \_SB_.IAOE.WLS1 */
             }
 
             Method (SWLS, 1, NotSerialized)
             {
-                Store (Arg0, WLS1)
+                Store (Arg0, WLS1) /* \_SB_.IAOE.WLS1 */
             }
 
             Method (GWWS, 0, NotSerialized)
             {
-                And (WWS1, 0x0E, WWS1)
-                Return (WWS1)
+                And (WWS1, 0x0E, WWS1) /* \_SB_.IAOE.WWS1 */
+                Return (WWS1) /* \_SB_.IAOE.WWS1 */
             }
 
             Method (SWWS, 1, NotSerialized)
             {
-                Store (Arg0, WWS1)
+                Store (Arg0, WWS1) /* \_SB_.IAOE.WWS1 */
             }
 
             Method (SASD, 1, NotSerialized)
             {
                 Divide (Arg0, 0x3C, Local1, Arg0)
-                Store (Arg0, IEWT)
-                Store (ShiftRight (And (Arg0, 0xFF00), 0x08), IEW2)
+                Store (Arg0, IEWT) /* \_SB_.IAOE.IEWT */
+                Store (ShiftRight (And (Arg0, 0xFF00), 0x08), IEW2) /* \_SB_.IAOE.IEW2 */
             }
 
             Method (GPWR, 0, NotSerialized)
@@ -189,7 +189,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-15.aml", "SSDT", 1, "Intel_", "IsctTabl", 0x00
 
             Method (GPCS, 0, NotSerialized)
             {
-                Return (LSTA)
+                Return (LSTA) /* \_SB_.IAOE.LSTA */
             }
 
             Method (SAWD, 1, NotSerialized)

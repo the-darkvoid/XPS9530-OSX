@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-0.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-0.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -20,7 +20,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
 {
 
     External (_TZ_.TZ00._TMP, MethodObj)    // 0 Arguments
-    External (_TZ_.TZ01)
+    External (_TZ_.TZ01, UnknownObj)
     External (_TZ_.TZ01._TMP, MethodObj)    // 0 Arguments
     External (DTS1, FieldUnitObj)
     External (DTS2, FieldUnitObj)
@@ -42,14 +42,14 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
         {
             If (LEqual (Arg0, Zero))
             {
-                Store (Arg1, MAIN)
+                Store (Arg1, MAIN) /* \_SB_.MAIN */
                 Store (MADT, Local2)
                 Return (Local2)
             }
             Else
             {
-                Store (Arg1, MAIN)
-                Store (Arg2, MADT)
+                Store (Arg1, MAIN) /* \_SB_.MAIN */
+                Store (Arg2, MADT) /* \_SB_.MADT */
                 Store (Zero, Local2)
                 Return (Local2)
             }
@@ -57,8 +57,8 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
 
         Device (PTID)
         {
-            Name (_HID, EisaId ("INT340E"))  // _HID: Hardware ID
-            Name (_CID, EisaId ("PNP0C02"))  // _CID: Compatible ID
+            Name (_HID, EisaId ("INT340E") /* Motherboard Resources */)  // _HID: Hardware ID
+            Name (_CID, EisaId ("PNP0C02") /* PNP Motherboard Resources */)  // _CID: Compatible ID
             Name (IVER, 0x00030000)
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
@@ -211,7 +211,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
                     Store (\_TZ.TZ01._TMP (), Index (TMPV, 0x14))
                 }
 
-                Return (TMPV)
+                Return (TMPV) /* \_SB_.PTID.TSDD.TMPV */
             }
 
             Method (PSDD, 0, Serialized)
@@ -238,7 +238,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
                     0x80000000, 
                     0x80000000
                 })
-                Return (PWRV)
+                Return (PWRV) /* \_SB_.PTID.PSDD.PWRV */
             }
 
             Method (OSDD, 0, NotSerialized)
@@ -251,7 +251,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
                     0x80000000, 
                     0x80000000
                 })
-                Return (OSDV)
+                Return (OSDV) /* \_SB_.PTID.OSDD.OSDV */
             }
 
             Method (SDSP, 0, NotSerialized)
@@ -289,10 +289,10 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
             {
                 If (PAMT)
                 {
-                    Return (PADA)
+                    Return (PADA) /* \_SB_.PTID.PADA */
                 }
 
-                Return (PADD)
+                Return (PADD) /* \_SB_.PTID.PADD */
             }
 
             Method (RPMD, 0, NotSerialized)
@@ -324,7 +324,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-0.aml", "SSDT", 1, "TrmRef", "PtidDevc", 0x000
                 Store (AMBX (Zero, 0x87FB, Zero), Index (MTMP, One))
                 Store (AMBX (Zero, 0x88FB, Zero), Index (MTMP, 0x02))
                 Store (AMBX (Zero, 0x89FB, Zero), Index (MTMP, 0x03))
-                Return (MTMP)
+                Return (MTMP) /* \_SB_.PTID.RPMD.MTMP */
             }
 
             Method (WPMD, 1, NotSerialized)

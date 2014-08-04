@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-1.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-1.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -19,8 +19,8 @@
 DefinitionBlock ("./DSDT/raw/SSDT-1.aml", "SSDT", 1, "INTEL", "sensrhub", 0x00000000)
 {
 
-    External (_SB_.PCI0.I2C0.DFUD)
-    External (_SB_.PCI0.I2C0.SHUB)
+    External (_SB_.PCI0.I2C0.DFUD, UnknownObj)
+    External (_SB_.PCI0.I2C0.SHUB, UnknownObj)
     External (_SB_.RDGP, MethodObj)    // 1 Arguments
     External (_SB_.WTGP, MethodObj)    // 2 Arguments
     External (SDS0, FieldUnitObj)
@@ -31,7 +31,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-1.aml", "SSDT", 1, "INTEL", "sensrhub", 0x0000
         Device (SHAD)
         {
             Name (_HID, EisaId ("INT33D0"))  // _HID: Hardware ID
-            Name (_CID, EisaId ("PNP0C02"))  // _CID: Compatible ID
+            Name (_CID, EisaId ("PNP0C02") /* PNP Motherboard Resources */)  // _CID: Compatible ID
             Method (_STA, 0, Serialized)  // _STA: Status
             {
                 If (LOr (And (SDS0, One), And (USBH, One)))
@@ -52,31 +52,27 @@ DefinitionBlock ("./DSDT/raw/SSDT-1.aml", "SSDT", 1, "INTEL", "sensrhub", 0x0000
                 Name (OLDV, Zero)
                 Name (PGCV, Zero)
                 Name (DFUV, Zero)
-                If (LEqual (Arg0, Buffer (0x10)
-                        {
-                            /* 0000 */   0xD5, 0x68, 0xC8, 0x03, 0x3F, 0x56, 0xA8, 0x42,
-                            /* 0008 */   0x9F, 0x57, 0x9A, 0x18, 0xD9, 0x49, 0xB7, 0xCB
-                        }))
+                If (LEqual (Arg0, ToUUID ("03c868d5-563f-42a8-9f57-9a18d949b7cb")))
                 {
                     If (LEqual (One, ToInteger (Arg1)))
                     {
                         While (One)
                         {
-                            Store (ToInteger (Arg2), _T_0)
+                            Store (ToInteger (Arg2), _T_0) /* \SHAD._DSM._T_0 */
                             If (LEqual (_T_0, Zero))
                             {
                                 Return (Buffer (One)
                                 {
-                                     0x0F
+                                     0x0F                                             /* . */
                                 })
                             }
                             Else
                             {
                                 If (LEqual (_T_0, One))
                                 {
-                                    Store (DerefOf (Index (Arg3, Zero)), PGCE)
-                                    Store (DerefOf (Index (Arg3, One)), PGCD)
-                                    Store (\_SB.RDGP (0x2E), OLDV)
+                                    Store (DerefOf (Index (Arg3, Zero)), PGCE) /* \SHAD._DSM.PGCE */
+                                    Store (DerefOf (Index (Arg3, One)), PGCD) /* \SHAD._DSM.PGCD */
+                                    Store (\_SB.RDGP (0x2E), OLDV) /* \SHAD._DSM.OLDV */
                                     \_SB.WTGP (0x2E, PGCE)
                                     If (LGreater (PGCD, Zero))
                                     {
@@ -89,11 +85,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-1.aml", "SSDT", 1, "INTEL", "sensrhub", 0x0000
                                         Sleep (0x96)
                                         If (LEqual (\_SB.RDGP (0x2C), One))
                                         {
-                                            Notify (\_SB.PCI0.I2C0.SHUB, One)
+                                            Notify (\_SB.PCI0.I2C0.SHUB, One) // Device Check
                                         }
                                         Else
                                         {
-                                            Notify (\_SB.PCI0.I2C0.DFUD, One)
+                                            Notify (\_SB.PCI0.I2C0.DFUD, One) // Device Check
                                         }
                                     }
 
@@ -103,9 +99,9 @@ DefinitionBlock ("./DSDT/raw/SSDT-1.aml", "SSDT", 1, "INTEL", "sensrhub", 0x0000
                                 {
                                     If (LEqual (_T_0, 0x02))
                                     {
-                                        Store (DerefOf (Index (Arg3, Zero)), DFUE)
-                                        Store (DerefOf (Index (Arg3, One)), DFUD)
-                                        Store (\_SB.RDGP (0x2C), OLDV)
+                                        Store (DerefOf (Index (Arg3, Zero)), DFUE) /* \SHAD._DSM.DFUE */
+                                        Store (DerefOf (Index (Arg3, One)), DFUD) /* \SHAD._DSM.DFUD */
+                                        Store (\_SB.RDGP (0x2C), OLDV) /* \SHAD._DSM.OLDV */
                                         \_SB.WTGP (0x2C, DFUE)
                                         If (LGreater (DFUD, Zero))
                                         {
@@ -119,8 +115,8 @@ DefinitionBlock ("./DSDT/raw/SSDT-1.aml", "SSDT", 1, "INTEL", "sensrhub", 0x0000
                                     {
                                         If (LEqual (_T_0, 0x03))
                                         {
-                                            Store (\_SB.RDGP (0x2C), DFUV)
-                                            Store (\_SB.RDGP (0x2E), PGCV)
+                                            Store (\_SB.RDGP (0x2C), DFUV) /* \SHAD._DSM.DFUV */
+                                            Store (\_SB.RDGP (0x2E), PGCV) /* \SHAD._DSM.PGCV */
                                             Return (Package (0x02)
                                             {
                                                 PGCV, 

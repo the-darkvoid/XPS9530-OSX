@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-2.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-2.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -19,9 +19,9 @@
 DefinitionBlock ("./DSDT/raw/SSDT-2.aml", "SSDT", 1, "PmRef", "Cpu0Ist", 0x00003000)
 {
 
+    External (_PR_.CFGD, FieldUnitObj)
     External (_PR_.CPPC, FieldUnitObj)
     External (_PR_.CPU0, ProcessorObj)
-    External (CFGD, FieldUnitObj)
     External (PDC0, IntObj)
     External (TCNT, FieldUnitObj)
 
@@ -385,15 +385,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-2.aml", "SSDT", 1, "PmRef", "Cpu0Ist", 0x00003
             {
                 Store (TCNT, Index (DerefOf (Index (HPSD, Zero)), 0x04))
                 Store (TCNT, Index (DerefOf (Index (SPSD, Zero)), 0x04))
-                Store (Ones, PSDF)
+                Store (Ones, PSDF) /* \_PR_.CPU0.PSDF */
             }
 
             If (And (PDC0, 0x0800))
             {
-                Return (HPSD)
+                Return (HPSD) /* \_PR_.CPU0.HPSD */
             }
 
-            Return (SPSD)
+            Return (SPSD) /* \_PR_.CPU0.SPSD */
         }
 
         Name (HPSD, Package (0x01)

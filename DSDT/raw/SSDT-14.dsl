@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-14.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-14.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -50,8 +50,6 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
     External (NXD6, FieldUnitObj)
     External (NXD7, FieldUnitObj)
     External (NXD8, FieldUnitObj)
-    External (SGOF, MethodObj)    // 0 Arguments
-    External (SGON, MethodObj)    // 0 Arguments
     External (SSMP, FieldUnitObj)
 
     Scope (\_SB.PCI0)
@@ -82,17 +80,17 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
         Name (_PSC, Zero)  // _PSC: Power State Current
         Method (_PS0, 0, NotSerialized)  // _PS0: Power State 0
         {
-            Store (Zero, _PSC)
+            Store (Zero, _PSC) /* \_SB_.PCI0.PEG0.PEGP._PSC */
             If (LNotEqual (DGPS, Zero))
             {
                 _ON ()
-                Store (Zero, DGPS)
+                Store (Zero, DGPS) /* \_SB_.PCI0.PEG0.PEGP.DGPS */
             }
         }
 
         Method (_PS1, 0, NotSerialized)  // _PS1: Power State 1
         {
-            Store (One, _PSC)
+            Store (One, _PSC) /* \_SB_.PCI0.PEG0.PEGP._PSC */
         }
 
         Method (_PS3, 0, NotSerialized)  // _PS3: Power State 3
@@ -102,13 +100,13 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                 If (LEqual (DGPS, Zero))
                 {
                     _OFF ()
-                    Store (One, DGPS)
+                    Store (One, DGPS) /* \_SB_.PCI0.PEG0.PEGP.DGPS */
                 }
 
-                Store (0x02, OPCE)
+                Store (0x02, OPCE) /* \_SB_.PCI0.PEG0.PEGP.OPCE */
             }
 
-            Store (0x03, _PSC)
+            Store (0x03, _PSC) /* \_SB_.PCI0.PEG0.PEGP._PSC */
         }
 
         Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -129,43 +127,43 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
             {
                 Return (Buffer (Local1)
                 {
-                     0x00
+                     0x00                                             /* . */
                 })
             }
 
             Multiply (Local1, 0x08, Local3)
             Name (ROM1, Buffer (0x8000)
             {
-                 0x00
+                 0x00                                             /* . */
             })
             Name (ROM2, Buffer (Local1)
             {
-                 0x00
+                 0x00                                             /* . */
             })
             If (LLess (Local0, 0x8000))
             {
-                Store (RBF1, ROM1)
+                Store (RBF1, ROM1) /* \_SB_.PCI0.PEG0.PEGP._ROM.ROM1 */
             }
             Else
             {
                 If (LLess (Local0, 0x00010000))
                 {
                     Subtract (Local0, 0x8000, Local0)
-                    Store (RBF2, ROM1)
+                    Store (RBF2, ROM1) /* \_SB_.PCI0.PEG0.PEGP._ROM.ROM1 */
                 }
                 Else
                 {
                     If (LLess (Local0, 0x00018000))
                     {
                         Subtract (Local0, 0x00010000, Local0)
-                        Store (RBF3, ROM1)
+                        Store (RBF3, ROM1) /* \_SB_.PCI0.PEG0.PEGP._ROM.ROM1 */
                     }
                     Else
                     {
                         If (LLess (Local0, 0x00020000))
                         {
                             Subtract (Local0, 0x00018000, Local0)
-                            Store (RBF4, ROM1)
+                            Store (RBF4, ROM1) /* \_SB_.PCI0.PEG0.PEGP._ROM.ROM1 */
                         }
                     }
                 }
@@ -173,8 +171,8 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
 
             Multiply (Local0, 0x08, Local2)
             CreateField (ROM1, Local2, Local3, TMPB)
-            Store (TMPB, ROM2)
-            Return (ROM2)
+            Store (TMPB, ROM2) /* \_SB_.PCI0.PEG0.PEGP._ROM.ROM2 */
+            Return (ROM2) /* \_SB_.PCI0.PEG0.PEGP._ROM.ROM2 */
         }
 
         Method (HDSM, 4, Serialized)
@@ -192,14 +190,14 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
         Method (_ON, 0, Serialized)  // _ON_: Power On
         {
             SGON ()
-            Store (0xB7, SSMP)
+            Store (0xB7, SSMP) /* External reference */
         }
 
         Method (_OFF, 0, Serialized)  // _OFF: Power Off
         {
             If (LEqual (CTXT, Zero))
             {
-                Store (One, CTXT)
+                Store (One, CTXT) /* \_SB_.PCI0.PEG0.PEGP.CTXT */
             }
 
             SGOF ()
@@ -291,56 +289,56 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
         })
         Method (INDL, 0, Serialized)
         {
-            Store (Zero, NXD1)
-            Store (Zero, NXD2)
-            Store (Zero, NXD3)
-            Store (Zero, NXD4)
-            Store (Zero, NXD5)
-            Store (Zero, NXD6)
-            Store (Zero, NXD7)
-            Store (Zero, NXD8)
+            Store (Zero, NXD1) /* External reference */
+            Store (Zero, NXD2) /* External reference */
+            Store (Zero, NXD3) /* External reference */
+            Store (Zero, NXD4) /* External reference */
+            Store (Zero, NXD5) /* External reference */
+            Store (Zero, NXD6) /* External reference */
+            Store (Zero, NXD7) /* External reference */
+            Store (Zero, NXD8) /* External reference */
         }
 
         Method (SND1, 1, Serialized)
         {
             If (LEqual (Arg0, DID1))
             {
-                Store (One, NXD1)
+                Store (One, NXD1) /* External reference */
             }
 
             If (LEqual (Arg0, DID2))
             {
-                Store (One, NXD2)
+                Store (One, NXD2) /* External reference */
             }
 
             If (LEqual (Arg0, DID3))
             {
-                Store (One, NXD3)
+                Store (One, NXD3) /* External reference */
             }
 
             If (LEqual (Arg0, DID4))
             {
-                Store (One, NXD4)
+                Store (One, NXD4) /* External reference */
             }
 
             If (LEqual (Arg0, DID5))
             {
-                Store (One, NXD5)
+                Store (One, NXD5) /* External reference */
             }
 
             If (LEqual (Arg0, DID6))
             {
-                Store (One, NXD6)
+                Store (One, NXD6) /* External reference */
             }
 
             If (LEqual (Arg0, DID7))
             {
-                Store (One, NXD7)
+                Store (One, NXD7) /* External reference */
             }
 
             If (LEqual (Arg0, DID8))
             {
-                Store (One, NXD8)
+                Store (One, NXD8) /* External reference */
             }
         }
 
@@ -372,7 +370,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
             Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
             While (One)
             {
-                Store (ToInteger (Arg0), _T_0)
+                Store (ToInteger (Arg0), _T_0) /* \_SB_.PCI0.GFX0.CTOI._T_0 */
                 If (LEqual (_T_0, One))
                 {
                     Return (One)
@@ -472,11 +470,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
 
         Method (HDSM, 4, Serialized)
         {
-            If (LEqual (Arg0, Buffer (0x10)
-                    {
-                        /* 0000 */   0x01, 0x2D, 0x13, 0xA3, 0xDA, 0x8C, 0xBA, 0x49,
-                        /* 0008 */   0xA5, 0x2E, 0xBC, 0x9D, 0x46, 0xDF, 0x6B, 0x81
-                    }))
+            If (LEqual (Arg0, ToUUID ("a3132d01-8cda-49ba-a52e-bc9d46df6b81")))
             {
                 Return (\_SB.PCI0.PEG0.PEGP.GPS (Arg0, Arg1, Arg2, Arg3))
             }
@@ -485,13 +479,9 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
             Name (NBCI, Zero)
             Name (OPCI, Zero)
             Name (BUFF, Zero)
-            If (LEqual (Arg0, Buffer (0x10)
-                    {
-                        /* 0000 */   0xF8, 0xD8, 0x86, 0xA4, 0xDA, 0x0B, 0x1B, 0x47,
-                        /* 0008 */   0xA7, 0x2B, 0x60, 0x42, 0xA6, 0xB5, 0xBE, 0xE0
-                    }))
+            If (LEqual (Arg0, ToUUID ("a486d8f8-0bda-471b-a72b-6042a6b5bee0")))
             {
-                Store (One, OPCI)
+                Store (One, OPCI) /* \_SB_.PCI0.GFX0.HDSM.OPCI */
             }
 
             If (LOr (OPCI, LOr (SGCI, NBCI)))
@@ -517,7 +507,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                     {
                         Return (Buffer (0x04)
                         {
-                             0x7F, 0x00, 0x04, 0x00
+                             0x7F, 0x00, 0x04, 0x00                           /* .... */
                         })
                     }
                     Else
@@ -526,7 +516,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                         {
                             Return (Buffer (0x04)
                             {
-                                 0x73, 0x00, 0x04, 0x00
+                                 0x73, 0x00, 0x04, 0x00                           /* s... */
                             })
                         }
                         Else
@@ -535,7 +525,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                             {
                                 Return (Buffer (0x04)
                                 {
-                                     0x01, 0x00, 0x03, 0x04
+                                     0x01, 0x00, 0x03, 0x04                           /* .... */
                                 })
                             }
                         }
@@ -546,27 +536,27 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                 {
                     Name (TEMP, Buffer (0x04)
                     {
-                         0x00, 0x00, 0x00, 0x00
+                         0x00, 0x00, 0x00, 0x00                           /* .... */
                     })
                     CreateDWordField (TEMP, Zero, STS0)
                     If (SGCI)
                     {
-                        Or (STS0, 0x0B0000BF, STS0)
-                        Or (STS0, ShiftLeft (SGNC, 0x08, SGNC), STS0)
+                        Or (STS0, 0x0B0000BF, STS0) /* \_SB_.PCI0.GFX0.HDSM.STS0 */
+                        Or (STS0, ShiftLeft (SGNC, 0x08, SGNC) /* \_SB_.PCI0.GFX0.SGNC */, STS0) /* \_SB_.PCI0.GFX0.HDSM.STS0 */
                     }
                     Else
                     {
-                        Or (STS0, Zero, STS0)
+                        Or (STS0, Zero, STS0) /* \_SB_.PCI0.GFX0.HDSM.STS0 */
                     }
 
-                    Return (TEMP)
+                    Return (TEMP) /* \_SB_.PCI0.GFX0.HDSM.TEMP */
                 }
 
                 If (LEqual (Arg2, 0x02))
                 {
                     Name (TMP1, Buffer (0x04)
                     {
-                         0x00, 0x00, 0x00, 0x00
+                         0x00, 0x00, 0x00, 0x00                           /* .... */
                     })
                     CreateDWordField (TMP1, Zero, STS1)
                     ToInteger (Arg3, Local0)
@@ -574,9 +564,9 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                     If (And (Local0, 0x10))
                     {
                         And (Local0, 0x0F, Local0)
-                        Store (Local0, GPSS)
-                        Notify (\_SB.PCI0.GFX0, 0xD9)
-                        Notify (\_SB.PCI0.WMI1, 0xD9)
+                        Store (Local0, GPSS) /* \_SB_.PCI0.GFX0.GPSS */
+                        Notify (\_SB.PCI0.GFX0, 0xD9) // Hardware-Specific
+                        Notify (\_SB.PCI0.WMI1, 0xD9) // Hardware-Specific
                     }
                     Else
                     {
@@ -585,19 +575,19 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                         {
                             Store (GPSS, Local0)
                             Or (Local0, 0x10, Local0)
-                            Store (Zero, GPPO)
+                            Store (Zero, GPPO) /* \_SB_.PCI0.GFX0.GPPO */
                         }
                     }
 
-                    Or (STS1, Local0, STS1)
-                    Return (TMP1)
+                    Or (STS1, Local0, STS1) /* \_SB_.PCI0.GFX0.HDSM.STS1 */
+                    Return (TMP1) /* \_SB_.PCI0.GFX0.HDSM.TMP1 */
                 }
 
                 If (LEqual (Arg2, 0x03))
                 {
                     Name (TMP2, Buffer (0x04)
                     {
-                         0x00, 0x00, 0x00, 0x00
+                         0x00, 0x00, 0x00, 0x00                           /* .... */
                     })
                     CreateDWordField (TMP2, Zero, STS2)
                     ToInteger (Arg3, Local0)
@@ -619,89 +609,89 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
 
                     If (LEqual (\_SB.PCI0.PEG0.PEGP.SGST (), 0x0F))
                     {
-                        Or (STS2, One, STS2)
+                        Or (STS2, One, STS2) /* \_SB_.PCI0.GFX0.HDSM.STS2 */
                     }
 
-                    Return (TMP2)
+                    Return (TMP2) /* \_SB_.PCI0.GFX0.HDSM.TMP2 */
                 }
 
                 If (LEqual (Arg2, 0x04))
                 {
                     Name (TMP3, Buffer (0x04)
                     {
-                         0x00, 0x00, 0x00, 0x00
+                         0x00, 0x00, 0x00, 0x00                           /* .... */
                     })
                     CreateDWordField (TMP3, Zero, STS3)
                     ToInteger (Arg3, Local0)
                     Store (Local0, Local1)
                     ShiftRight (Local0, 0x10, Local0)
-                    And (Local0, One, USPM)
+                    And (Local0, One, USPM) /* \_SB_.PCI0.GFX0.USPM */
                     ShiftRight (Local1, 0x0D, Local1)
                     And (Local1, 0x03, Local1)
                     If (LNotEqual (Local1, GPSP))
                     {
                         If (LEqual (USPM, One))
                         {
-                            Store (Local1, GPSP)
+                            Store (Local1, GPSP) /* \_SB_.PCI0.GFX0.GPSP */
                         }
                         Else
                         {
                             Store (GPSP, Local1)
-                            Or (STS3, 0x8000, STS3)
+                            Or (STS3, 0x8000, STS3) /* \_SB_.PCI0.GFX0.HDSM.STS3 */
                         }
                     }
 
-                    Or (STS3, ShiftLeft (Local1, 0x0D), STS3)
-                    Return (TMP3)
+                    Or (STS3, ShiftLeft (Local1, 0x0D), STS3) /* \_SB_.PCI0.GFX0.HDSM.STS3 */
+                    Return (TMP3) /* \_SB_.PCI0.GFX0.HDSM.TMP3 */
                 }
 
                 If (LEqual (Arg2, 0x05))
                 {
                     Name (TMP4, Buffer (0x04)
                     {
-                         0x00, 0x00, 0x00, 0x00
+                         0x00, 0x00, 0x00, 0x00                           /* .... */
                     })
                     CreateDWordField (TMP4, Zero, STS4)
                     ToInteger (Arg3, Local0)
                     If (And (Local0, 0x80000000))
                     {
-                        Store (And (ShiftRight (Local0, 0x19), 0x1F), TLSN)
+                        Store (And (ShiftRight (Local0, 0x19), 0x1F), TLSN) /* \_SB_.PCI0.GFX0.TLSN */
                         If (And (Local0, 0x40000000))
                         {
-                            Store (One, DOSF)
+                            Store (One, DOSF) /* \_SB_.PCI0.GFX0.DOSF */
                         }
                     }
 
                     If (And (Local0, 0x01000000))
                     {
-                        Store (And (ShiftRight (Local0, 0x0C), 0x0FFF), GACD)
-                        Store (And (Local0, 0x0FFF), GATD)
-                        Store (CTOI (GACD), TLSN)
+                        Store (And (ShiftRight (Local0, 0x0C), 0x0FFF), GACD) /* \_SB_.PCI0.GFX0.GACD */
+                        Store (And (Local0, 0x0FFF), GATD) /* \_SB_.PCI0.GFX0.GATD */
+                        Store (CTOI (GACD), TLSN) /* \_SB_.PCI0.GFX0.TLSN */
                         Increment (TLSN)
                         If (LGreater (TLSN, 0x0D))
                         {
-                            Store (One, TLSN)
+                            Store (One, TLSN) /* \_SB_.PCI0.GFX0.TLSN */
                         }
 
                         SNXD (TLSN)
                     }
 
-                    Or (STS4, ShiftLeft (DHPE, 0x15), STS4)
-                    Or (STS4, ShiftLeft (DHPS, 0x14), STS4)
-                    Or (STS4, ShiftLeft (TLSN, 0x08), STS4)
-                    Or (STS4, ShiftLeft (DKST, 0x05), STS4)
-                    Or (STS4, ShiftLeft (LDES, 0x04), STS4)
-                    Or (STS4, DACE, STS4)
-                    Store (Zero, LDES)
-                    Store (Zero, DHPS)
-                    Store (Zero, DHPE)
-                    Store (Zero, DACE)
-                    Return (TMP4)
+                    Or (STS4, ShiftLeft (DHPE, 0x15), STS4) /* \_SB_.PCI0.GFX0.HDSM.STS4 */
+                    Or (STS4, ShiftLeft (DHPS, 0x14), STS4) /* \_SB_.PCI0.GFX0.HDSM.STS4 */
+                    Or (STS4, ShiftLeft (TLSN, 0x08), STS4) /* \_SB_.PCI0.GFX0.HDSM.STS4 */
+                    Or (STS4, ShiftLeft (DKST, 0x05), STS4) /* \_SB_.PCI0.GFX0.HDSM.STS4 */
+                    Or (STS4, ShiftLeft (LDES, 0x04), STS4) /* \_SB_.PCI0.GFX0.HDSM.STS4 */
+                    Or (STS4, DACE, STS4) /* \_SB_.PCI0.GFX0.HDSM.STS4 */
+                    Store (Zero, LDES) /* \_SB_.PCI0.GFX0.LDES */
+                    Store (Zero, DHPS) /* \_SB_.PCI0.GFX0.DHPS */
+                    Store (Zero, DHPE) /* \_SB_.PCI0.GFX0.DHPE */
+                    Store (Zero, DACE) /* \_SB_.PCI0.GFX0.DACE */
+                    Return (TMP4) /* \_SB_.PCI0.GFX0.HDSM.TMP4 */
                 }
 
                 If (LEqual (Arg2, 0x06))
                 {
-                    Return (TLPK)
+                    Return (TLPK) /* \_SB_.PCI0.GFX0.TLPK */
                 }
 
                 If (LEqual (Arg2, 0x10))
@@ -709,39 +699,39 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                     CreateWordField (Arg3, 0x02, USRG)
                     Name (OPVK, Buffer (0xE6)
                     {
-                        /* 0000 */   0xE4, 0x42, 0x5F, 0x14, 0x36, 0x26, 0x16, 0x37,
-                        /* 0008 */   0x4B, 0x56, 0xE6, 0x00, 0x00, 0x00, 0x01, 0x00,
-                        /* 0010 */   0x31, 0x34, 0x38, 0x35, 0x39, 0x37, 0x34, 0x35,
-                        /* 0018 */   0x36, 0x39, 0x38, 0x35, 0x47, 0x65, 0x6E, 0x75,
-                        /* 0020 */   0x69, 0x6E, 0x65, 0x20, 0x4E, 0x56, 0x49, 0x44,
-                        /* 0028 */   0x49, 0x41, 0x20, 0x43, 0x65, 0x72, 0x74, 0x69,
-                        /* 0030 */   0x66, 0x69, 0x65, 0x64, 0x20, 0x4F, 0x70, 0x74,
-                        /* 0038 */   0x69, 0x6D, 0x75, 0x73, 0x20, 0x52, 0x65, 0x61,
-                        /* 0040 */   0x64, 0x79, 0x20, 0x4D, 0x6F, 0x74, 0x68, 0x65,
-                        /* 0048 */   0x72, 0x62, 0x6F, 0x61, 0x72, 0x64, 0x20, 0x66,
-                        /* 0050 */   0x6F, 0x72, 0x20, 0x37, 0x33, 0x36, 0x30, 0x31,
-                        /* 0058 */   0x39, 0x5F, 0x4D, 0x49, 0x52, 0x63, 0x20, 0x20,
-                        /* 0060 */   0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
-                        /* 0068 */   0x2D, 0x20, 0x3C, 0x34, 0x27, 0x21, 0x58, 0x29,
-                        /* 0070 */   0x57, 0x27, 0x58, 0x20, 0x27, 0x25, 0x59, 0x5D,
-                        /* 0078 */   0x31, 0x29, 0x3A, 0x2A, 0x26, 0x39, 0x59, 0x43,
-                        /* 0080 */   0x56, 0x3B, 0x58, 0x56, 0x58, 0x3D, 0x59, 0x4E,
-                        /* 0088 */   0x3B, 0x3A, 0x35, 0x44, 0x25, 0x42, 0x5A, 0x48,
-                        /* 0090 */   0x55, 0x3A, 0x58, 0x4C, 0x25, 0x48, 0x54, 0x21,
-                        /* 0098 */   0x35, 0x4B, 0x4D, 0x37, 0x2C, 0x3C, 0x20, 0x2D,
-                        /* 00A0 */   0x20, 0x43, 0x6F, 0x70, 0x79, 0x72, 0x69, 0x67,
-                        /* 00A8 */   0x68, 0x74, 0x20, 0x32, 0x30, 0x31, 0x30, 0x20,
-                        /* 00B0 */   0x4E, 0x56, 0x49, 0x44, 0x49, 0x41, 0x20, 0x43,
-                        /* 00B8 */   0x6F, 0x72, 0x70, 0x6F, 0x72, 0x61, 0x74, 0x69,
-                        /* 00C0 */   0x6F, 0x6E, 0x20, 0x41, 0x6C, 0x6C, 0x20, 0x52,
-                        /* 00C8 */   0x69, 0x67, 0x68, 0x74, 0x73, 0x20, 0x52, 0x65,
-                        /* 00D0 */   0x73, 0x65, 0x72, 0x76, 0x65, 0x64, 0x2D, 0x31,
-                        /* 00D8 */   0x34, 0x38, 0x35, 0x39, 0x37, 0x34, 0x35, 0x36,
-                        /* 00E0 */   0x39, 0x38, 0x35, 0x28, 0x52, 0x29
+                        /* 0000 */  0xE4, 0x42, 0x5F, 0x14, 0x36, 0x26, 0x16, 0x37,  /* .B_.6&.7 */
+                        /* 0008 */  0x4B, 0x56, 0xE6, 0x00, 0x00, 0x00, 0x01, 0x00,  /* KV...... */
+                        /* 0010 */  0x31, 0x34, 0x38, 0x35, 0x39, 0x37, 0x34, 0x35,  /* 14859745 */
+                        /* 0018 */  0x36, 0x39, 0x38, 0x35, 0x47, 0x65, 0x6E, 0x75,  /* 6985Genu */
+                        /* 0020 */  0x69, 0x6E, 0x65, 0x20, 0x4E, 0x56, 0x49, 0x44,  /* ine NVID */
+                        /* 0028 */  0x49, 0x41, 0x20, 0x43, 0x65, 0x72, 0x74, 0x69,  /* IA Certi */
+                        /* 0030 */  0x66, 0x69, 0x65, 0x64, 0x20, 0x4F, 0x70, 0x74,  /* fied Opt */
+                        /* 0038 */  0x69, 0x6D, 0x75, 0x73, 0x20, 0x52, 0x65, 0x61,  /* imus Rea */
+                        /* 0040 */  0x64, 0x79, 0x20, 0x4D, 0x6F, 0x74, 0x68, 0x65,  /* dy Mothe */
+                        /* 0048 */  0x72, 0x62, 0x6F, 0x61, 0x72, 0x64, 0x20, 0x66,  /* rboard f */
+                        /* 0050 */  0x6F, 0x72, 0x20, 0x37, 0x33, 0x36, 0x30, 0x31,  /* or 73601 */
+                        /* 0058 */  0x39, 0x5F, 0x4D, 0x49, 0x52, 0x63, 0x20, 0x20,  /* 9_MIRc   */
+                        /* 0060 */  0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,  /*          */
+                        /* 0068 */  0x2D, 0x20, 0x3C, 0x34, 0x27, 0x21, 0x58, 0x29,  /* - <4'!X) */
+                        /* 0070 */  0x57, 0x27, 0x58, 0x20, 0x27, 0x25, 0x59, 0x5D,  /* W'X '%Y] */
+                        /* 0078 */  0x31, 0x29, 0x3A, 0x2A, 0x26, 0x39, 0x59, 0x43,  /* 1):*&9YC */
+                        /* 0080 */  0x56, 0x3B, 0x58, 0x56, 0x58, 0x3D, 0x59, 0x4E,  /* V;XVX=YN */
+                        /* 0088 */  0x3B, 0x3A, 0x35, 0x44, 0x25, 0x42, 0x5A, 0x48,  /* ;:5D%BZH */
+                        /* 0090 */  0x55, 0x3A, 0x58, 0x4C, 0x25, 0x48, 0x54, 0x21,  /* U:XL%HT! */
+                        /* 0098 */  0x35, 0x4B, 0x4D, 0x37, 0x2C, 0x3C, 0x20, 0x2D,  /* 5KM7,< - */
+                        /* 00A0 */  0x20, 0x43, 0x6F, 0x70, 0x79, 0x72, 0x69, 0x67,  /*  Copyrig */
+                        /* 00A8 */  0x68, 0x74, 0x20, 0x32, 0x30, 0x31, 0x30, 0x20,  /* ht 2010  */
+                        /* 00B0 */  0x4E, 0x56, 0x49, 0x44, 0x49, 0x41, 0x20, 0x43,  /* NVIDIA C */
+                        /* 00B8 */  0x6F, 0x72, 0x70, 0x6F, 0x72, 0x61, 0x74, 0x69,  /* orporati */
+                        /* 00C0 */  0x6F, 0x6E, 0x20, 0x41, 0x6C, 0x6C, 0x20, 0x52,  /* on All R */
+                        /* 00C8 */  0x69, 0x67, 0x68, 0x74, 0x73, 0x20, 0x52, 0x65,  /* ights Re */
+                        /* 00D0 */  0x73, 0x65, 0x72, 0x76, 0x65, 0x64, 0x2D, 0x31,  /* served-1 */
+                        /* 00D8 */  0x34, 0x38, 0x35, 0x39, 0x37, 0x34, 0x35, 0x36,  /* 48597456 */
+                        /* 00E0 */  0x39, 0x38, 0x35, 0x28, 0x52, 0x29               /* 985(R) */
                     })
                     If (LEqual (USRG, 0x564B))
                     {
-                        Return (OPVK)
+                        Return (OPVK) /* \_SB_.PCI0.GFX0.HDSM.OPVK */
                     }
 
                     Return (Zero)
@@ -757,39 +747,15 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                     Return (Package (0x0A)
                     {
                         0xD0, 
-                        Buffer (0x10)
-                        {
-                            /* 0000 */   0x40, 0x2F, 0x1A, 0x92, 0xC4, 0x0D, 0x2D, 0x40,
-                            /* 0008 */   0xAC, 0x18, 0xB4, 0x84, 0x44, 0xEF, 0x9E, 0xD2
-                        }, 
-
+                        ToUUID ("921a2f40-0dc4-402d-ac18-b48444ef9ed2"), 
                         0xD9, 
-                        Buffer (0x10)
-                        {
-                            /* 0000 */   0x61, 0xD3, 0x2A, 0xC1, 0xA9, 0x9F, 0x74, 0x4C,
-                            /* 0008 */   0x90, 0x1F, 0x95, 0xCB, 0x09, 0x45, 0xCF, 0x3E
-                        }, 
-
+                        ToUUID ("c12ad361-9fa9-4c74-901f-95cb0945cf3e"), 
                         0xDB, 
-                        Buffer (0x10)
-                        {
-                            /* 0000 */   0x06, 0x80, 0x84, 0x42, 0x86, 0x88, 0x0E, 0x49,
-                            /* 0008 */   0x8C, 0x72, 0x2B, 0xDC, 0xA9, 0x3A, 0x8A, 0x09
-                        }, 
-
+                        ToUUID ("42848006-8886-490e-8c72-2bdca93a8a09"), 
                         0xEF, 
-                        Buffer (0x10)
-                        {
-                            /* 0000 */   0xD2, 0x85, 0xE4, 0xB3, 0xC1, 0x3C, 0x54, 0x4B,
-                            /* 0008 */   0x8F, 0x31, 0x77, 0xBA, 0x2F, 0xDC, 0x9E, 0xBE
-                        }, 
-
+                        ToUUID ("b3e485d2-3cc1-4b54-8f31-77ba2fdc9ebe"), 
                         0xF0, 
-                        Buffer (0x10)
-                        {
-                            /* 0000 */   0xB6, 0x6F, 0x0D, 0x36, 0x4E, 0x1D, 0xA6, 0x4F,
-                            /* 0008 */   0xB8, 0x48, 0x1B, 0xE3, 0x3D, 0xD8, 0xEC, 0x7B
-                        }
+                        ToUUID ("360d6fb6-1d4e-4fa6-b848-1be33dd8ec7b")
                     })
                 }
 
@@ -804,20 +770,20 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
 
                     Store (Buffer (0x04)
                         {
-                             0x00, 0x00, 0x00, 0x00
+                             0x00, 0x00, 0x00, 0x00                           /* .... */
                         }, Local0)
                     CreateField (Local0, Zero, One, OPEN)
                     CreateField (Local0, 0x03, 0x02, CGCS)
                     CreateField (Local0, 0x06, One, SHPC)
                     CreateField (Local0, 0x18, 0x03, DGPC)
                     CreateField (Local0, 0x1B, 0x02, HDAC)
-                    Store (One, OPEN)
-                    Store (One, SHPC)
-                    Store (0x02, HDAC)
-                    Store (One, DGPC)
+                    Store (One, OPEN) /* \_SB_.PCI0.GFX0.HDSM.OPEN */
+                    Store (One, SHPC) /* \_SB_.PCI0.GFX0.HDSM.SHPC */
+                    Store (0x02, HDAC) /* \_SB_.PCI0.GFX0.HDSM.HDAC */
+                    Store (One, DGPC) /* \_SB_.PCI0.GFX0.HDSM.DGPC */
                     If (LNotEqual (\_SB.PCI0.PEG0.PEGP.SGST (), Zero))
                     {
-                        Store (0x03, CGCS)
+                        Store (0x03, CGCS) /* \_SB_.PCI0.GFX0.HDSM.CGCS */
                     }
 
                     Return (Local0)
@@ -868,16 +834,16 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
 
             While (One)
             {
-                Store (ToInteger (Arg2), _T_0)
+                Store (ToInteger (Arg2), _T_0) /* \_SB_.PCI0.PEG0.PEGP.GPS_._T_0 */
                 If (LEqual (_T_0, Zero))
                 {
                     Name (FMSK, Buffer (0x08)
                     {
-                         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+                         0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF   /* ........ */
                     })
                     Store (Buffer (0x08)
                         {
-                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   /* ........ */
                         }, Local0)
                     Divide (Zero, 0x08, Local2, Local1)
                     ShiftLeft (One, Local2, Local2)
@@ -937,43 +903,43 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                             {
                                 If (NRIT)
                                 {
-                                    Or (RET1, 0x01000000, RET1)
+                                    Or (RET1, 0x01000000, RET1) /* \_SB_.PCI0.PEG0.PEGP.GPS_.RET1 */
                                 }
                                 Else
                                 {
-                                    And (RET1, 0xFEFFFFFF, RET1)
+                                    And (RET1, 0xFEFFFFFF, RET1) /* \_SB_.PCI0.PEG0.PEGP.GPS_.RET1 */
                                 }
                             }
 
-                            Or (RET1, 0x40000000, RET1)
+                            Or (RET1, 0x40000000, RET1) /* \_SB_.PCI0.PEG0.PEGP.GPS_.RET1 */
                             If (NLIM)
                             {
-                                Or (RET1, One, RET1)
+                                Or (RET1, One, RET1) /* \_SB_.PCI0.PEG0.PEGP.GPS_.RET1 */
                             }
 
-                            Return (RET1)
+                            Return (RET1) /* \_SB_.PCI0.PEG0.PEGP.GPS_.RET1 */
                         }
                         Else
                         {
                             If (LEqual (_T_0, 0x21))
                             {
-                                Return (\_PR.CPU0._PSS)
+                                Return (\_PR.CPU0._PSS) /* External reference */
                             }
                             Else
                             {
                                 If (LEqual (_T_0, 0x22))
                                 {
                                     CreateByteField (Arg3, Zero, PCAP)
-                                    Store (PCAP, \_PR.CPU0._PPC)
-                                    Notify (\_PR.CPU0, 0x80)
-                                    Store (PCAP, PSAP)
-                                    Return (PCAP)
+                                    Store (PCAP, \_PR.CPU0._PPC) /* External reference */
+                                    Notify (\_PR.CPU0, 0x80) // Status Change
+                                    Store (PCAP, PSAP) /* \_SB_.PCI0.PEG0.PEGP.PSAP */
+                                    Return (PCAP) /* \_SB_.PCI0.PEG0.PEGP.GPS_.PCAP */
                                 }
                                 Else
                                 {
                                     If (LEqual (_T_0, 0x23))
                                     {
-                                        Return (PSAP)
+                                        Return (PSAP) /* \_SB_.PCI0.PEG0.PEGP.PSAP */
                                     }
                                     Else
                                     {
@@ -988,9 +954,9 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                                             {
                                                 Store ("GPS fun 26", Debug)
                                                 CreateDWordField (Arg3, Zero, TCAP)
-                                                Store (TCAP, \_PR.CPU0._PTC)
-                                                Notify (\_PR.CPU0, 0x80)
-                                                Return (TCAP)
+                                                Store (TCAP, \_PR.CPU0._PTC) /* External reference */
+                                                Notify (\_PR.CPU0, 0x80) // Status Change
+                                                Return (TCAP) /* \_SB_.PCI0.PEG0.PEGP.GPS_.TCAP */
                                             }
                                             Else
                                             {
@@ -1008,41 +974,41 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                                                     CreateBitField (Arg3, 0x0E, SEN2)
                                                     While (One)
                                                     {
-                                                        Store (PSH0, _T_1)
+                                                        Store (PSH0, _T_1) /* \_SB_.PCI0.PEG0.PEGP.GPS_._T_1 */
                                                         If (LEqual (_T_1, Zero))
                                                         {
                                                             If (CPUT)
                                                             {
-                                                                Store (0x0200, RETN)
-                                                                Or (RETN, PSH0, RETN)
-                                                                Store (\_TZ.TZ01._TMP (), PDTS)
+                                                                Store (0x0200, RETN) /* \_SB_.PCI0.PEG0.PEGP.RETN */
+                                                                Or (RETN, PSH0, RETN) /* \_SB_.PCI0.PEG0.PEGP.RETN */
+                                                                Store (\_TZ.TZ01._TMP (), PDTS) /* \_SB_.PCI0.PEG0.PEGP.PDTS */
                                                             }
 
-                                                            Return (GPSP)
+                                                            Return (GPSP) /* \_SB_.PCI0.PEG0.PEGP.GPSP */
                                                         }
                                                         Else
                                                         {
                                                             If (LEqual (_T_1, One))
                                                             {
-                                                                Store (0x0300, RETN)
-                                                                Or (RETN, PSH0, RETN)
-                                                                Store (0x03E8, PDTS)
-                                                                Return (GPSP)
+                                                                Store (0x0300, RETN) /* \_SB_.PCI0.PEG0.PEGP.RETN */
+                                                                Or (RETN, PSH0, RETN) /* \_SB_.PCI0.PEG0.PEGP.RETN */
+                                                                Store (0x03E8, PDTS) /* \_SB_.PCI0.PEG0.PEGP.PDTS */
+                                                                Return (GPSP) /* \_SB_.PCI0.PEG0.PEGP.GPSP */
                                                             }
                                                             Else
                                                             {
                                                                 If (LEqual (_T_1, 0x02))
                                                                 {
-                                                                    Store (0x0102, RETN)
-                                                                    Store (Zero, VRV1)
-                                                                    Store (0x50, TGPU)
-                                                                    Store (Zero, PDTS)
-                                                                    Store (Zero, SFAN)
-                                                                    Store (Zero, CPUE)
-                                                                    Store (Zero, SKNT)
-                                                                    Store (Zero, TMP1)
-                                                                    Store (Zero, TMP2)
-                                                                    Return (GPSP)
+                                                                    Store (0x0102, RETN) /* \_SB_.PCI0.PEG0.PEGP.RETN */
+                                                                    Store (Zero, VRV1) /* \_SB_.PCI0.PEG0.PEGP.VRV1 */
+                                                                    Store (0x50, TGPU) /* \_SB_.PCI0.PEG0.PEGP.TGPU */
+                                                                    Store (Zero, PDTS) /* \_SB_.PCI0.PEG0.PEGP.PDTS */
+                                                                    Store (Zero, SFAN) /* \_SB_.PCI0.PEG0.PEGP.SFAN */
+                                                                    Store (Zero, CPUE) /* \_SB_.PCI0.PEG0.PEGP.CPUE */
+                                                                    Store (Zero, SKNT) /* \_SB_.PCI0.PEG0.PEGP.SKNT */
+                                                                    Store (Zero, TMP1) /* \_SB_.PCI0.PEG0.PEGP.TMP1 */
+                                                                    Store (Zero, TMP2) /* \_SB_.PCI0.PEG0.PEGP.TMP2 */
+                                                                    Return (GPSP) /* \_SB_.PCI0.PEG0.PEGP.GPSP */
                                                                 }
                                                             }
                                                         }
@@ -1070,13 +1036,13 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
     {
         Device (WMI1)
         {
-            Name (_HID, "PNP0C14")  // _HID: Hardware ID
+            Name (_HID, "PNP0C14" /* Windows Management Instrumentation Device */)  // _HID: Hardware ID
             Name (_UID, "OPT1")  // _UID: Unique ID
             Name (_WDG, Buffer (0x14)
             {
-                /* 0000 */   0x3C, 0x5C, 0xCB, 0xF6, 0xAE, 0x9C, 0xBD, 0x4E,
-                /* 0008 */   0xB5, 0x77, 0x93, 0x1E, 0xA3, 0x2A, 0x2C, 0xC0,
-                /* 0010 */   0x4D, 0x58, 0x01, 0x02
+                /* 0000 */  0x3C, 0x5C, 0xCB, 0xF6, 0xAE, 0x9C, 0xBD, 0x4E,  /* <\.....N */
+                /* 0008 */  0xB5, 0x77, 0x93, 0x1E, 0xA3, 0x2A, 0x2C, 0xC0,  /* .w...*,. */
+                /* 0010 */  0x4D, 0x58, 0x01, 0x02                           /* MX.. */
             })
             Method (WMMX, 3, NotSerialized)
             {
@@ -1101,7 +1067,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-14.aml", "SSDT", 1, "OptRef", "OptTabl", 0x000
                         CreateField (Arg2, 0xE0, 0x20, XRG0)
                         If (CondRefOf (\_SB.PCI0.GFX0._DSM))
                         {
-                            Return (\_SB.PCI0.GFX0._DSM)
+                            Return (\_SB.PCI0.GFX0._DSM) /* External reference */
                             MUID
                             REVI
                             SFNC

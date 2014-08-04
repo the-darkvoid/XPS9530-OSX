@@ -1,3 +1,5 @@
 backup/*
 logs/*
 DSDT/decompiled/*
+DSDT/compiled/*
+

@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-10.aml, Sun Aug  3 21:25:59 2014
+ * Disassembly of ./DSDT/raw/SSDT-10.aml, Mon Aug  4 20:44:58 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -27,19 +27,19 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
     {
         Name (STFE, Buffer (0x07)
         {
-             0x10, 0x06, 0x00, 0x00, 0x00, 0x00, 0xEF
+             0x10, 0x06, 0x00, 0x00, 0x00, 0x00, 0xEF         /* ....... */
         })
         Name (STFD, Buffer (0x07)
         {
-             0x90, 0x06, 0x00, 0x00, 0x00, 0x00, 0xEF
+             0x90, 0x06, 0x00, 0x00, 0x00, 0x00, 0xEF         /* ....... */
         })
         Name (FZTF, Buffer (0x07)
         {
-             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF5
+             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF5         /* ....... */
         })
         Name (DCFL, Buffer (0x07)
         {
-             0xC1, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB1
+             0xC1, 0x00, 0x00, 0x00, 0x00, 0x00, 0xB1         /* ....... */
         })
         Name (SCBF, Buffer (0x15) {})
         Name (CMDC, Zero)
@@ -49,8 +49,8 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
             CreateField (SCBF, Local0, 0x38, CMDX)
             Multiply (CMDC, 0x07, Local0)
             CreateByteField (SCBF, Add (Local0, One), A001)
-            Store (Arg0, CMDX)
-            Store (Arg1, A001)
+            Store (Arg0, CMDX) /* \GTFB.CMDX */
+            Store (Arg1, A001) /* \GTFB.A001 */
             Increment (CMDC)
         }
     }
@@ -62,7 +62,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
         {
             If (LEqual (Arg0, 0x02))
             {
-                Store (Arg1, REGF)
+                Store (Arg1, REGF) /* \_SB_.PCI0.SAT0.REGF */
             }
         }
 
@@ -74,12 +74,12 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
         CreateDWordField (TMD0, 0x10, CHNF)
         Method (_GTM, 0, NotSerialized)  // _GTM: Get Timing Mode
         {
-            Store (0x78, PIO0)
-            Store (0x14, DMA0)
-            Store (0x78, PIO1)
-            Store (0x14, DMA1)
-            Or (CHNF, 0x05, CHNF)
-            Return (TMD0)
+            Store (0x78, PIO0) /* \_SB_.PCI0.SAT0.PIO0 */
+            Store (0x14, DMA0) /* \_SB_.PCI0.SAT0.DMA0 */
+            Store (0x78, PIO1) /* \_SB_.PCI0.SAT0.PIO1 */
+            Store (0x14, DMA1) /* \_SB_.PCI0.SAT0.DMA1 */
+            Or (CHNF, 0x05, CHNF) /* \_SB_.PCI0.SAT0.CHNF */
+            Return (TMD0) /* \_SB_.PCI0.SAT0.TMD0 */
         }
 
         Method (_STM, 3, NotSerialized)  // _STM: Set Timing Mode
@@ -91,13 +91,13 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
             Name (_ADR, 0xFFFF)  // _ADR: Address
             Name (GTF0, Buffer (0x07)
             {
-                 0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x00
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x00         /* ....... */
             })
             Method (_SDD, 1, NotSerialized)  // _SDD: Set Device Data
             {
                 Name (FFS0, Buffer (0x07)
                 {
-                     0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x00
+                     0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x00         /* ....... */
                 })
                 CreateByteField (FFS0, Zero, FF00)
                 CreateByteField (FFS0, 0x06, FF06)
@@ -110,18 +110,18 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
                     {
                         If (LEqual (And (W156, 0x8000), Zero))
                         {
-                            Store (0x5A, FF00)
-                            Store (0xEF, FF06)
+                            Store (0x5A, FF00) /* \_SB_.PCI0.SAT0.SPT0._SDD.FF00 */
+                            Store (0xEF, FF06) /* \_SB_.PCI0.SAT0.SPT0._SDD.FF06 */
                         }
                     }
                 }
 
-                Store (FFS0, GTF0)
+                Store (FFS0, GTF0) /* \_SB_.PCI0.SAT0.SPT0.GTF0 */
             }
 
             Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
             {
-                Store (Zero, CMDC)
+                Store (Zero, CMDC) /* \CMDC */
                 If (LOr (DSSP, FHPP))
                 {
                     GTFB (STFD, 0x06)
@@ -133,7 +133,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
 
                 GTFB (FZTF, Zero)
                 GTFB (DCFL, Zero)
-                Return (GTF0)
+                Return (GTF0) /* \_SB_.PCI0.SAT0.SPT0.GTF0 */
             }
         }
 
@@ -142,7 +142,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
             Name (_ADR, 0x0001FFFF)  // _ADR: Address
             Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
             {
-                Store (Zero, CMDC)
+                Store (Zero, CMDC) /* \CMDC */
                 If (LOr (DSSP, FHPP))
                 {
                     GTFB (STFD, 0x06)
@@ -154,7 +154,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
 
                 GTFB (FZTF, Zero)
                 GTFB (DCFL, Zero)
-                Return (SCBF)
+                Return (SCBF) /* \SCBF */
             }
         }
 
@@ -163,7 +163,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
             Name (_ADR, 0x0003FFFF)  // _ADR: Address
             Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
             {
-                Store (Zero, CMDC)
+                Store (Zero, CMDC) /* \CMDC */
                 If (LOr (DSSP, FHPP))
                 {
                     GTFB (STFD, 0x06)
@@ -175,7 +175,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
 
                 GTFB (FZTF, Zero)
                 GTFB (DCFL, Zero)
-                Return (SCBF)
+                Return (SCBF) /* \SCBF */
             }
         }
 
@@ -184,7 +184,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
             Name (_ADR, 0x0004FFFF)  // _ADR: Address
             Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
             {
-                Store (Zero, CMDC)
+                Store (Zero, CMDC) /* \CMDC */
                 If (LOr (DSSP, FHPP))
                 {
                     GTFB (STFD, 0x06)
@@ -196,7 +196,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
 
                 GTFB (FZTF, Zero)
                 GTFB (DCFL, Zero)
-                Return (SCBF)
+                Return (SCBF) /* \SCBF */
             }
         }
 
@@ -205,7 +205,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
             Name (_ADR, 0x0005FFFF)  // _ADR: Address
             Method (_GTF, 0, NotSerialized)  // _GTF: Get Task File
             {
-                Store (Zero, CMDC)
+                Store (Zero, CMDC) /* \CMDC */
                 If (LOr (DSSP, FHPP))
                 {
                     GTFB (STFD, 0x06)
@@ -217,7 +217,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-10.aml", "SSDT", 1, "SataRe", "SataTabl", 0x00
 
                 GTFB (FZTF, Zero)
                 GTFB (DCFL, Zero)
-                Return (SCBF)
+                Return (SCBF) /* \SCBF */
             }
         }
     }

@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20130823-64 [Aug 30 2013]
- * Copyright (c) 2000 - 2013 Intel Corporation
+ * AML Disassembler version 20140724-64 [Jul 24 2014]
+ * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of ./DSDT/raw/SSDT-7.aml, Sun Aug  3 21:26:00 2014
+ * Disassembly of ./DSDT/raw/SSDT-7.aml, Mon Aug  4 20:44:59 2014
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -19,9 +19,9 @@
 DefinitionBlock ("./DSDT/raw/SSDT-7.aml", "SSDT", 1, "PmRef", "Cpu0Tst", 0x00003000)
 {
 
+    External (_PR_.CFGD, FieldUnitObj)
     External (_PR_.CPU0, ProcessorObj)
-    External (_PSS, PkgObj)
-    External (CFGD, FieldUnitObj)
+    External (_PR_.CPU0._PSS, PkgObj)
     External (PDC0, IntObj)
     External (TCNT, FieldUnitObj)
 
@@ -306,11 +306,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-7.aml", "SSDT", 1, "PmRef", "Cpu0Tst", 0x00003
                 If (LAnd (LNot (TSSF), CondRefOf (_PSS)))
                 {
                     Name (LFMI, Zero)
-                    Store (SizeOf (_PSS), LFMI)
+                    Store (SizeOf (_PSS), LFMI) /* \_PR_.CPU0._TSS.LFMI */
                     Decrement (LFMI)
                     Name (LFMP, Zero)
                     Store (DerefOf (Index (DerefOf (Index (_PSS, LFMI)), One)), 
-                        LFMP)
+                        LFMP) /* \_PR_.CPU0._TSS.LFMP */
                     Store (Zero, Local0)
                     If (And (CFGD, 0x2000))
                     {
@@ -332,7 +332,7 @@ DefinitionBlock ("./DSDT/raw/SSDT-7.aml", "SSDT", 1, "PmRef", "Cpu0Tst", 0x00003
                         Increment (Local0)
                     }
 
-                    Store (Ones, TSSF)
+                    Store (Ones, TSSF) /* \_PR_.CPU0.TSSF */
                 }
 
                 Release (TSMO)
@@ -340,11 +340,11 @@ DefinitionBlock ("./DSDT/raw/SSDT-7.aml", "SSDT", 1, "PmRef", "Cpu0Tst", 0x00003
 
             If (And (CFGD, 0x2000))
             {
-                Return (TSMF)
+                Return (TSMF) /* \_PR_.CPU0.TSMF */
             }
             Else
             {
-                Return (TSMC)
+                Return (TSMC) /* \_PR_.CPU0.TSMC */
             }
         }
 

@@ -90,7 +90,7 @@ Disabled, NID 0x1d:
 Disabled, NID 0x1e:
 	01e71cf0 01e71d00 01e71e00 01e71f40
 Disabled, NID 0x1f:
- 01f71cf0 01f71d00 01f71e00 01f71f40
+	01f71cf0 01f71d00 01f71e00 01f71f40
 
 Connections:
  

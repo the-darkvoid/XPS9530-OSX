@@ -85,6 +85,9 @@ patch_dsdt:
 	# Audio Layout
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_HDEF-layout1.txt ./DSDT/decompiled/DSDT.dsl
 
+	# Rename B0D3 to HDAU
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/DSDT.dsl
+
 	########################
 	# SSDT-9 Patches
 	########################
@@ -108,6 +111,12 @@ patch_dsdt:
 	# [2.11] Brightness fix (Haswell)
 	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ./DSDT/decompiled/SSDT-11.dsl
 
+	# Rename B0D3 to HDAU
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/SSDT-11.dsl
+
+	# Insert HDAU device
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-11.dsl
+
 	########################
 	# SSDT-12 Patches
 	########################
@@ -128,6 +137,10 @@ patch_dsdt:
 	# Disable Nvidia card (Non-operational in OS X)
 	./tools/patchmatic ./DSDT/decompiled/SSDT-14.dsl ./DSDT/patches/graphics_Disable_Nvidia.txt ./DSDT/decompiled/SSDT-14.dsl
 
+patch_bcm943xx:
+	# BCM4352 Wifi
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/BCM4352_wifi.txt ./DSDT/decompiled/DSDT.dsl
+
 compile_dsdt:
 	# Patched BIOS DSDT
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/DSDT.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/DSDT.dsl
@@ -135,7 +148,7 @@ compile_dsdt:
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-11.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-11.dsl
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-12.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-12.dsl
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-14.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-14.dsl
-	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
+#	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
 
 	# Additional custom SSDT
 	# Rehabman NullEthernet.kext
@@ -143,9 +156,6 @@ compile_dsdt:
 
 	# ssdtPRgen (P-states / C-states)
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-17.aml ./DSDT/custom/SSDT-pr.dsl
-
-	# bcm9433xx
-	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-18.aml ./DSDT/custom/SSDT-bcm943xx.dsl
 
 clean:
 	rm -rf ./DSDT/decompiled/*

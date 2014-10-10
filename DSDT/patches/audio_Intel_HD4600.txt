@@ -1,10 +1,7 @@
-#audio_HDEF-layout1.txt
+#audio_Intel_HD4600
 
-# Note: Change your layout ID if you need something different
-
-#   Inject Audio info
-into method label _DSM parent_label HDEF remove_entry;
-into device label HDEF insert
+into method label _DSM parent_label HDAU remove_entry;
+into device label HDAU insert
 begin
 Method (_DSM, 4, NotSerialized)\n
 {\n

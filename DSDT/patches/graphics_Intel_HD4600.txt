@@ -10,6 +10,7 @@ Method (_DSM, 4, NotSerialized)\n
     {\n
         "AAPL,ig-platform-id", Buffer() { 0x08, 0x00, 0x2e, 0x0a },\n
         "model", Buffer() { "Intel HD 4600" },\n
+        "device-id", Buffer() { 0x12, 0x04, 0x00, 0x00 },\n
         "hda-gfx", Buffer() { "onboard-1" },\n
     })\n
 }\n

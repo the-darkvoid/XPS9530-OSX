@@ -137,7 +137,7 @@ patch_dsdt:
 	# Disable Nvidia card (Non-operational in OS X)
 	./tools/patchmatic ./DSDT/decompiled/SSDT-14.dsl ./DSDT/patches/graphics_Disable_Nvidia.txt ./DSDT/decompiled/SSDT-14.dsl
 
-patch_bcm943xx:
+patch_wifi:
 	# BCM4352 Wifi
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/BCM4352_wifi.txt ./DSDT/decompiled/DSDT.dsl
 

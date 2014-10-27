@@ -31,7 +31,7 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>-xcpm dart=0 kext-dev-mode=1</string>
+		<string>dart=0 kext-dev-mode=1 -gux_defer_usb2</string>
 		<key>DefaultVolume</key>
 		<string>3C304970-C14E-49AC-9CEC-A089A6B220FE</string>
 		<key>Legacy</key>
@@ -61,7 +61,7 @@
 			<key>IMEI</key>
 			<string>0x0</string>
 			<key>IntelGFX</key>
-			<string>0x0</string>
+			<string>0x04128086</string>
 			<key>LAN</key>
 			<string>0x0</string>
 			<key>NVidia</key>
@@ -93,7 +93,7 @@
 			<array>
 				<dict>
 					<key>Arguments</key>
-					<string>-xcpm dart=0 kext-dev-mode=1</string>
+					<string>dart=0 kext-dev-mode=1 -gux_defer_usb2</string>
 					<key>Disabled</key>
 					<false/>
 					<key>FullTitle</key>
@@ -108,7 +108,7 @@
 						<array>
 							<dict>
 								<key>Comment</key>
-								<string>Second Stage Patch 1</string>
+								<string>Bootloader Graphics - Second Stage Patch 1</string>
 								<key>Find</key>
 								<data>
 								hcB0XUg=
@@ -122,7 +122,7 @@
 							</dict>
 							<dict>
 								<key>Comment</key>
-								<string>Second Stage Patch 2</string>
+								<string>Bootloader Graphics - Second Stage Patch 2</string>
 								<key>Find</key>
 								<data>
 								QYjE6wM=
@@ -182,7 +182,7 @@
 			<key>Legacy</key>
 			<false/>
 			<key>Tool</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>Theme</key>
 		<string>LightUp</string>
@@ -194,7 +194,7 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<false/>
+			<true/>
 			<key>NVidia</key>
 			<false/>
 		</dict>
@@ -227,21 +227,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>External icons patch (Orange Disk Icons)</string>
-				<key>Find</key>
-				<data>
-				RXh0ZXJuYWw=
-				</data>
-				<key>Name</key>
-				<string>AppleAHCIPort</string>
-				<key>Replace</key>
-				<data>
-				SW50ZXJuYWw=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable 128MB for Azul framebuffer 0x0a2e0008</string>
+				<string>Enable 96MB for Azul framebuffer 0x0a2e0008</string>
 				<key>Find</key>
 				<data>
 				CAAuCgEDAwMAAAAEAAAgAgAAUAEAAABgbAUAAGwFAAAA
@@ -252,9 +238,23 @@
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
 				<data>
-				CAAuCgEDAwMAAAAIAAAgAgAAUAEAAABgbAUAAGwFAAAA
+				CAAuCgEDAwMAAAAGAAAgAgAAUAEAAABgbAUAAGwFAAAA
 				AAAAAAAAAAAACAAEAAAAMAAAAAEFCQAACAAABgAAAAIE
 				CgAABAAAhwAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Recognize 3rd party Wifi as Airport Extreme</string>
+				<key>Find</key>
+				<data>
+				axAAAHUN
+				</data>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				axAAAJCQ
 				</data>
 			</dict>
 			<dict>
@@ -315,20 +315,6 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Recognize 3rd party Wifi as Airport Extreme</string>
-				<key>Find</key>
-				<data>
-				axAAAHUN
-				</data>
-				<key>Name</key>
-				<string>AirPortBrcm4360</string>
-				<key>Replace</key>
-				<data>
-				axAAAJCQ
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Replace Intel HDMI audio ID #1</string>
 				<key>Find</key>
 				<data>
@@ -383,18 +369,30 @@
 				PYaAFgQ=
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable USB3 after wake for Intel 8 series chipset</string>
+				<key>Find</key>
+				<data>
+				xoDIAAAAAQ==
+				</data>
+				<key>Name</key>
+				<string>AppleUSBXHCI</string>
+				<key>Replace</key>
+				<data>
+				xoDIAAAAAA==
+				</data>
+			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
 	<dict>
-		<key>LogEveryBoot</key>
-		<string>10</string>
-		<key>LogLineCount</key>
-		<integer>3000</integer>
 		<key>MLB</key>
-		<string>"YOUR SERIAL"12345</string>
-		<key>MountEFI</key>
-		<string>Yes</string>
+		<string>#SERIAL#12345</string>
+		<key>ROM</key>
+		<data>
+		IRUwlIZT
+		</data>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
@@ -409,7 +407,7 @@
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string>YOUR SERIAL</string>
+		<string>#BOARD_SERIAL#</string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>ChassisAssetTag</key>
@@ -435,9 +433,9 @@
 		<key>ProductName</key>
 		<string>MacBookPro11,2</string>
 		<key>SerialNumber</key>
-		<string>YOUR SERIAL</string>
-		<key>SmUUID</key>
-		<string>YOUR UUID</string>
+		<string>#SERIAL#</string>
+		<key>SMUUID</key>
+		<string>#SYSTEM_UUID#</string>
 		<key>Trust</key>
 		<true/>
 	</dict>

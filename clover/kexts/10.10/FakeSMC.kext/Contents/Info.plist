@@ -105,6 +105,27 @@
 						AQ==
 						</data>
 					</array>
+					<key>ALI0</key>
+					<array>
+						<string>{ali</string>
+						<data>
+						AAAAAA==
+						</data>
+					</array>
+					<key>ALRV</key>
+					<array>
+						<string>ui16</string>
+						<data>
+						AAE=
+						</data>
+					</array>
+					<key>ALV0</key>
+					<array>
+						<string>{alv</string>
+						<data>
+						AAEAAAAAAAAAAA==
+						</data>
+					</array>
 					<key>FNum</key>
 					<array>
 						<string>ui8</string>
@@ -124,6 +145,13 @@
 						<string>{rev</string>
 						<data>
 						AQQKAAY=
+						</data>
+					</array>
+					<key>MSLD</key>
+					<array>
+						<string>ui8</string>
+						<data>
+						AA==
 						</data>
 					</array>
 					<key>MSSD</key>
@@ -187,6 +215,12 @@
 				</dict>
 				<key>Types</key>
 				<dict>
+					<key>ALI0</key>
+					<string>{ali</string>
+					<key>ALRV</key>
+					<string>ui16</string>
+					<key>ALV0</key>
+					<string>{alv</string>
 					<key>BEMB</key>
 					<string>flag</string>
 					<key>CLKC</key>
@@ -205,6 +239,8 @@
 					<string>ui8</string>
 					<key>MSDW</key>
 					<string>flag</string>
+					<key>MSLD</key>
+					<string>ui8</string>
 					<key>MSPS</key>
 					<string>{msp</string>
 					<key>RPlt</key>

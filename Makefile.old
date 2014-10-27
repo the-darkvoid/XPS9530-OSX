@@ -28,8 +28,8 @@ dsdt: decompile_dsdt patch_dsdt
 decompile_dsdt:
 	./tools/iasl -w1 -da ./DSDT/raw/DSDT.aml ./DSDT/raw/SSDT-*.aml &> ./logs/iasl_decompile.log
 	cp ./DSDT/raw/DSDT.dsl ./DSDT/decompiled/
-	cp ./DSDT/raw/SSDT-10.dsl ./DSDT/decompiled/
-	cp ./DSDT/raw/SSDT-1[235].dsl ./DSDT/decompiled/
+	cp ./DSDT/raw/SSDT-9.dsl ./DSDT/decompiled/
+	cp ./DSDT/raw/SSDT-1[1245].dsl ./DSDT/decompiled/
 
 # Patch decompiled DSDT with patchmatic
 patch_dsdt:
@@ -88,57 +88,54 @@ patch_dsdt:
 	# Rename B0D3 to HDAU
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/DSDT.dsl
 
-	# Remove GLAN device
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/remove_glan.txt ./DSDT/decompiled/DSDT.dsl
-
 	########################
 	# SSDT-9 Patches
 	########################
 
 	# _BST package size
-	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./DSDT/patches/_BST-package-size.txt ./DSDT/decompiled/SSDT-10.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-9.dsl ./DSDT/patches/_BST-package-size.txt ./DSDT/decompiled/SSDT-9.dsl
 
 	# [2.12] Rename GFX0 to IGPU
-	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-10.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-9.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-9.dsl
 
 	########################
 	# SSDT-11 Patches
 	########################
 
 	# [2.12] Rename GFX0 to IGPU
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-11.dsl
 
 	# [2.05] Haswell HD4400/HD4600/HD5000 (Modified)
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/graphics_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./DSDT/patches/graphics_Intel_HD4600.txt ./DSDT/decompiled/SSDT-11.dsl
 
 	# [2.11] Brightness fix (Haswell)
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ./DSDT/decompiled/SSDT-11.dsl
 
 	# Rename B0D3 to HDAU
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/SSDT-11.dsl
 
 	# Insert HDAU device
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-11.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-11.dsl
 
 	########################
 	# SSDT-12 Patches
 	########################
 
 	# [2.12] Rename GFX0 to IGPU
-	./tools/patchmatic ./DSDT/decompiled/SSDT-13.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-13.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-12.dsl
 
 	########################
 	# SSDT-14 Patches
 	########################
 
 	# Remove invalid operands
-	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/WMMX-invalid-operands.txt ./DSDT/decompiled/SSDT-15.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-14.dsl ./DSDT/patches/WMMX-invalid-operands.txt ./DSDT/decompiled/SSDT-14.dsl
 
 	# [2.12] Rename GFX0 to IGPU
-	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-15.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-14.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-14.dsl
 
 	# Disable Nvidia card (Non-operational in OS X)
-	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/graphics_Disable_Nvidia.txt ./DSDT/decompiled/SSDT-15.dsl
+	./tools/patchmatic ./DSDT/decompiled/SSDT-14.dsl ./DSDT/patches/graphics_Disable_Nvidia.txt ./DSDT/decompiled/SSDT-14.dsl
 
 patch_wifi:
 	# BCM4352 Wifi
@@ -147,10 +144,10 @@ patch_wifi:
 compile_dsdt:
 	# Patched BIOS DSDT
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/DSDT.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/DSDT.dsl
-	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-10.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-10.dsl
+	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-9.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-9.dsl
+	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-11.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-11.dsl
 	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-12.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-12.dsl
-	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-13.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-13.dsl
-	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
+	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-14.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-14.dsl
 #	./tools/iasl $(IASLFLAGS) -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
 
 	# Additional custom SSDT

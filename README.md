@@ -1,7 +1,7 @@
-OS X Mavericks on Dell XPS 15 (9530)
+OS X Yosemite on Dell XPS 15 (9530)
 ====================================
 
-This repository contains documentation and research on the installation of on X Mavericks (10.9.5) 
+This repository contains documentation and research on the installation of on X Yosemite (10.10) 
 
 Covered topics:
 

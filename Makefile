@@ -92,7 +92,7 @@ patch_dsdt:
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/remove_glan.txt ./DSDT/decompiled/DSDT.dsl
 
 	########################
-	# SSDT-9 Patches
+	# SSDT-10 Patches
 	########################
 
 	# _BST package size
@@ -102,7 +102,7 @@ patch_dsdt:
 	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-10.dsl
 
 	########################
-	# SSDT-11 Patches
+	# SSDT-12 Patches
 	########################
 
 	# [2.12] Rename GFX0 to IGPU
@@ -121,14 +121,14 @@ patch_dsdt:
 	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
 
 	########################
-	# SSDT-12 Patches
+	# SSDT-13 Patches
 	########################
 
 	# [2.12] Rename GFX0 to IGPU
 	./tools/patchmatic ./DSDT/decompiled/SSDT-13.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-13.dsl
 
 	########################
-	# SSDT-14 Patches
+	# SSDT-15 Patches
 	########################
 
 	# Remove invalid operands

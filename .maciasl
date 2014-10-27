@@ -1,0 +1,9 @@
+Add BCM94352Z Airport device	DSDT/patches/BCM4352_wifi.txt
+Fix Invalid Operands	DSDT/patches/WMMX-invalid-operands.txt
+Fix Invalid _BST Package Size	DSDT/patches/_BST-package-size.txt
+Rename B0D3 to HDAU device	DSDT/patches/audio_B0D3_HDAU.txt
+Insert HDEF audio, layout 1	DSDT/patches/audio_HDEF-layout1.txt
+Insert HDMI/DP Audio for HD 4600	DSDT/patches/audio_Intel_HD4600.txt
+Disable Nvidia Graphics Card	DSDT/patches/graphics_Disable_Nvidia.txt
+Insert Intel HD4600 GPU	DSDT/patches/graphics_Intel_HD4600.txt
+Remove Gigabit Lan Device	DSDT/patches/remove_glan.txt

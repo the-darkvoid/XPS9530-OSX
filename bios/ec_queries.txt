@@ -1,0 +1,4 @@
+EC Queries:
+	_Q16	: Laptop Lid Close
+	_Q15	: Laptop Lid Open
+

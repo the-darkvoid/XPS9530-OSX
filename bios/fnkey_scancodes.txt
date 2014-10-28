@@ -1,0 +1,14 @@
+Function keys
+	F1	Mute/Unmute:	0xe020 = 4a
+	F2	Volume Down:	0xe02e = 49
+	F3	Volume Up:		0xe030 = 48
+	F4	Previous Track:	0xe010 = 4d
+	F5	Play/Pause:		0xe022 = 34
+	F6	Next Track:		0xe019 = 42
+	F7  -------
+	F8	Ext. Monitor:	N/A (0xe00b?)
+	F9	Search:			N/A
+	F10	Keyboard Light: N/A
+	F11	Brightness Down:0xe005 = 91
+	F12	Brightness Up:  0xe006 = 90
+	PrtScr.	WiFi:		0xe037 = 0, 0 = 80

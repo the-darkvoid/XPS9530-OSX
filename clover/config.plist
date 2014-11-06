@@ -371,6 +371,20 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
+					<string>IOBluetoothFamily - Continuity &amp; Hand-off</string>
+					<key>Find</key>
+					<data>
+					i4eMAQAA
+					</data>
+					<key>Name</key>
+					<string>IOBluetoothFamily</string>
+					<key>Replace</key>
+					<data>
+					uA8AAACQ
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
 					<string>Enable USB3 after wake for Intel 8 series chipset</string>
 					<key>Find</key>
 					<data>

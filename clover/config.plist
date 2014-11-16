@@ -240,7 +240,7 @@
 					<data>
 					CAAuCgEDAwMAAAAGAAAgAgAAUAEAAABgbAUAAGwFAAAA
 					AAAAAAAAAAAACAAEAAAAMAAAAAEFCQAACAAABgAAAAIE
-					CgAABAAAhwAAAA==
+					CgAABAAABgAAAA==
 					</data>
 				</dict>
 				<dict>
@@ -318,13 +318,13 @@
 					<string>Replace Intel HDMI audio ID #1</string>
 					<key>Find</key>
 					<data>
-					CwwAAA==
+					PQsMAAA=
 					</data>
 					<key>Name</key>
 					<string>AppleHDAController</string>
 					<key>Replace</key>
 					<data>
-					DAwAAA==
+					PQwMAAA=
 					</data>
 				</dict>
 				<dict>
@@ -332,13 +332,13 @@
 					<string>Replace Intel HDMI audio ID #2</string>
 					<key>Find</key>
 					<data>
-					DAoAAA==
+					PQwKAAA=
 					</data>
 					<key>Name</key>
 					<string>AppleHDAController</string>
 					<key>Replace</key>
 					<data>
-					DAwAAA==
+					PQwMAAA=
 					</data>
 				</dict>
 				<dict>

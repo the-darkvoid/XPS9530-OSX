@@ -1,7 +1,7 @@
 OS X Yosemite on Dell XPS 15 (9530)
 ====================================
 
-This repository contains documentation and research on the installation of on X Yosemite (10.10) 
+This repository contains documentation and research on the installation of OS X Yosemite (10.10) on the Dell XPS 15 (9530) 
 
 Covered topics:
 

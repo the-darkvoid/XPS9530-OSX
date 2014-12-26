@@ -238,7 +238,7 @@ patch_opencl()
 RETVAL=0
 
 case "$1" in
-	"")
+	""|--help|-h)
 		echo "${BOLD}Dell XPS 9530${OFF} - Yosemite 10.10.1 (14B25)"
 		echo "\t${BOLD}--update${OFF}: Update to latest git version (including externals)"
 		echo "\t${BOLD}--decompile-dsdt${OFF}: Decompile DSDT files in ./DSDT/raw"

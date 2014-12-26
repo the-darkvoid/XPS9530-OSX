@@ -203,6 +203,7 @@ patch_iokit()
 		"2a8cbc2f6616d3f7a5e499bd2d5593ab")
 		echo "\t--> ${BOLD}Yosemite 10.10.1 IOKit (unpatched)${OFF}"
 		sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 		echo "\tPatched"
 		;;
 		"8756e20f979c9e74c80f07b452ebfadd")
@@ -222,9 +223,15 @@ patch_opencl()
 	echo "${RED}Current libCLVMIGILPlugin md5 is${OFF} ${BOLD}${opencl_md5}${OFF}"
 	
 	case $opencl_md5 in
+		"6d325a0b3785e82b8074fb8f64005fdd")
+		echo "\t--> ${BOLD}Yosemite 10.10.1 libCLVMIGILPlugin (unpatched)${OFF}"
+		sudo perl -i.bak -pe 's|([\xFF\xFC\x3D])\x86\x80\x12\x04|$1\x86\x80\x16\x04|sg' /System/Library/Frameworks/OpenCL.framework/Libraries/libCLVMIGILPlugin.dylib
+		echo "\tPatched"
+		;;
 		"a77fe21fa2cbf3958e7d43a9b9453535")
 		echo "${BOLD}Yosemite 10.10.1 libCLVMIGILPlugin (patched)${OFF}"
 		echo "libCLVMIGILPlugin is already patched, no action taken."
+		;;
 	esac
 }
 

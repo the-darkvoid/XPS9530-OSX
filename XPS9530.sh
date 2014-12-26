@@ -287,6 +287,8 @@ RETVAL=0
 case "$1" in
 	""|--help|-h)
 		echo "${BOLD}Dell XPS 9530${OFF} - Yosemite 10.10.1 (14B25)"
+		echo "https://github.com/robvanoostenrijk/XPS9530-OSX"
+		echo
 		echo "\t${BOLD}--update${OFF}: Update to latest git version (including externals)"
 		echo "\t${BOLD}--decompile-dsdt${OFF}: Decompile DSDT files in ./DSDT/raw"
 		echo "\t${BOLD}--patch-dsdt${OFF}: Patch DSDT files in ./DSDT/decompiled\e[0"
@@ -295,6 +297,12 @@ case "$1" in
 		echo "\t${BOLD}--patch-iokit${OFF}: Patch maximum pixel clock in IOKit"
 		echo "\t${BOLD}--patch-opencl${OFF}: Patch OpenCL/OpenGL in libCLVMIGILPlugin"
 		echo "\t${BOLD}--patch-hda${OFF}: Create AppleHDA injector kernel extension"
+		echo
+		echo "Credits:"
+		echo "Laptop-DSDT: https://github.com/RehabMan/Laptop-DSDT-Patch"
+		echo "ssdtPRgen: https://github.com/Piker-Alpha/ssdtPRGen.sh"
+		echo "AppleHDA ALC668: https://github.com/vbourachot/Dell-XPS13-9333-DSDT-Patch/"
+		echo
 		RETVAL=1
     ;;
 	--update)

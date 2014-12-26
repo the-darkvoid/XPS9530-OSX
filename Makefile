@@ -37,51 +37,64 @@ patch_dsdt:
 	# DSDT Patches
 	########################
 
-	# [1.8] Fix PARSEOP_ZERO Error
+	# [syn] Fix PARSEOP_ZERO Error
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/syntax/fix_PARSEOP_ZERO.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [1.5] Fix ADBG Error
+	# [syn] Fix ADBG Error
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/syntax/fix_ADBG.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [2.12] Rename GFX0 to IGPU
+	# [gfx] Rename GFX0 to IGPU
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [3.2] 7-series/8-series USB
+	# [usb] 7-series/8-series USB
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/usb/usb_7-series.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [4.01] Acer Aspire E1-571
+	# [bat] Acer Aspire E1-571
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.01] IRQ Fix
+	# [sys] IRQ Fix
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_IRQ.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.02] SMBus Fix
+	# [sys] SMBus Fix
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_SMBUS.txt ./DSDT/decompiled/DSDT.dsl
 
 	# [7.03] RTC Fix
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_RTC.txt ./DSDT/decompiled/DSDT.dsl
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_RTC.txt ./DSDT/decompiled/DSDT.dsl
 
 	# [7.05] Shutdown Fix v2
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_Shutdown2.txt ./DSDT/decompiled/DSDT.dsl
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_Shutdown2.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.06] HPET Fix
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_HPET.txt ./DSDT/decompiled/DSDT.dsl
+	# [sys] HPET Fix (No HPETs available..)
+	# Check if boot / wakeup works
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_HPET.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.07] OS Check Fix
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
+	# [sys] OS Check Fix
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
+	
+	# [sys] AC Adapter Fix
+	# Seems inoperational, check if AppleACPIACAdapter is loaded
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_ADP1.txt ./DSDT/decompiled/DSDT.dsl
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_AC.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.08] AC Adapter Fix
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_ADP1.txt ./DSDT/decompiled/DSDT.dsl
-
-	# [7.09] Add MCHC
+	# [sys] Add MCHC
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_MCHC.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.11] Fix _WAK Arg0 v2
+	# [sys] Fix _WAK Arg0 v2
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_WAK2.txt ./DSDT/decompiled/DSDT.dsl
 
-	# [7.14] Add IMEI
+	# [sys] Add IMEI
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_IMEI.txt ./DSDT/decompiled/DSDT.dsl
 
+	# [sys] Fix PNOT/PPNT
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_PNOT.txt ./DSDT/decompiled/DSDT.dsl
+
+	# [sys] Fix Non-zero Mutex
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_Mutex.txt ./DSDT/decompiled/DSDT.dsl
+	
+	# [sys] Add Haswell LPC
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt ./DSDT/decompiled/DSDT.dsl
+	
 	# Audio Layout
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_HDEF-layout1.txt ./DSDT/decompiled/DSDT.dsl
 
@@ -98,20 +111,20 @@ patch_dsdt:
 	# _BST package size
 	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./DSDT/patches/_BST-package-size.txt ./DSDT/decompiled/SSDT-10.dsl
 
-	# [2.12] Rename GFX0 to IGPU
+	# [gfx] Rename GFX0 to IGPU
 	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-10.dsl
 
 	########################
 	# SSDT-12 Patches
 	########################
 
-	# [2.12] Rename GFX0 to IGPU
+	# [gfx] Rename GFX0 to IGPU
 	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-12.dsl
 
-	# [2.05] Haswell HD4400/HD4600/HD5000 (Modified)
+	# Haswell HD4400/HD4600/HD5000 (Yosemite - Modified)
 	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/graphics_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
 
-	# [2.11] Brightness fix (Haswell)
+	# [gfx] Brightness fix (Haswell)
 	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ./DSDT/decompiled/SSDT-12.dsl
 
 	# Rename B0D3 to HDAU
@@ -124,7 +137,7 @@ patch_dsdt:
 	# SSDT-13 Patches
 	########################
 
-	# [2.12] Rename GFX0 to IGPU
+	# [gfx] Rename GFX0 to IGPU
 	./tools/patchmatic ./DSDT/decompiled/SSDT-13.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-13.dsl
 
 	########################
@@ -134,7 +147,7 @@ patch_dsdt:
 	# Remove invalid operands
 	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/WMMX-invalid-operands.txt ./DSDT/decompiled/SSDT-15.dsl
 
-	# [2.12] Rename GFX0 to IGPU
+	# [gfx] Rename GFX0 to IGPU
 	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-15.dsl
 
 	# Disable Nvidia card (Non-operational in OS X)

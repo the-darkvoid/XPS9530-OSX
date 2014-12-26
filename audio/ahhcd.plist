@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HDAConfigDefault</key>
+	<array>
+		<dict>
+			<key>AFGLowPowerState</key>
+			<data>
+			AwAAAA==
+			</data>
+			<key>CodecID</key>
+			<integer>283903592</integer>
+			<key>ConfigData</key>
+			<data>
+			ASccEAEnHQABJx6gAScfkAFHHCABRx0AAUce
+			EwFHH5ABVxwwAVcdEAFXHiEBVx8AAUcMAgFX
+			DAI=
+			</data>
+			<key>FuncGroup</key>
+			<integer>1</integer>
+			<key>LayoutID</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

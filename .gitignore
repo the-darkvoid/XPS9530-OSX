@@ -1,3 +1,6 @@
-backup/*
 audio/AppleHDA_ALC668.kext
-
+backup/*
+DSDT/compiled/*
+DSDT/decompiled/*
+DSDT/raw/*
+logs/*

@@ -154,8 +154,10 @@ patch_dsdt()
 
 patch_wifi()
 {
-    echo "Adding BCM94352Z Combo WiFi support in ./DSDT/compiled"
-    cd "${REPO}"
+	echo "${RED}Patching DSDT in ./DSDT/decompiled${OFF}"
+
+	echo "${BOLD}Adding BCM94352Z Combo WiFi support${OFF}"
+	cd "${REPO}"
 		
 	# BCM4352 Wifi
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/BCM4352_wifi.txt ./DSDT/decompiled/DSDT.dsl

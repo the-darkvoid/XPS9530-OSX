@@ -34,7 +34,7 @@ decompile_dsdt()
 
 	./tools/iasl -w1 -da ./DSDT/raw/DSDT.aml ./DSDT/raw/SSDT-*.aml &> ./logs/dsdt_decompile.log
 	echo "${BLUE}[DSDT]${OFF}: Log created in ./logs/dsdt_decompile.log"
-	rm ./DSDT/decompiled/*
+	rm ./DSDT/decompiled/* 2&>/dev/null
 	cp ./DSDT/raw/DSDT.dsl ./DSDT/decompiled/
 	cp ./DSDT/raw/SSDT-1[0235].dsl ./DSDT/decompiled/
 }

@@ -86,8 +86,8 @@ patch_dsdt()
 	echo "${BOLD}[sys] Add IMEI${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_IMEI.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] Fix PNOT/PPNT${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_PNOT.txt ./DSDT/decompiled/DSDT.dsl
+	#echo "${BOLD}[sys] Fix PNOT/PPNT${OFF}"
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_PNOT.txt ./DSDT/decompiled/DSDT.dsl
 
 	echo "${BOLD}[sys] Fix Non-zero Mutex${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_Mutex.txt ./DSDT/decompiled/DSDT.dsl
@@ -181,6 +181,20 @@ compile_dsdt()
 	cd "${REPO}"
 
 	rm ./DSDT/compiled/*
+	
+	echo "${BLUE}[DSDT]${OFF}: Copying untouched original SSDTs to ./DSDT/compiled"
+	cp ./DSDT/raw/SSDT-0.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-1.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-2.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-3.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-4x.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-5x.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-6x.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-7.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-8.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-9.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-11.aml ./DSDT/compiled
+	cp ./DSDT/raw/SSDT-14.aml ./DSDT/compiled
 
 	echo "${BLUE}[DSDT]${OFF}: Compiling DSDT to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/DSDT.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/DSDT.dsl
@@ -198,13 +212,13 @@ compile_dsdt()
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
 
 	# Additional custom SSDT
-	# Rehabman NullEthernet.kext
-	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-rmne to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-16.aml ./DSDT/custom/SSDT-rmne.dsl
-
 	# ssdtPRgen (P-states / C-states)
 	echo "${BLUE}[DSDT]${OFF}: Compiling ssdtPRgen to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-17.aml ./DSDT/custom/SSDT-pr.dsl
+	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr.dsl
+
+	# Rehabman NullEthernet.kext
+	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-rmne to ./DSDT/compiled"
+	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-rmne.aml ./DSDT/custom/SSDT-rmne.dsl	
 }
 
 patch_iokit()

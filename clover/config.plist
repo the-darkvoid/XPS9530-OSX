@@ -80,7 +80,7 @@
 			<key>IMEI</key>
 			<string>0x0</string>
 			<key>IntelGFX</key>
-			<string>0x04128086</string>
+			<string>0x0</string>
 			<key>LAN</key>
 			<string>0x0</string>
 			<key>NVidia</key>
@@ -151,7 +151,7 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<true/>
+			<false/>
 			<key>NVidia</key>
 			<false/>
 		</dict>
@@ -208,20 +208,6 @@
 				<key>Replace</key>
 				<data>
 				QYjE6yM=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>QECI HD4600 (GT2 Mobile to Desktop)</string>
-				<key>Find</key>
-				<data>
-				PYaAEgR0EOtd
-				</data>
-				<key>Name</key>
-				<string>AppleIntelHD5000Graphics</string>
-				<key>Replace</key>
-				<data>
-				PYaAFgR0EOtd
 				</data>
 			</dict>
 			<dict>

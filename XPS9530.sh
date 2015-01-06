@@ -337,10 +337,10 @@ case "$1" in
 		patch_iokit
 		RETVAL=1
 		;;
-	--patch-opencl)
-		patch_opencl
-		RETVAL=1
-		;;
+#	--patch-opencl)
+#		patch_opencl
+#		RETVAL=1
+#		;;
 	--patch-hda)
 		patch_hda
 		RETVAL=1
@@ -355,7 +355,7 @@ case "$1" in
 		echo "\t${BOLD}--patch-wifi${OFF}: Add BCM94352Z Combo WiFi support in ./DSDT/decompiled"
 		echo "\t${BOLD}--compile-dsdt${OFF}: Compile DSDT files to ./DSDT/compiled"
 		echo "\t${BOLD}--patch-iokit${OFF}: Patch maximum pixel clock in IOKit"
-		echo "\t${BOLD}--patch-opencl${OFF}: Patch OpenCL/OpenGL in libCLVMIGILPlugin"
+		#echo "\t${BOLD}--patch-opencl${OFF}: Patch OpenCL/OpenGL in libCLVMIGILPlugin"
 		echo "\t${BOLD}--patch-hda${OFF}: Create AppleHDA injector kernel extension"
 		echo
 		echo "Credits:"

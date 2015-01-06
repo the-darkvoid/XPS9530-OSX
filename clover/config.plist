@@ -314,20 +314,6 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Recognize 3rd party Wifi as Airport Extreme</string>
-				<key>Find</key>
-				<data>
-				axAAAHUN
-				</data>
-				<key>Name</key>
-				<string>AirPortBrcm4360</string>
-				<key>Replace</key>
-				<data>
-				axAAAJCQ
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Enable USB3 after wake for Intel 8 series chipset</string>
 				<key>Find</key>
 				<data>

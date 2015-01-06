@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -27,9 +27,9 @@
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>13F26</string>
+	<string>10K549</string>
 	<key>DTSDKName</key>
-	<string>macosx10.9</string>
+	<string>macosx10.6</string>
 	<key>DTXcode</key>
 	<string>0611</string>
 	<key>DTXcodeBuild</key>
@@ -220,6 +220,23 @@
 			<string>BrcmFirmwareStore</string>
 			<key>idProduct</key>
 			<integer>8680</integer>
+			<key>idVendor</key>
+			<integer>2652</integer>
+		</dict>
+		<key>0A5C_21EC</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.no-one.BrcmPatchRAM</string>
+			<key>FirmwareKey</key>
+			<string>BCM20702A1_001.002.014.1443.1459_v5555</string>
+			<key>IOClass</key>
+			<string>BrcmPatchRAM</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>IOResourceMatch</key>
+			<string>BrcmFirmwareStore</string>
+			<key>idProduct</key>
+			<integer>8684</integer>
 			<key>idVendor</key>
 			<integer>2652</integer>
 		</dict>
@@ -9405,6 +9422,8 @@
 			<string>IOResources</string>
 		</dict>
 	</dict>
+	<key>OSBundleCompatibleVersion</key>
+	<string>1.0</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.iokit.IOUSBFamily</key>

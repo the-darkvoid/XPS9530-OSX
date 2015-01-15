@@ -96,7 +96,7 @@ patch_dsdt()
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt ./DSDT/decompiled/DSDT.dsl
 	
 	echo "${BOLD}Audio Layout${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_HDEF-layout1.txt ./DSDT/decompiled/DSDT.dsl
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_HDEF-layout3.txt ./DSDT/decompiled/DSDT.dsl
 
 	echo "${BOLD}Rename B0D3 to HDAU${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/DSDT.dsl
@@ -283,17 +283,17 @@ patch_hda()
 	rm ./audio/AppleHDA_ALC668.kext/Contents/version.plist
 	ln -s /System/Library/Extensions/AppleHDA.kext/Contents/MacOS/AppleHDA ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
 
-	echo "       --> ${BOLD}Copying AppleHDA_ALC668 audio platform & layout${OFF}"
+	echo "       --> ${BOLD}Copying AppleHDA_ALC668 audio platform & layouts${OFF}"
 	cp ./audio/*.zlib ./audio/AppleHDA_ALC668.kext/Contents/Resources/
 
 	echo "       --> ${BOLD}Configuring AppleHDA_ALC668 Info.plist${OFF}"
-	replace=`/usr/libexec/plistbuddy -c "Print :NSHumanReadableCopyright" $plist | perl -pi -e 's/(\d*\.\d*)/9\1/'`
+	replace=`/usr/libexec/plistbuddy -c "Print :NSHumanReadableCopyright" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
 	/usr/libexec/plistbuddy -c "Set :NSHumanReadableCopyright '$replace'" $plist
-	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleGetInfoString" $plist | perl -pi -e 's/(\d*\.\d*)/9\1/'`
+	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleGetInfoString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
 	/usr/libexec/plistbuddy -c "Set :CFBundleGetInfoString '$replace'" $plist
-	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleVersion" $plist | perl -pi -e 's/(\d*\.\d*)/9\1/'`
+	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleVersion" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
 	/usr/libexec/plistbuddy -c "Set :CFBundleVersion '$replace'" $plist
-	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleShortVersionString" $plist | perl -pi -e 's/(\d*\.\d*)/9\1/'`
+	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleShortVersionString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
 	/usr/libexec/plistbuddy -c "Set :CFBundleShortVersionString '$replace'" $plist
 	/usr/libexec/plistbuddy -c "Add ':HardwareConfigDriver_Temp' dict" $plist
 	/usr/libexec/plistbuddy -c "Merge /System/Library/Extensions/AppleHDA.kext/Contents/PlugIns/AppleHDAHardwareConfigDriver.kext/Contents/Info.plist ':HardwareConfigDriver_Temp'" $plist
@@ -306,7 +306,7 @@ patch_hda()
 	/usr/libexec/plistbuddy -c "Merge ./audio/ahhcd.plist ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
     
 	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
-	#sudo cp -r ./audio/AppleHDA_ALC668.kext /System/Library/Extensions
+	sudo cp -r ./audio/AppleHDA_ALC668.kext /System/Library/Extensions
 	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /System/Library/Extensions${OFF}"
 }
 

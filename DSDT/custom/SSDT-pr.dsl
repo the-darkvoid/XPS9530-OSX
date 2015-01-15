@@ -28,6 +28,22 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
 
     Scope (\_PR_.CPU0)
     {
+        Method (_INI, 0, NotSerialized)
+        {
+            Store ("ssdtPRGen version....: 15.6 / Mac OS X 10.10.1 (14B25)", Debug)
+            Store ("target processor.....: i7-4712HQ", Debug)
+            Store ("running processor....: Intel(R) Core(TM) i7-4712HQ CPU @ 2.30GHz", Debug)
+            Store ("baseFrequency........: 800", Debug)
+            Store ("frequency............: 2300", Debug)
+            Store ("busFrequency.........: 100", Debug)
+            Store ("logicalCPUs..........: 8", Debug)
+            Store ("maximum TDP..........: 37", Debug)
+            Store ("packageLength........: 26", Debug)
+            Store ("turboStates..........: 10", Debug)
+            Store ("maxTurboFrequency....: 3300", Debug)
+            Store ("machdep.xcpm.mode....: 1", Debug)
+        }
+
         Name (APLF, Zero)
         Name (APSN, 0x0A)
         Name (APSS, Package (0x1A)
@@ -65,11 +81,14 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
 
         Method (ACST, 0, NotSerialized)
         {
+            Store ("Method CPU0.ACST Called", Debug)
+            Store ("CPU0 C-States    : 29", Debug)
+
             /* Low Power Modes for CPU0 */
-            Return (Package (0x07)
+            Return (Package (0x06)
             {
                 One,
-                0x05,
+                0x04,
                 Package (0x04)
                 {
                     ResourceTemplate ()
@@ -82,7 +101,7 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
                             )
                     },
                     One,
-                    0x03E8,
+                    Zero,
                     0x03E8
                 },
 
@@ -97,8 +116,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
                             0x03,               // Access Size
                             )
                     },
-                    0x02,
-                    0x94,
+                    0x03,
+                    0xCD,
                     0x01F4
                 },
 
@@ -109,23 +128,7 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
                         Register (FFixedHW,
                             0x01,               // Bit Width
                             0x02,               // Bit Offset
-                            0x0000000000000030, // Address
-                            0x03,               // Access Size
-                            )
-                    },
-                    0x03,
-                    0xC6,
-                    0xC8
-                },
-
-                Package (0x04)
-                {
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW,
-                            0x01,               // Bit Width
-                            0x02,               // Bit Offset
-                            0x0000000000000040, // Address
+                            0x0000000000000020, // Address
                             0x03,               // Access Size
                             )
                     },
@@ -141,7 +144,7 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
                         Register (FFixedHW,
                             0x01,               // Bit Width
                             0x02,               // Bit Offset
-                            0x0000000000000050, // Address
+                            0x0000000000000030, // Address
                             0x03,               // Access Size
                             )
                     },
@@ -154,6 +157,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
 
         Method (_DSM, 4, NotSerialized)
         {
+            Store ("Method CPU0._DSM Called", Debug)
+
             If (LEqual (Arg2, Zero))
             {
                 Return (Buffer (One)
@@ -174,11 +179,16 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU1.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
         Method (ACST, 0, NotSerialized)
         {
+            Store ("Method CPU1.ACST Called", Debug)
+            Store ("CPU1 C-States    : 31", Debug)
+
             /* Low Power Modes for CPU1 */
             Return (Package (0x07)
             {
@@ -271,6 +281,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU2.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
@@ -281,6 +293,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU3.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
@@ -291,6 +305,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU4.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
@@ -301,6 +317,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU5.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
@@ -311,6 +329,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU6.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 
@@ -321,6 +341,8 @@ DefinitionBlock ("ssdt.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00015600)
     {
         Method (APSS, 0, NotSerialized)
         {
+            Store ("Method _PR_.CPU7.APSS Called", Debug)
+
             Return (\_PR_.CPU0.APSS)
         }
 

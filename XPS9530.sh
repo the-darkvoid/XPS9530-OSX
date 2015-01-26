@@ -134,8 +134,8 @@ patch_dsdt()
 	echo "${BOLD}Rename B0D3 to HDAU${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/SSDT-12.dsl
 
-	#echo "${BOLD}Insert HDAU device${OFF}"
-	#./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
+	echo "${BOLD}Insert HDAU device${OFF}"
+	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
 
 	########################
 	# SSDT-13 Patches

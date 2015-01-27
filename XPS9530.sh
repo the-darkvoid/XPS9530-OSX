@@ -308,6 +308,8 @@ patch_hda()
 	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
 	sudo cp -r ./audio/AppleHDA_ALC668.kext /System/Library/Extensions
 	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /System/Library/Extensions${OFF}"
+	sudo cp -r ./audio/CodecCommander.kext /System/Library/Extensions
+	echo "       --> ${BOLD}Installed CodecCommander.kext to /System/Library/Extensions${OFF}"
 }
 
 RETVAL=0

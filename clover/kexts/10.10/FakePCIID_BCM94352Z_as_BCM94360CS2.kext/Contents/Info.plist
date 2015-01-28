@@ -13,9 +13,9 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0d1</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0d1</string>
+	<string>1.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -23,9 +23,9 @@
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>10K549</string>
+	<string>14A382</string>
 	<key>DTSDKName</key>
-	<string>macosx10.6</string>
+	<string>macosx10.10</string>
 	<key>DTXcode</key>
 	<string>0611</string>
 	<key>DTXcodeBuild</key>
@@ -57,23 +57,25 @@
 			<string>AppleUSBMergeNub</string>
 			<key>IOPCIPrimaryMatch</key>
 			<string>0x43b114e4</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
-				<key>device-id</key>
+				<key>RM,device-id</key>
 				<data>
 				oEMAAA==
 				</data>
-				<key>subsystem-id</key>
+				<key>RM,subsystem-id</key>
 				<data>
 				NAEAAA==
 				</data>
-				<key>subsystem-vendor-id</key>
+				<key>RM,subsystem-vendor-id</key>
 				<data>
 				axAAAA==
 				</data>
-				<key>vendor-id</key>
+				<key>RM,vendor-id</key>
 				<data>
 				5BQAAA==
 				</data>
@@ -92,9 +94,9 @@
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
-			<string>Release-rob</string>
+			<string>Debug-rob</string>
 			<key>RM,Version</key>
-			<string>FakePCIID_BCM94352Z_as_BCM94360CS2 1.0.0d1</string>
+			<string>FakePCIID_BCM94352Z_as_BCM94360CS2 1.0</string>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>

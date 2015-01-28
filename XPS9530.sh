@@ -254,6 +254,7 @@ patch_iokit()
 		"9f99c861294afc3d643987782ce45e4f")
 		echo "         --> Yosemite 10.10.2 IOKit (${RED}patched${OFF})"
 		echo "         IOKit is already patched, no action taken."
+		;;
 		*)
 		echo "         --> Unknown IOKit version (${RED}no action taken${OFF})"
 		;;

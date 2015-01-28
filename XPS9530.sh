@@ -364,7 +364,7 @@ case "$1" in
 		RETVAL=1
 		;;
 	*)
-		echo "${BOLD}Dell XPS 9530${OFF} - Yosemite 10.10.1 (14B25)"
+		echo "${BOLD}Dell XPS 9530${OFF} - Yosemite 10.10.2 (14C109)"
 		echo "https://github.com/robvanoostenrijk/XPS9530-OSX"
 		echo
 		echo "\t${BOLD}--update${OFF}: Update to latest git version (including externals)"

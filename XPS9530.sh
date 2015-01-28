@@ -235,12 +235,27 @@ patch_iokit()
 		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 		echo "         Patched"
 		;;
+		"a94dc8e1b6bb6491e5f610f0a3caf960")
+		echo "         --> Yosemite 10.10.2 IOKit (${GREEN}unpatched${OFF})"
+		sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		echo "         Patched"
+		;;
 		"8756e20f979c9e74c80f07b452ebfadd")
 		echo "         --> Yosemite 10.10.1 IOKit (${RED}patched, not signed${OFF})"
+		;;
+		"20849598dcfa1e8c59038d28e0ab5fd5")
+		echo "         --> Yosemite 10.10.2 IOKit (${RED}patched, not signed${OFF})"
 		;;
 		"f834136d72126cc9479604879270d24f")
 		echo "         --> Yosemite 10.10.1 IOKit (${RED}patched${OFF})"
 		echo "         IOKit is already patched, no action taken."
+		;;
+		"9f99c861294afc3d643987782ce45e4f")
+		echo "         --> Yosemite 10.10.2 IOKit (${RED}patched${OFF})"
+		echo "         IOKit is already patched, no action taken."
+		*)
+		echo "         --> Unknown IOKit version (${RED}no action taken${OFF})"
 		;;
 	esac
 }

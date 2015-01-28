@@ -184,30 +184,16 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Bootloader Graphics - Second Stage Patch 1</string>
-				<key>Find</key>
-				<data>
-				hcB0XUg=
-				</data>
-				<key>Name</key>
-				<string>IOGraphicsFamily</string>
-				<key>Replace</key>
-				<data>
-				McB0W0g=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Bootloader Graphics - Second Stage Patch 2</string>
 				<key>Find</key>
 				<data>
-				QYjE6wM=
+				QYjE6xE=
 				</data>
 				<key>Name</key>
 				<string>IOGraphicsFamily</string>
 				<key>Replace</key>
 				<data>
-				QYjE6yM=
+				QYjE6zE=
 				</data>
 			</dict>
 			<dict>
@@ -215,17 +201,41 @@
 				<string>Enable 96MB for Azul framebuffer 0x0a2e0008</string>
 				<key>Find</key>
 				<data>
-				CAAuCgEDAwMAAAAEAAAgAgAAUAEAAABgbAUAAGwFAAAA
-				AAAAAAAAAAAACAACAAAAMAAAAAEFCQAABAAABwEAAAIE
-				CgAABAAABwEAAA==
+				CAAuCgEDAwMAAAAE
 				</data>
 				<key>Name</key>
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
 				<data>
-				CAAuCgEDAwMAAAAGAAAgAgAAUAEAAABgbAUAAGwFAAAA
-				AAAAAAAAAAAACAAEAAAAMAAAAAEFCQAACAAABgAAAAIE
-				CgAABAAABgAAAA==
+				CAAuCgEDAwMAAAAG
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable eDP port 0x00 for Azul framebuffer 0x0a2e0008</string>
+				<key>Find</key>
+				<data>
+				AAAIAAIAAAAwAAAA
+				</data>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				AAAIAAQAAAAwAAAA
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable HDMI port 0x05 for Azul framebuffer 0x0a2e0008</string>
+				<key>Find</key>
+				<data>
+				AQUJAAAEAAAHAQAA
+				</data>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				AQUJAAAIAAAHAQAA
 				</data>
 			</dict>
 			<dict>
@@ -272,48 +282,6 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Enable Realtek ALC668 #4</string>
-				<key>Find</key>
-				<data>
-				hBnUEQ==
-				</data>
-				<key>Name</key>
-				<string>AppleHDA</string>
-				<key>Replace</key>
-				<data>
-				aAbsEA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Replace Intel HDMI audio ID #1</string>
-				<key>Find</key>
-				<data>
-				PQsMAAA=
-				</data>
-				<key>Name</key>
-				<string>AppleHDAController</string>
-				<key>Replace</key>
-				<data>
-				PQwMAAA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Replace Intel HDMI audio ID #2</string>
-				<key>Find</key>
-				<data>
-				PQwKAAA=
-				</data>
-				<key>Name</key>
-				<string>AppleHDAController</string>
-				<key>Replace</key>
-				<data>
-				PQwMAAA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Enable USB3 after wake for Intel 8 series chipset</string>
 				<key>Find</key>
 				<data>
@@ -331,13 +299,13 @@
 				<string>IOBluetoothFamily - Continuity &amp; Hand-off</string>
 				<key>Find</key>
 				<data>
-				i4eMAQAA
+				SIXAdFwPt0gQg8kEg/kGdVBIiw==
 				</data>
 				<key>Name</key>
 				<string>IOBluetoothFamily</string>
 				<key>Replace</key>
 				<data>
-				uA8AAACQ
+				PsaDvAIAAAJBvg8AAADpTgAAAA==
 				</data>
 			</dict>
 		</array>

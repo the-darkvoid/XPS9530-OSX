@@ -245,26 +245,6 @@ patch_iokit()
 	esac
 }
 
-patch_opencl()
-{
-	opencl_md5=$(md5 -q "/System/Library/Frameworks/OpenCL.framework/Libraries/libCLVMIGILPlugin.dylib")
-	
-	echo "${GREEN}[OpenCL]${OFF}: Patching libCLVMIGILPlugin for OpenCL/OpenGL"	
-	echo "${BLUE}[OpenCL]${OFF}: Current libCLVMIGILPlugin md5 is ${BOLD}${opencl_md5}${OFF}"
-	
-	case $opencl_md5 in
-		"6d325a0b3785e82b8074fb8f64005fdd")
-		echo "          --> Yosemite 10.10.1 libCLVMIGILPlugin (${GREEN}unpatched${OFF})"
-		sudo perl -i.bak -pe 's|([\xFF\xFC\x3D])\x86\x80\x12\x04|$1\x86\x80\x16\x04|sg' /System/Library/Frameworks/OpenCL.framework/Libraries/libCLVMIGILPlugin.dylib
-		echo "\tPatched"
-		;;
-		"a77fe21fa2cbf3958e7d43a9b9453535")
-		echo "          --> Yosemite 10.10.1 libCLVMIGILPlugin (${RED}patched${OFF})"
-		echo "          libCLVMIGILPlugin is already patched, no action taken."
-		;;
-	esac
-}
-
 patch_hda()
 {
 	echo "${GREEN}[HDA]${OFF}: Creating AppleHDA injection kernel extension for ${BOLD}ALC668${OFF}"
@@ -335,10 +315,6 @@ case "$1" in
 		patch_iokit
 		RETVAL=1
 		;;
-#	--patch-opencl)
-#		patch_opencl
-#		RETVAL=1
-#		;;
 	--patch-hda)
 		patch_hda
 		RETVAL=1
@@ -352,7 +328,6 @@ case "$1" in
 		echo "\t${BOLD}--patch-dsdt${OFF}: Patch DSDT files in ./DSDT/decompiled"
 		echo "\t${BOLD}--compile-dsdt${OFF}: Compile DSDT files to ./DSDT/compiled"
 		echo "\t${BOLD}--patch-iokit${OFF}: Patch maximum pixel clock in IOKit"
-		#echo "\t${BOLD}--patch-opencl${OFF}: Patch OpenCL/OpenGL in libCLVMIGILPlugin"
 		echo "\t${BOLD}--patch-hda${OFF}: Create AppleHDA injector kernel extension"
 		echo
 		echo "Credits:"

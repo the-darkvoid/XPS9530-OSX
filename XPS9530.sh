@@ -187,9 +187,6 @@ compile_dsdt()
 	cp ./DSDT/raw/SSDT-1.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-2.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-3.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-4x.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-5x.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-6x.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-7.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-8.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-9.aml ./DSDT/compiled

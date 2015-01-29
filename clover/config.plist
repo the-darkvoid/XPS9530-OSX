@@ -77,7 +77,7 @@
 			<key>IMEI</key>
 			<string>0x0</string>
 			<key>IntelGFX</key>
-			<string>0x0</string>
+			<string>0x04128086</string>
 			<key>LAN</key>
 			<string>0x0</string>
 			<key>NVidia</key>
@@ -148,7 +148,7 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<false/>
+			<true/>
 			<key>NVidia</key>
 			<false/>
 		</dict>

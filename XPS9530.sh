@@ -162,19 +162,6 @@ patch_dsdt()
 	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/graphics_Disable_Nvidia.txt ./DSDT/decompiled/SSDT-15.dsl
 }
 
-patch_wifi()
-{
-	echo "${GREEN}[WiFi]${OFF}: Applying WiFi patch to DSDT / SST"
-	
-	echo "${BLUE}[WiFi]${OFF}: Patching DSDT in ./DSDT/decompiled"
-
-	echo "${BOLD}Adding BCM94352Z Combo WiFi support${OFF}"
-	cd "${REPO}"
-		
-	# BCM4352 Wifi
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/BCM4352_wifi.txt ./DSDT/decompiled/DSDT.dsl
-}
-
 compile_dsdt()
 {
 	echo "${GREEN}[DSDT]${OFF}: Compiling DSDT / SSDT in ./DSDT/compiled"
@@ -344,10 +331,6 @@ case "$1" in
 		patch_dsdt
 		RETVAL=1
 		;;
-	--patch-wifi)
-		patch_wifi
-		RETVAL=1
-		;;
 	--patch-iokit)
 		patch_iokit
 		RETVAL=1
@@ -367,7 +350,6 @@ case "$1" in
 		echo "\t${BOLD}--update${OFF}: Update to latest git version (including externals)"
 		echo "\t${BOLD}--decompile-dsdt${OFF}: Decompile DSDT files in ./DSDT/raw"
 		echo "\t${BOLD}--patch-dsdt${OFF}: Patch DSDT files in ./DSDT/decompiled"
-		echo "\t${BOLD}--patch-wifi${OFF}: Add BCM94352Z Combo WiFi support in ./DSDT/decompiled"
 		echo "\t${BOLD}--compile-dsdt${OFF}: Compile DSDT files to ./DSDT/compiled"
 		echo "\t${BOLD}--patch-iokit${OFF}: Patch maximum pixel clock in IOKit"
 		#echo "\t${BOLD}--patch-opencl${OFF}: Patch OpenCL/OpenGL in libCLVMIGILPlugin"

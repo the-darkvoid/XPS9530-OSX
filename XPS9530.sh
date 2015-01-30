@@ -32,7 +32,7 @@ decompile_dsdt()
 	echo "${GREEN}[DSDT]${OFF}: Decompiling DSDT / SSDT in ./DSDT/raw"
 	cd "${REPO}"
 
-	./tools/iasl -w1 -da ./DSDT/raw/DSDT.aml ./DSDT/raw/SSDT-*.aml &> ./logs/dsdt_decompile.log
+	./tools/iasl -w1 -da -dl ./DSDT/raw/DSDT.aml ./DSDT/raw/SSDT-*.aml &> ./logs/dsdt_decompile.log
 	echo "${BLUE}[DSDT]${OFF}: Log created in ./logs/dsdt_decompile.log"
 	rm ./DSDT/decompiled/* 2&>/dev/null
 	cp ./DSDT/raw/DSDT.dsl ./DSDT/decompiled/

@@ -155,7 +155,7 @@
 		<key>InjectEDID</key>
 		<false/>
 		<key>ig-platform-id</key>
-		<string>0x0a2e0008</string>
+		<string>0x0a260006</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
@@ -195,44 +195,30 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Enable 96MB for Azul framebuffer 0x0a2e0008</string>
+				<string>Enable 96MB BIOS, 34MB Framebuffer, 34MB Cursor for Azul framebuffer 0x0a260006</string>
 				<key>Find</key>
 				<data>
-				CAAuCgEDAwMAAAAE
+				BgAmCgEDAwMAAAACAAAwAQAAYAA=
 				</data>
 				<key>Name</key>
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
 				<data>
-				CAAuCgEDAwMAAAAG
+				BgAmCgEDAwMAAAAGAAAgAgAAIAI=
 				</data>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Enable eDP port 0x00 for Azul framebuffer 0x0a2e0008</string>
+				<string>Enable eDP port 0x00, HDMI port 0x05 for Azul framebuffer 0x0a260006</string>
 				<key>Find</key>
 				<data>
-				AAAIAAIAAAAwAAAA
+				AAAIAAIAAAAwAAAAAQUJAAAEAACHAAAA
 				</data>
 				<key>Name</key>
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
 				<data>
-				AAAIAAQAAAAwAAAA
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable HDMI port 0x05 for Azul framebuffer 0x0a2e0008</string>
-				<key>Find</key>
-				<data>
-				AQUJAAAEAAAHAQAA
-				</data>
-				<key>Name</key>
-				<string>AppleIntelFramebufferAzul</string>
-				<key>Replace</key>
-				<data>
-				AQUJAAAIAAAHAQAA
+				AAAIAAQAAAAwAAAAAQUJAAAIAACHAAAA
 				</data>
 			</dict>
 			<dict>

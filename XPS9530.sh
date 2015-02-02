@@ -198,8 +198,19 @@ compile_dsdt()
 	# Additional custom SSDT
 	# ssdtPRgen (P-states / C-states)
 	echo "${BLUE}[DSDT]${OFF}: Compiling ssdtPRgen to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr.dsl
-
+	
+	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4710HQ"* ]]
+	then
+		echo "${BLUE}[DSDT]${OFF}: Intel ${BOLD}i7-4710HQ${OFF} processor found"
+		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4710HQ.dsl
+	fi
+	
+	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4712HQ"* ]]
+	then
+		echo "${BLUE}[DSDT]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
+		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4712HQ.dsl
+	fi
+	
 	# Rehabman NullEthernet.kext
 	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-rmne to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-rmne.aml ./DSDT/custom/SSDT-rmne.dsl	

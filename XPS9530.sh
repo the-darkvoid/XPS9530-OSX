@@ -199,10 +199,10 @@ compile_dsdt()
 	# ssdtPRgen (P-states / C-states)
 	echo "${BLUE}[DSDT]${OFF}: Compiling ssdtPRgen to ./DSDT/compiled"
 	
-	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4710HQ"* ]]
+	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4702HQ"* ]]
 	then
-		echo "${BLUE}[DSDT]${OFF}: Intel ${BOLD}i7-4710HQ${OFF} processor found"
-		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4710HQ.dsl
+		echo "${BLUE}[DSDT]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
+		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4702HQ.dsl
 	fi
 	
 	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4712HQ"* ]]

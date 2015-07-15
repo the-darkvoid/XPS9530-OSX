@@ -323,10 +323,10 @@ patch_hda()
 	/usr/libexec/plistbuddy -c "Merge ./audio/ahhcd.plist ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
     
 	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
-	sudo cp -r ./audio/AppleHDA_ALC668.kext /System/Library/Extensions
-	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /System/Library/Extensions${OFF}"
-	sudo cp -r ./audio/CodecCommander.kext /System/Library/Extensions
-	echo "       --> ${BOLD}Installed CodecCommander.kext to /System/Library/Extensions${OFF}"
+	sudo cp -r ./audio/AppleHDA_ALC668.kext /Library/Extensions
+	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /Library/Extensions${OFF}"
+	sudo cp -r ./audio/CodecCommander.kext /Library/Extensions
+	echo "       --> ${BOLD}Installed CodecCommander.kext to /Library/Extensions${OFF}"
 }
 
 RETVAL=0

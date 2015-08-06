@@ -108,7 +108,7 @@ patch_dsdt()
 	# SSDT-10 Patches
 	########################
 	
-	echo "${BLUE}[DSDT]${OFF}: Patching SSDT-10 in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-10]${OFF}: Patching SSDT-10 in ./DSDT/decompiled"
 
 	echo "${BOLD}_BST package size${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./DSDT/patches/_BST-package-size.txt ./DSDT/decompiled/SSDT-10.dsl
@@ -120,7 +120,7 @@ patch_dsdt()
 	# SSDT-12 Patches
 	########################
 
-	echo "${BLUE}[DSDT]${OFF}: Patching SSDT-12 in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-12]${OFF}: Patching SSDT-12 in ./DSDT/decompiled"	
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-12.dsl
@@ -141,7 +141,7 @@ patch_dsdt()
 	# SSDT-13 Patches
 	########################
 
-	echo "${BLUE}[DSDT]${OFF}: Patching SSDT-13 in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-13]${OFF}: Patching SSDT-13 in ./DSDT/decompiled"	
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/SSDT-13.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-13.dsl
@@ -150,7 +150,7 @@ patch_dsdt()
 	# SSDT-15 Patches
 	########################
 
-	echo "${BLUE}[DSDT]${OFF}: Patching SSDT-15 in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-15]${OFF}: Patching SSDT-15 in ./DSDT/decompiled"	
 
 	echo "${BOLD}Remove invalid operands${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/WMMX-invalid-operands.txt ./DSDT/decompiled/SSDT-15.dsl
@@ -169,7 +169,7 @@ compile_dsdt()
 
 	rm ./DSDT/compiled/*
 	
-	echo "${BLUE}[DSDT]${OFF}: Copying untouched original SSDTs to ./DSDT/compiled"
+	echo "${BLUE}[SSDT]${OFF}: Copying untouched original SSDTs to ./DSDT/compiled"
 	cp ./DSDT/raw/SSDT-0.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-1.aml ./DSDT/compiled
 	cp ./DSDT/raw/SSDT-2.aml ./DSDT/compiled
@@ -183,36 +183,36 @@ compile_dsdt()
 	echo "${BLUE}[DSDT]${OFF}: Compiling DSDT to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/DSDT.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-10 to ./DSDT/compiled"
+	echo "${BLUE}[SSDT-10]${OFF}: Compiling SSDT-10 to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-10.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-10.dsl
 
-	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-12 to ./DSDT/compiled"
+	echo "${BLUE}[SSDT-12]${OFF}: Compiling SSDT-12 to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-12.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-12.dsl
 
-	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-13 to ./DSDT/compiled"
+	echo "${BLUE}[SSDT-13]${OFF}: Compiling SSDT-13 to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-13.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-13.dsl
 
-	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-15 to ./DSDT/compiled"
+	echo "${BLUE}[SSDT-15]${OFF}: Compiling SSDT-15 to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
 
 	# Additional custom SSDT
 	# ssdtPRgen (P-states / C-states)
-	echo "${BLUE}[DSDT]${OFF}: Compiling ssdtPRgen to ./DSDT/compiled"
+	echo "${BLUE}[PRgen]${OFF}: Compiling ssdtPRgen to ./DSDT/compiled"
 	
 	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4702HQ"* ]]
 	then
-		echo "${BLUE}[DSDT]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
+		echo "${BLUE}[PRgen]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
 		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4702HQ.dsl
 	fi
 	
 	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4712HQ"* ]]
 	then
-		echo "${BLUE}[DSDT]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
+		echo "${BLUE}[PRgen]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
 		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4712HQ.dsl
 	fi
 	
 	# Rehabman NullEthernet.kext
-	echo "${BLUE}[DSDT]${OFF}: Compiling SSDT-rmne to ./DSDT/compiled"
+	echo "${BLUE}[RMNE]${OFF}: Compiling SSDT-rmne to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-rmne.aml ./DSDT/custom/SSDT-rmne.dsl	
 }
 
@@ -247,7 +247,13 @@ patch_iokit()
 		sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 		echo "         Patched"
-		;;		
+		;;
+		"16e1320076417596176c919009f4b088")
+		echo "         --> El Capitan 10.11 Beta 2 IOKit (${GREEN}unpatched${OFF})"
+		sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		echo "         Patched"
+		;;
 		"8756e20f979c9e74c80f07b452ebfadd")
 		echo "         --> Yosemite 10.10.1 IOKit (${RED}patched, not signed${OFF})"
 		;;
@@ -259,6 +265,9 @@ patch_iokit()
 		;;
 		"1ab7c0ec047d11f6b40798b6f0107c0c")
 		echo "         --> El Capitan 10.11 Beta 1 IOKit (${RED}patched, not signed${OFF})"
+		;;
+		"080b614971777a0b7022f0c19ba58f9b")
+		echo "         --> El Capitan 10.11 Beta 2 IOKit (${RED}patched, not signed${OFF})"
 		;;
 		"f834136d72126cc9479604879270d24f")
 		echo "         --> Yosemite 10.10.1 IOKit (${RED}patched${OFF})"
@@ -275,7 +284,11 @@ patch_iokit()
 		"e96a04420555b71bb0933e26773575bc")
 		echo "         --> El Capitan 10.11 Beta 1 IOKit (${RED}patched${OFF})"
 		echo "         IOKit is already patched, no action taken."
-		;;		
+		;;
+		"f0b2d73ac13c9211857af8707db9676d")
+		echo "         --> El Capitan 10.11 Beta 1 IOKit (${RED}patched${OFF})"
+		echo "         IOKit is already patched, no action taken."
+		;;
 		*)
 		echo "         --> Unknown IOKit version (${RED}no action taken${OFF})"
 		;;

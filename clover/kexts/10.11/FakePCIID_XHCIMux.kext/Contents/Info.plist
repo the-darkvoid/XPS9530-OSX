@@ -3,127 +3,130 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14C109</string>
+	<string>14E46</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.FakePCIID-BCM94352Z-as-BCM94360CS2</string>
+	<string>org.rehabman.injector.FakePCIID-XHCIMux</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FakePCIID_BCM94352Z_as_BCM94360CS2</string>
+	<string>FakePCIID_XHCIMux</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.2.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.1</string>
+	<string>1.2.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>6A2008a</string>
+	<string>6E35b</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>14A382</string>
+	<string>10M2518</string>
 	<key>DTSDKName</key>
-	<string>macosx10.10</string>
+	<string>macosx10.6</string>
 	<key>DTXcode</key>
-	<string>0611</string>
+	<string>0640</string>
 	<key>DTXcodeBuild</key>
-	<string>6A2008a</string>
+	<string>6E35b</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>Airport_Brcm4360</key>
+		<key>XHCIMux 7-series</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AirPort.Brcm4360</string>
+			<string>org.rehabman.driver.FakePCIID</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,pr2-block</key>
+				<data>
+				AA==
+				</data>
+				<key>RM,pr2-chipset-mask</key>
+				<data>
+				DwAAAA==
+				</data>
+				<key>RM,pr2-force</key>
+				<data>
+				AAAAAA==
+				</data>
+				<key>RM,pr2-honor-pr2m</key>
+				<data>
+				AQ==
+				</data>
+				<key>RM,pr2-init</key>
+				<data>
+				AQ==
+				</data>
+				<key>RM,pr2m-block</key>
+				<data>
+				AQ==
+				</data>
+			</dict>
 			<key>IOClass</key>
-			<string>AirPort_Brcm4360</string>
+			<string>FakePCIID_XHCIMux</string>
 			<key>IOMatchCategory</key>
-			<string>IODefaultMatchCategory</string>
+			<string>FakePCIID_XHCIMux</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x43b114e4</string>
+			<string>0x1e318086</string>
 			<key>IOProbeScore</key>
-			<integer>901</integer>
+			<integer>9001</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
-			<key>TruePowerOff</key>
-			<true/>
+			<key>RM,Build</key>
+			<string>Release-RehabMan</string>
+			<key>RM,Version</key>
+			<string>FakePCIID_XHCIMux 1.2.0</string>
 		</dict>
-		<key>BCM943224HMS as BCM94360CS2</key>
+		<key>XHCIMux 8 and 9-series</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
 			<key>FakeProperties</key>
 			<dict>
-				<key>RM,device-id</key>
+				<key>RM,pr2-block</key>
 				<data>
-				oEMAAA==
+				AA==
 				</data>
-				<key>RM,subsystem-id</key>
+				<key>RM,pr2-chipset-mask</key>
 				<data>
-				NAEAAA==
+				/z8AAA==
 				</data>
-				<key>RM,subsystem-vendor-id</key>
+				<key>RM,pr2-force</key>
 				<data>
-				axAAAA==
+				AAAAAA==
 				</data>
-				<key>RM,vendor-id</key>
+				<key>RM,pr2-honor-pr2m</key>
 				<data>
-				5BQAAA==
+				AQ==
 				</data>
-			</dict>
-			<key>IOClass</key>
-			<string>FakePCIID</string>
-			<key>IOMatchCategory</key>
-			<string>FakePCIID</string>
-			<key>IOPCIPrimaryMatch</key>
-			<string>0x435314e4</string>
-			<key>IOProviderClass</key>
-			<string>IOPCIDevice</string>
-			<key>RM,Build</key>
-			<string>Debug-rob</string>
-			<key>RM,Version</key>
-			<string>FakePCIID_BCM94352Z_as_BCM94360CS2 1.0.1</string>
-		</dict>
-		<key>BCM94352Z as BCM94360CS2</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>org.rehabman.driver.FakePCIID</string>
-			<key>FakeProperties</key>
-			<dict>
-				<key>RM,device-id</key>
+				<key>RM,pr2-init</key>
 				<data>
-				oEMAAA==
+				AQ==
 				</data>
-				<key>RM,subsystem-id</key>
+				<key>RM,pr2m-block</key>
 				<data>
-				NAEAAA==
-				</data>
-				<key>RM,subsystem-vendor-id</key>
-				<data>
-				axAAAA==
-				</data>
-				<key>RM,vendor-id</key>
-				<data>
-				5BQAAA==
+				AQ==
 				</data>
 			</dict>
 			<key>IOClass</key>
-			<string>FakePCIID</string>
+			<string>FakePCIID_XHCIMux</string>
 			<key>IOMatchCategory</key>
-			<string>FakePCIID</string>
+			<string>FakePCIID_XHCIMux</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x43b114e4 0x43a014e4</string>
+			<string>0x9c318086 0x9cb18086 0x8c318086 0x8cb18086</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
-			<string>Debug-rob</string>
+			<string>Release-RehabMan</string>
 			<key>RM,Version</key>
-			<string>FakePCIID_BCM94352Z_as_BCM94360CS2 1.0.1</string>
+			<string>FakePCIID_XHCIMux 1.2.0</string>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>
-	<string>Network-Root</string>
+	<string>Root</string>
 	<key>Source Code</key>
 	<string>https://github.com/RehabMan/FakePCIID</string>
 </dict>

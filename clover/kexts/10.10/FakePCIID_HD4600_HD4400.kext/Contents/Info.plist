@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14B25</string>
+	<string>14C109</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.HD4600-HD4400</string>
+	<string>org.rehabman.injector.FakePCIID-HD4600-HD4400</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -13,9 +13,9 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0d1</string>
+	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0d1</string>
+	<string>1.0.1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -23,9 +23,9 @@
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>10K549</string>
+	<string>14A382</string>
 	<key>DTSDKName</key>
-	<string>macosx10.6</string>
+	<string>macosx10.10</string>
 	<key>DTXcode</key>
 	<string>0611</string>
 	<key>DTXcodeBuild</key>
@@ -36,20 +36,29 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>
+				EgQAAA==
+				</data>
+			</dict>
 			<key>IOClass</key>
-			<string>FakePCIID_HD4600_HD4400</string>
+			<string>FakePCIID</string>
 			<key>IOMatchCategory</key>
-			<string>FakePCIID_HD4600_HD4400</string>
+			<string>FakePCIID</string>
 			<key>IOPCIClassMatch</key>
 			<string>0x03000000&amp;0xff000000</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x04128086 0x04168086 0x0a168086</string>
+			<string>0x04128086 0x04168086 0x0a168086 0x0a1e8086 0x041e8086 0x041a8086</string>
+			<key>IOProbeScore</key>
+			<integer>9001</integer>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
-			<string>Release-rob</string>
+			<string>Debug-rob</string>
 			<key>RM,Version</key>
-			<string>FakePCIID_HD4600_HD4400 1.0.0d1</string>
+			<string>FakePCIID_HD4600_HD4400 1.0.1</string>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>

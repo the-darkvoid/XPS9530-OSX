@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14B25</string>
+	<string>14C109</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rehabman.injector.Intel-HDMI-Audio</string>
+	<string>org.rehabman.injector.FakePCIID-Intel-HDMI-Audio</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -13,9 +13,9 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -36,18 +36,25 @@
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>org.rehabman.driver.FakePCIID</string>
+			<key>FakeProperties</key>
+			<dict>
+				<key>RM,device-id</key>
+				<data>
+				DAoAAA==
+				</data>
+			</dict>
 			<key>IOClass</key>
 			<string>FakePCIID</string>
 			<key>IOMatchCategory</key>
 			<string>FakePCIID</string>
 			<key>IOPCIPrimaryMatch</key>
-			<string>0x0c0c8086 0x0d0c8086</string>
+			<string>0x0c0c8086 0x0d0c8086 0x0a0c8086</string>
 			<key>IOProviderClass</key>
 			<string>IOPCIDevice</string>
 			<key>RM,Build</key>
 			<string>Debug-rob</string>
 			<key>RM,Version</key>
-			<string>FakePCIID_Intel_HDMI_Audio 1.0</string>
+			<string>FakePCIID_Intel_HDMI_Audio 1.0.1</string>
 		</dict>
 	</dict>
 	<key>OSBundleRequired</key>

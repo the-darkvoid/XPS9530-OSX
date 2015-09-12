@@ -254,6 +254,20 @@
 				<string>Enable Realtek ALC668 #3</string>
 				<key>Find</key>
 				<data>
+				gxnUEQ==
+				</data>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #4</string>
+				<key>Find</key>
+				<data>
 				hBnUEQ==
 				</data>
 				<key>Name</key>
@@ -291,7 +305,26 @@
 				PsaDvAIAAAJBvg8AAADpTgAAAA==
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>AirPortBrcm4360 5ghz</string>
+				<key>Find</key>
+				<data>
+				QYP8/3QsSA==
+				</data>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				ZscGVVPrKw==
+				</data>
+			</dict>
 		</array>
+	</dict>
+	<key>RtVariables</key>
+	<dict>
+		<key>CsrActiveConfig</key>
+		<string>0x03</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>

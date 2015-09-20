@@ -12,6 +12,27 @@ OFF="\033[m"
 REPO=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 GIT_DIR="${REPO}"
 
+# SSDT variables
+SSDT_DptfTabl=""
+SSDT_SaSsdt=""
+SSDT_SgPeg=""
+SSDT_OptTabl=""
+
+locate_ssdt()
+{
+	SSDT_DptfTabl=$(grep -l "DptfTabl" $1/*.dsl)	
+	echo "${BLUE}[SSDT]${OFF}: Located DptfTabl SSDT in ${SSDT_DptfTabl}"
+		
+	SSDT_SaSsdt=$(grep -l "SaSsdt" $1/*.dsl)	
+	echo "${BLUE}[SSDT]${OFF}: Located SaSsdt SSDT in ${SSDT_SaSsdt}"
+
+	SSDT_SgPeg=$(grep -l "SgPeg" $1/*.dsl)	
+	echo "${BLUE}[SSDT]${OFF}: Located SgPeg SSDT in ${SSDT_SgPeg}"
+	
+	SSDT_OptTabl=$(grep -l "OptTabl" $1/*.dsl)	
+	echo "${BLUE}[SSDT]${OFF}: Located OptTabl SSDT in ${SSDT_OptTabl}"
+}
+
 git_update()
 {
 	cd ${REPO}
@@ -31,21 +52,24 @@ decompile_dsdt()
 {
 	echo "${GREEN}[DSDT]${OFF}: Decompiling DSDT / SSDT in ./DSDT/raw"
 	cd "${REPO}"
+	
+	locate_ssdt ./DSDT/raw
 
 	./tools/iasl -w1 -da -dl ./DSDT/raw/DSDT.aml ./DSDT/raw/SSDT-*.aml &> ./logs/dsdt_decompile.log
 	echo "${BLUE}[DSDT]${OFF}: Log created in ./logs/dsdt_decompile.log"
 	rm ./DSDT/decompiled/* 2&>/dev/null
-	cp ./DSDT/raw/DSDT.dsl ./DSDT/decompiled/
-	cp ./DSDT/raw/SSDT-1[023].dsl ./DSDT/decompiled/
-	
-	GFX_SSDT=$(grep -l "OptTabl" ./DSDT/raw/*.dsl)	
-	echo "${BLUE}[DSDT]${OFF}: Located GFX DSDT in $GFX_SSDT"
-	cp ${GFX_SSDT} ./DSDT/decompiled/
+	cp -v ./DSDT/raw/DSDT.dsl ./DSDT/decompiled/
+	cp -v ${SSDT_DptfTabl} ./DSDT/decompiled/	
+	cp -v ${SSDT_SaSsdt} ./DSDT/decompiled/	
+	cp -v ${SSDT_SgPeg} ./DSDT/decompiled/
+	cp -v ${SSDT_OptTabl} ./DSDT/decompiled/
 }
 
 patch_dsdt()
 {
 	echo "${GREEN}[DSDT]${OFF}: Patching DSDT / SSDT"
+	
+	locate_ssdt ./DSDT/decompiled
 	
 	echo "${BLUE}[DSDT]${OFF}: Patching DSDT in ./DSDT/decompiled"
 	
@@ -112,99 +136,89 @@ patch_dsdt()
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/usb_EHC_EHC0.txt ./DSDT/decompiled/DSDT.dsl
 
 	########################
-	# SSDT-10 Patches
+	# SSDT-DptfTabl Patches
 	########################
-	
-	echo "${BLUE}[SSDT-10]${OFF}: Patching SSDT-10 in ./DSDT/decompiled"
+
+	echo "${BLUE}[SSDT-DptfTabl]${OFF}: Patching ${SSDT_DptfTabl}"
 
 	echo "${BOLD}_BST package size${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./DSDT/patches/_BST-package-size.txt ./DSDT/decompiled/SSDT-10.dsl
+	./tools/patchmatic ${SSDT_DptfTabl} ./DSDT/patches/_BST-package-size.txt ${SSDT_DptfTabl}
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-10.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-10.dsl
+	./tools/patchmatic ${SSDT_DptfTabl} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_DptfTabl}
 
 	########################
-	# SSDT-12 Patches
+	# SSDT-SaSsdt Patches
 	########################
 
-	echo "${BLUE}[SSDT-12]${OFF}: Patching SSDT-12 in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-SaSsdt]${OFF}: Patching ${SSDT_SaSsdt}"
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ${SSDT_SaSsdt} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_SaSsdt}
 
 	echo "${BOLD}Haswell HD4400/HD4600/HD5000 (Yosemite - Modified)${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/graphics_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/graphics_Intel_HD4600.txt ${SSDT_SaSsdt}
 
 	echo "${BOLD}[gfx] Brightness fix (Haswell)${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ${SSDT_SaSsdt} ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ${SSDT_SaSsdt}
 
 	echo "${BOLD}Rename B0D3 to HDAU${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/audio_B0D3_HDAU.txt ${SSDT_SaSsdt}
 
 	echo "${BOLD}Insert HDAU device${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-12.dsl ./DSDT/patches/audio_Intel_HD4600.txt ./DSDT/decompiled/SSDT-12.dsl
+	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/audio_Intel_HD4600.txt ${SSDT_SaSsdt}
 
 	########################
-	# SSDT-13 Patches
+	# SSDT-SgPeg Patches
 	########################
 
-	echo "${BLUE}[SSDT-13]${OFF}: Patching SSDT-13 in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-SgPeg]${OFF}: Patching ${SSDT_SgPeg}"	
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-13.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-13.dsl
+	./tools/patchmatic ${SSDT_SgPeg} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_SgPeg}
 
 	########################
-	# SSDT-15 Patches
+	# SSDT-OptTabl Patches
 	########################
 
-	GFX_SSDT=$(grep -l "OptTabl" ./DSDT/decompiled/*.dsl)
-	
-	echo "${BLUE}[DSDT]${OFF}: Located GFX DSDT in ${GFX_SSDT}"
-
-	echo "${BLUE}[SSDT-GFX]${OFF}: Patching ${GFX_SSDT} in ./DSDT/decompiled"	
+	echo "${BLUE}[SSDT-OptTabl]${OFF}: Patching ${SSDT_OptTabl}"	
 
 	echo "${BOLD}Remove invalid operands${OFF}"
-	./tools/patchmatic ${GFX_SSDT} ./DSDT/patches/WMMX-invalid-operands.txt ${GFX_SSDT}
+	./tools/patchmatic ${SSDT_OptTabl} ./DSDT/patches/WMMX-invalid-operands.txt ${SSDT_OptTabl}
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
-	./tools/patchmatic ${GFX_SSDT} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${GFX_SSDT}
+	./tools/patchmatic ${SSDT_OptTabl} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_OptTabl}
 
 	echo "${BOLD}Disable Nvidia card (Non-operational in OS X)${OFF}"
-	./tools/patchmatic ${GFX_SSDT} ./DSDT/patches/graphics_Disable_Nvidia.txt ${GFX_SSDT}
+	./tools/patchmatic ${SSDT_OptTabl} ./DSDT/patches/graphics_Disable_Nvidia.txt ${SSDT_OptTabl}
 }
 
 compile_dsdt()
 {
 	echo "${GREEN}[DSDT]${OFF}: Compiling DSDT / SSDT in ./DSDT/compiled"
 	cd "${REPO}"
+	
+	locate_ssdt ./DSDT/decompiled
 
 	rm ./DSDT/compiled/*
 	
 	echo "${BLUE}[SSDT]${OFF}: Copying untouched original SSDTs to ./DSDT/compiled"
-	cp ./DSDT/raw/SSDT-0.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-1.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-2.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-3.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-7.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-8.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-9.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-11.aml ./DSDT/compiled
-	cp ./DSDT/raw/SSDT-14.aml ./DSDT/compiled
+	grep -L "DptfTabl\|SaSsdt\|SgPeg\|OptTabl" ./DSDT/raw/SSDT-[0-9].aml ./DSDT/raw/SSDT-[1-9][0-9].aml | xargs -I{} cp -v {} ./DSDT/compiled
 
 	echo "${BLUE}[DSDT]${OFF}: Compiling DSDT to ./DSDT/compiled"
 	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/DSDT.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BLUE}[SSDT-10]${OFF}: Compiling SSDT-10 to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-10.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-10.dsl
+	echo "${BLUE}[SSDT-10]${OFF}: Compiling SSDT-DptfTabl to ./DSDT/compiled"
+	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/`basename -s dsl ${SSDT_DptfTabl}`aml -I ./DSDT/decompiled/ ${SSDT_DptfTabl}
 
-	echo "${BLUE}[SSDT-12]${OFF}: Compiling SSDT-12 to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-12.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-12.dsl
+	echo "${BLUE}[SSDT-12]${OFF}: Compiling SSDT-SaSsdt to ./DSDT/compiled"
+	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/`basename -s dsl ${SSDT_SaSsdt}`aml -I ./DSDT/decompiled/ ${SSDT_SaSsdt}
 
-	echo "${BLUE}[SSDT-13]${OFF}: Compiling SSDT-13 to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-13.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-13.dsl
+	echo "${BLUE}[SSDT-13]${OFF}: Compiling SSDT-SgPeg to ./DSDT/compiled"
+	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/`basename -s dsl ${SSDT_SgPeg}`aml -I ./DSDT/decompiled/ ${SSDT_SgPeg}
 
-	echo "${BLUE}[SSDT-15]${OFF}: Compiling SSDT-15 to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-15.aml -I ./DSDT/decompiled/ ./DSDT/decompiled/SSDT-15.dsl
+	echo "${BLUE}[SSDT-15]${OFF}: Compiling SSDT-OptTabl to ./DSDT/compiled"
+	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/`basename -s dsl ${SSDT_OptTabl}`aml -I ./DSDT/decompiled/ ${SSDT_OptTabl}
 
 	# Additional custom SSDT
 	# ssdtPRgen (P-states / C-states)

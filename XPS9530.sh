@@ -36,7 +36,11 @@ decompile_dsdt()
 	echo "${BLUE}[DSDT]${OFF}: Log created in ./logs/dsdt_decompile.log"
 	rm ./DSDT/decompiled/* 2&>/dev/null
 	cp ./DSDT/raw/DSDT.dsl ./DSDT/decompiled/
-	cp ./DSDT/raw/SSDT-1[0235].dsl ./DSDT/decompiled/
+	cp ./DSDT/raw/SSDT-1[023].dsl ./DSDT/decompiled/
+	
+	GFX_SSDT=$(grep -l "OptTabl" ./DSDT/raw/*.dsl)	
+	echo "${BLUE}[DSDT]${OFF}: Located GFX DSDT in $GFX_SSDT"
+	cp ${GFX_SSDT} ./DSDT/decompiled/
 }
 
 patch_dsdt()
@@ -153,16 +157,20 @@ patch_dsdt()
 	# SSDT-15 Patches
 	########################
 
-	echo "${BLUE}[SSDT-15]${OFF}: Patching SSDT-15 in ./DSDT/decompiled"	
+	GFX_SSDT=$(grep -l "OptTabl" ./DSDT/decompiled/*.dsl)
+	
+	echo "${BLUE}[DSDT]${OFF}: Located GFX DSDT in ${GFX_SSDT}"
+
+	echo "${BLUE}[SSDT-GFX]${OFF}: Patching ${GFX_SSDT} in ./DSDT/decompiled"	
 
 	echo "${BOLD}Remove invalid operands${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/WMMX-invalid-operands.txt ./DSDT/decompiled/SSDT-15.dsl
+	./tools/patchmatic ${GFX_SSDT} ./DSDT/patches/WMMX-invalid-operands.txt ${GFX_SSDT}
 
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/SSDT-15.dsl
+	./tools/patchmatic ${GFX_SSDT} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${GFX_SSDT}
 
 	echo "${BOLD}Disable Nvidia card (Non-operational in OS X)${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/SSDT-15.dsl ./DSDT/patches/graphics_Disable_Nvidia.txt ./DSDT/decompiled/SSDT-15.dsl
+	./tools/patchmatic ${GFX_SSDT} ./DSDT/patches/graphics_Disable_Nvidia.txt ${GFX_SSDT}
 }
 
 compile_dsdt()

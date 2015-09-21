@@ -74,66 +74,66 @@ patch_dsdt()
 	
 	echo "${BLUE}[DSDT]${OFF}: Patching DSDT in ./DSDT/decompiled"
 	
-	echo "${BOLD}[syn] Fix PARSEOP_ZERO Error${OFF}"
+	echo "${BOLD}[syn] Fix PARSEOP_ZERO Error${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/syntax/fix_PARSEOP_ZERO.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/syntax/fix_PARSEOP_ZERO.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[syn] Fix ADBG Error${OFF}"
+	echo "${BOLD}[syn] Fix ADBG Error${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/syntax/fix_ADBG.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/syntax/fix_ADBG.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
+	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[usb] 7-series/8-series USB${OFF}"
+	echo "${BOLD}[usb] 7-series/8-series USB${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/usb/usb_7-series.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/usb/usb_7-series.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[bat] Acer Aspire E1-571${OFF}"
+	echo "${BOLD}[bat] Acer Aspire E1-571${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] IRQ Fix${OFF}"
+	echo "${BOLD}[sys] IRQ Fix${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_IRQ.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_IRQ.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] SMBus Fix${OFF}"
+	echo "${BOLD}[sys] SMBus Fix${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_SMBUS.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_SMBUS.txt ./DSDT/decompiled/DSDT.dsl
 
 	#echo "${BOLD}[sys] HPET Fix${OFF}" # (No HPETs available..), Check if boot / wakeup works
 	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_HPET.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] OS Check Fix${OFF}"
+	echo "${BOLD}[sys] OS Check Fix${OFF} - ${GREEN}/DSDT/patches/system_OSYS.txt${OFF}"
 	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
 	
-	echo "${BOLD}[sys] AC Adapter Fix${OFF}"
+	echo "${BOLD}[sys] AC Adapter Fix${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_ADP1.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_ADP1.txt ./DSDT/decompiled/DSDT.dsl
 	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_AC.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] Add MCHC${OFF}"
+	echo "${BOLD}[sys] Add MCHC${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_MCHC.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_MCHC.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] Fix _WAK Arg0 v2${OFF}"
+	echo "${BOLD}[sys] Fix _WAK Arg0 v2${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_WAK2.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_WAK2.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] Add IMEI${OFF}"
+	echo "${BOLD}[sys] Add IMEI${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_IMEI.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_IMEI.txt ./DSDT/decompiled/DSDT.dsl
 
 	#echo "${BOLD}[sys] Fix PNOT/PPNT${OFF}"
 	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_PNOT.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[sys] Fix Non-zero Mutex${OFF}"
+	echo "${BOLD}[sys] Fix Non-zero Mutex${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_Mutex.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_Mutex.txt ./DSDT/decompiled/DSDT.dsl
 	
-	echo "${BOLD}[sys] Add Haswell LPC${OFF}"
+	echo "${BOLD}[sys] Add Haswell LPC${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt ./DSDT/decompiled/DSDT.dsl
 	
-	echo "${BOLD}Audio Layout${OFF}"
+	echo "${BOLD}Audio Layout${OFF} - ${GREEN}/DSDT/patches/audio_HDEF-layout1.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_HDEF-layout1.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}Rename B0D3 to HDAU${OFF}"
+	echo "${BOLD}Rename B0D3 to HDAU${OFF} - ${GREEN}/DSDT/patches/audio_B0D3_HDAU.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_B0D3_HDAU.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}Remove GLAN device${OFF}"
+	echo "${BOLD}Remove GLAN device${OFF} - ${GREEN}/DSDT/patches/remove_glan.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/remove_glan.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}Rename EHCX to EH0X${OFF}"
+	echo "${BOLD}Rename EHCX to EH0X${OFF} - ${GREEN}/DSDT/patches/usb_EHC_EHC0.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/usb_EHC_EHC0.txt ./DSDT/decompiled/DSDT.dsl
 
 	########################
@@ -142,10 +142,10 @@ patch_dsdt()
 
 	echo "${BLUE}[SSDT-DptfTabl]${OFF}: Patching ${SSDT_DptfTabl}"
 
-	echo "${BOLD}_BST package size${OFF}"
+	echo "${BOLD}_BST package size${OFF} - ${GREEN}/DSDT/patches/_BST-package-size.txt${OFF}"
 	./tools/patchmatic ${SSDT_DptfTabl} ./DSDT/patches/_BST-package-size.txt ${SSDT_DptfTabl}
 
-	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
+	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ${SSDT_DptfTabl} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_DptfTabl}
 
 	########################
@@ -154,19 +154,19 @@ patch_dsdt()
 
 	echo "${BLUE}[SSDT-SaSsdt]${OFF}: Patching ${SSDT_SaSsdt}"
 
-	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
+	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_SaSsdt}
 
-	echo "${BOLD}Haswell HD4400/HD4600/HD5000 (Yosemite - Modified)${OFF}"
+	echo "${BOLD}Haswell HD4400/HD4600/HD5000 (Yosemite - Modified)${OFF} - ${GREEN}/DSDT/patches/graphics_Intel_HD4600.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/graphics_Intel_HD4600.txt ${SSDT_SaSsdt}
 
-	echo "${BOLD}[gfx] Brightness fix (Haswell)${OFF}"
+	echo "${BOLD}[gfx] Brightness fix (Haswell)${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt ${SSDT_SaSsdt}
 
-	echo "${BOLD}Rename B0D3 to HDAU${OFF}"
+	echo "${BOLD}Rename B0D3 to HDAU${OFF} - ${GREEN}/DSDT/patches/audio_B0D3_HDAU.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/audio_B0D3_HDAU.txt ${SSDT_SaSsdt}
 
-	echo "${BOLD}Insert HDAU device${OFF}"
+	echo "${BOLD}Insert HDAU device${OFF} - ${GREEN}/DSDT/patches/audio_Intel_HD4600.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/audio_Intel_HD4600.txt ${SSDT_SaSsdt}
 
 	########################
@@ -175,7 +175,7 @@ patch_dsdt()
 
 	echo "${BLUE}[SSDT-SgPeg]${OFF}: Patching ${SSDT_SgPeg}"	
 
-	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
+	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ${SSDT_SgPeg} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_SgPeg}
 
 	########################
@@ -184,13 +184,13 @@ patch_dsdt()
 
 	echo "${BLUE}[SSDT-OptTabl]${OFF}: Patching ${SSDT_OptTabl}"	
 
-	echo "${BOLD}Remove invalid operands${OFF}"
+	echo "${BOLD}Remove invalid operands${OFF} - ${GREEN}/DSDT/patches/WMMX-invalid-operands.txt${OFF}"
 	./tools/patchmatic ${SSDT_OptTabl} ./DSDT/patches/WMMX-invalid-operands.txt ${SSDT_OptTabl}
 
-	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF}"
+	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ${SSDT_OptTabl} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_OptTabl}
 
-	echo "${BOLD}Disable Nvidia card (Non-operational in OS X)${OFF}"
+	echo "${BOLD}Disable Nvidia card (Non-operational in OS X)${OFF} - ${GREEN}/DSDT/patches/graphics_Disable_Nvidia.txt${OFF}"
 	./tools/patchmatic ${SSDT_OptTabl} ./DSDT/patches/graphics_Disable_Nvidia.txt ${SSDT_OptTabl}
 }
 

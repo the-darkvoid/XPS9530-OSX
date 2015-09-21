@@ -195,7 +195,7 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Enable 96MB BIOS, 34MB Framebuffer, 34MB Cursor for Azul framebuffer 0x0a260006</string>
+				<string>Enable 128MB BIOS, 48MB Framebuffer, 48MB Cursor for Azul framebuffer 0x0a260006</string>
 				<key>Find</key>
 				<data>
 				BgAmCgEDAwMAAAACAAAwAQAAYAA=
@@ -204,7 +204,7 @@
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
 				<data>
-				BgAmCgEDAwMAAAAGAAAgAgAAIAI=
+				BgAmCgEDAwMAAAAIAAAAAwAAAAM=
 				</data>
 			</dict>
 			<dict>

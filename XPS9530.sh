@@ -368,6 +368,12 @@ patch_hda()
 	echo "       --> ${BOLD}Installed CodecCommander.kext to /Library/Extensions${OFF}"
 }
 
+enable_trim()
+{
+	echo "${GREEN}[TRIM]${OFF}: Enabling ${BOLD}TRIM${OFF} support for 3rd party SSD"
+	sudo trimforce enable
+}
+
 RETVAL=0
 
 case "$1" in
@@ -395,6 +401,10 @@ case "$1" in
 		patch_hda
 		RETVAL=1
 		;;
+	--enable-trim)
+		enable_trim
+		RETVAL=1
+		;;
 	*)
 		echo "${BOLD}Dell XPS 9530${OFF} - Yosemite 10.10.4 (14E46)"
 		echo "https://github.com/robvanoostenrijk/XPS9530-OSX"
@@ -405,6 +415,7 @@ case "$1" in
 		echo "\t${BOLD}--compile-dsdt${OFF}: Compile DSDT files to ./DSDT/compiled"
 		echo "\t${BOLD}--patch-iokit${OFF}: Patch maximum pixel clock in IOKit"
 		echo "\t${BOLD}--patch-hda${OFF}: Create AppleHDA injector kernel extension"
+		echo "\t${BOLD}--enable-trim${OFF}: Enable trim support for 3rd party SSD"
 		echo
 		echo "Credits:"
 		echo "${BLUE}Laptop-DSDT${OFF}: https://github.com/RehabMan/Laptop-DSDT-Patch"

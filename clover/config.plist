@@ -167,20 +167,6 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Enable TRIM support for non-Apple SSD</string>
-				<key>Find</key>
-				<data>
-				QVBQTEUgU1NEAA==
-				</data>
-				<key>Name</key>
-				<string>IOAHCIBlockStorage</string>
-				<key>Replace</key>
-				<data>
-				AAAAAAAAAAAAAA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Bootloader Graphics - Second Stage Patch 2</string>
 				<key>Find</key>
 				<data>

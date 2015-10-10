@@ -167,16 +167,16 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Bootloader Graphics - Second Stage Patch 2</string>
+				<string>Boot graphics glitch, 10.10.x/10.11.x (credit lisai9093, cecekpawon)</string>
 				<key>Find</key>
 				<data>
-				QYjE6xE=
+				AQAAdRc=
 				</data>
 				<key>Name</key>
 				<string>IOGraphicsFamily</string>
 				<key>Replace</key>
 				<data>
-				QYjE6zE=
+				AQAA6xc=
 				</data>
 			</dict>
 			<dict>

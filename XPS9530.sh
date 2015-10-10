@@ -83,9 +83,6 @@ patch_dsdt()
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[usb] 7-series/8-series USB${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/usb/usb_7-series.txt${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/usb/usb_7-series.txt ./DSDT/decompiled/DSDT.dsl
-
 	echo "${BOLD}[bat] Acer Aspire E1-571${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt ./DSDT/decompiled/DSDT.dsl
 
@@ -133,9 +130,9 @@ patch_dsdt()
 	echo "${BOLD}Remove GLAN device${OFF} - ${GREEN}/DSDT/patches/remove_glan.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/remove_glan.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}Rename EHCX to EH0X${OFF} - ${GREEN}/DSDT/patches/usb_EHC_EHC0.txt${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/usb_EHC_EHC0.txt ./DSDT/decompiled/DSDT.dsl
-
+	echo "${BOLD}[usb] Fix USB _PRW${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/usb/usb_prw_0x0d_xhc.txt${OFF}"
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/usb/usb_prw_0x0d_xhc.txt ./DSDT/decompiled/DSDT.dsl
+	
 	########################
 	# SSDT-DptfTabl Patches
 	########################

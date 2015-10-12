@@ -34,6 +34,8 @@
 			<string>AppleUSBEHCIPCI</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
+				<key>kUSBSleepSupported</key>
+				<true/>
 				<key>port-count</key>
 				<data>
 				AQAAAA==
@@ -136,6 +138,12 @@
 			<string>AppleUSBEHCIPCI</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
+				<key>kUSBSleepSupported</key>
+				<true/>
+				<key>port-count</key>
+				<data>
+				AQAAAA==
+				</data>
 				<key>ports</key>
 				<dict>
 					<key>PR01</key>
@@ -207,6 +215,10 @@
 			<string>AppleUSBXHCIPCI</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
+				<key>kUSBMuxEnabled</key>
+				<true/>
+				<key>kUSBSleepSupported</key>
+				<true/>
 				<key>port-count</key>
 				<data>
 				FQAAAA==

@@ -276,7 +276,13 @@ patch_iokit()
 		sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 		echo "         Patched"
-		;;		
+		;;
+		"a7afb2dd9df1e4c48f12b4b52f7da212")
+		echo "         --> El Capitan 10.11.2 IOKit (${GREEN}unpatched${OFF})"
+		sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+		echo "         Patched"
+		;;
 		"8756e20f979c9e74c80f07b452ebfadd")
 		echo "         --> Yosemite 10.10.1 IOKit (${RED}patched, not signed${OFF})"
 		;;
@@ -291,6 +297,9 @@ patch_iokit()
 		;;
 		"881e3786f84ef98e89e6af7444f7f5e9")
 		echo "         --> El Capitan 10.11.1 IOKit (${RED}patched, not signed${OFF})"
+		;;
+		"3e21d1f0e82d8a24bfff92e9f9c206d7")
+		echo "         --> El Capitan 10.11.2 IOKit (${RED}patched, not signed${OFF})"
 		;;
 		"f834136d72126cc9479604879270d24f")
 		echo "         --> Yosemite 10.10.1 IOKit (${RED}patched${OFF})"
@@ -311,7 +320,11 @@ patch_iokit()
 		"8df7effea833a7d4d243a55d5fdbf946")
 		echo "         --> El Capitan 10.11.1 IOKit (${RED}patched${OFF})"
 		echo "         IOKit is already patched, no action taken."
-		;;		
+		;;
+		"ac41947ecc5d736b8c88c4f30f776fff")
+		echo "         --> El Capitan 10.11.2 IOKit (${RED}patched${OFF})"
+		echo "         IOKit is already patched, no action taken."
+		;;
 		*)
 		echo "         --> Unknown IOKit version (${RED}no action taken${OFF})"
 		;;

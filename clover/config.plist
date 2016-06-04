@@ -10,6 +10,11 @@
 			<false/>
 			<key>DropOEM_DSM</key>
 			<true/>
+			<key>Fixes</key>
+			<dict>
+				<key>FixRegions_10000000</key>
+				<true/>
+			</dict>
 			<key>Name</key>
 			<string>DSDT.aml</string>
 			<key>ReuseFFFF</key>
@@ -20,12 +25,7 @@
 			<key>DropOem</key>
 			<true/>
 			<key>Generate</key>
-			<dict>
-				<key>CStates</key>
-				<false/>
-				<key>PStates</key>
-				<false/>
-			</dict>
+			<false/>
 		</dict>
 		<key>SortedOrder</key>
 		<array>
@@ -52,15 +52,18 @@
 		<string>kext-dev-mode=1 dart=0 nv_disable=1</string>
 		<key>Legacy</key>
 		<string>LegacyBiosDefault</string>
-		<key>Log</key>
-		<false/>
-		<key>NeverHibernate</key>
-		<false/>
+		<key>NoEarlyProgress</key>
+		<true/>
 		<key>Secure</key>
 		<false/>
 		<key>Timeout</key>
 		<integer>10</integer>
 		<key>XMPDetection</key>
+		<false/>
+	</dict>
+	<key>CPU</key>
+	<dict>
+		<key>UseARTFrequency</key>
 		<false/>
 	</dict>
 	<key>Devices</key>
@@ -152,7 +155,7 @@
 			<key>NVidia</key>
 			<false/>
 		</dict>
-		<key>InjectEDID</key>
+		<key>NvidiaSingle</key>
 		<false/>
 		<key>ig-platform-id</key>
 		<string>0x0a260006</string>
@@ -161,10 +164,76 @@
 	<dict>
 		<key>AppleRTC</key>
 		<false/>
+		<key>AsusAICPUPM</key>
+		<false/>
+		<key>Debug</key>
+		<false/>
+		<key>KernelCpu</key>
+		<false/>
+		<key>KernelHaswellE</key>
+		<false/>
+		<key>KernelLapic</key>
+		<false/>
 		<key>KernelPm</key>
 		<false/>
 		<key>KextsToPatch</key>
 		<array>
+			<dict>
+				<key>Comment</key>
+				<string>Enable 160MB BIOS, 48MB Framebuffer, 48MB Cursor for Azul framebuffer 0x0a260006</string>
+				<key>Find</key>
+				<data>
+				BgAmCgEDAwMAAAACAAAwAQAAYAA=
+				</data>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				BgAmCgEDAwMAAAAKAAAAAwAAAAM=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>IOBluetoothFamily - Continuity &amp; Hand-off</string>
+				<key>Find</key>
+				<data>
+				SIX/dEdIiwc=
+				</data>
+				<key>Name</key>
+				<string>IOBluetoothFamily</string>
+				<key>Replace</key>
+				<data>
+				Qb4PAAAA60Q=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>AirPortBrcm4360 5ghz</string>
+				<key>Find</key>
+				<data>
+				QYP8/3QsSA==
+				</data>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				ZscGI2HrKw==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable HD4600 HDMI Audio</string>
+				<key>Find</key>
+				<data>
+				PQwKAAA=
+				</data>
+				<key>Name</key>
+				<string>AppleHDAController</string>
+				<key>Replace</key>
+				<data>
+				PQwMAAA=
+				</data>
+			</dict>
 			<dict>
 				<key>Comment</key>
 				<string>Boot graphics glitch, 10.10.x/10.11.x (credit lisai9093, cecekpawon)</string>
@@ -179,138 +248,20 @@
 				AQAA6xc=
 				</data>
 			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable 128MB BIOS, 48MB Framebuffer, 48MB Cursor for Azul framebuffer 0x0a260006</string>
-				<key>Find</key>
-				<data>
-				BgAmCgEDAwMAAAACAAAwAQAAYAA=
-				</data>
-				<key>Name</key>
-				<string>AppleIntelFramebufferAzul</string>
-				<key>Replace</key>
-				<data>
-				BgAmCgEDAwMAAAAIAAAAAwAAAAM=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable eDP port 0x00, HDMI port 0x05 for Azul framebuffer 0x0a260006</string>
-				<key>Find</key>
-				<data>
-				AAAIAAIAAAAwAAAAAQUJAAAEAACHAAAA
-				</data>
-				<key>Name</key>
-				<string>AppleIntelFramebufferAzul</string>
-				<key>Replace</key>
-				<data>
-				AAAIAAQAAAAwAAAAAQUJAAAIAACHAAAA
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable Realtek ALC668 #1</string>
-				<key>Find</key>
-				<data>
-				hAjsEA==
-				</data>
-				<key>Name</key>
-				<string>AppleHDA</string>
-				<key>Replace</key>
-				<data>
-				AAAAAA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable Realtek ALC668 #2</string>
-				<key>Find</key>
-				<data>
-				hQjsEA==
-				</data>
-				<key>Name</key>
-				<string>AppleHDA</string>
-				<key>Replace</key>
-				<data>
-				AAAAAA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable Realtek ALC668 #3</string>
-				<key>Find</key>
-				<data>
-				gxnUEQ==
-				</data>
-				<key>Name</key>
-				<string>AppleHDA</string>
-				<key>Replace</key>
-				<data>
-				AAAAAA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable Realtek ALC668 #4</string>
-				<key>Find</key>
-				<data>
-				hBnUEQ==
-				</data>
-				<key>Name</key>
-				<string>AppleHDA</string>
-				<key>Replace</key>
-				<data>
-				aAbsEA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable USB3 after wake for Intel 8 series chipset</string>
-				<key>Find</key>
-				<data>
-				xoDIAAAAAQ==
-				</data>
-				<key>Name</key>
-				<string>AppleUSBXHCI</string>
-				<key>Replace</key>
-				<data>
-				xoDIAAAAAA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>IOBluetoothFamily - Continuity &amp; Hand-off</string>
-				<key>Find</key>
-				<data>
-				SIXAdFwPt0gQg8kEg/kGdVBIiw==
-				</data>
-				<key>Name</key>
-				<string>IOBluetoothFamily</string>
-				<key>Replace</key>
-				<data>
-				PsaDvAIAAAJBvg8AAADpTgAAAA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>AirPortBrcm4360 5ghz</string>
-				<key>Find</key>
-				<data>
-				QYP8/3QsSA==
-				</data>
-				<key>Name</key>
-				<string>AirPortBrcm4360</string>
-				<key>Replace</key>
-				<data>
-				ZscGVVPrKw==
-				</data>
-			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
 	<dict>
+		<key>BooterConfig</key>
+		<string>0x2A</string>
 		<key>CsrActiveConfig</key>
 		<string>0x03</string>
+		<key>MLB</key>
+		<string>C02416?????FJRJ??</string>
+		<key>ROM</key>
+		<data>
+		3q++78r+
+		</data>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>

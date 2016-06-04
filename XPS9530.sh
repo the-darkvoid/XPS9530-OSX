@@ -83,6 +83,9 @@ patch_dsdt()
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ./DSDT/decompiled/DSDT.dsl
 
+	echo "${BOLD}[usb] Fix USB _PRW${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/usb/usb_prw_0x0d_xhc.txt${OFF}"
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/usb/usb_prw_0x0d_xhc.txt ./DSDT/decompiled/DSDT.dsl
+	
 	echo "${BOLD}[bat] Acer Aspire E1-571${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/battery/battery_Acer-Aspire-E1-571.txt ./DSDT/decompiled/DSDT.dsl
 
@@ -92,16 +95,8 @@ patch_dsdt()
 	echo "${BOLD}[sys] SMBus Fix${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_SMBUS.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_SMBUS.txt ./DSDT/decompiled/DSDT.dsl
 
-	#echo "${BOLD}[sys] HPET Fix${OFF}" # (No HPETs available..), Check if boot / wakeup works
-	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_HPET.txt ./DSDT/decompiled/DSDT.dsl
-
-	echo "${BOLD}[sys] OS Check Fix${OFF} - ${GREEN}/DSDT/patches/system_OSYS.txt${OFF}"
-	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
-	
 	echo "${BOLD}[sys] AC Adapter Fix${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_ADP1.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_ADP1.txt ./DSDT/decompiled/DSDT.dsl
-	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_AC.txt ./DSDT/decompiled/DSDT.dsl
 
 	echo "${BOLD}[sys] Add MCHC${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_MCHC.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_MCHC.txt ./DSDT/decompiled/DSDT.dsl
@@ -112,14 +107,15 @@ patch_dsdt()
 	echo "${BOLD}[sys] Add IMEI${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_IMEI.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_IMEI.txt ./DSDT/decompiled/DSDT.dsl
 
-	#echo "${BOLD}[sys] Fix PNOT/PPNT${OFF}"
-	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_PNOT.txt ./DSDT/decompiled/DSDT.dsl
-
 	echo "${BOLD}[sys] Fix Non-zero Mutex${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/system/system_Mutex.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_Mutex.txt ./DSDT/decompiled/DSDT.dsl
+
+	echo "${BOLD}[sys] OS Check Fix${OFF} - ${GREEN}/DSDT/patches/system_OSYS.txt${OFF}"
+	#./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/system/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_OSYS.txt ./DSDT/decompiled/DSDT.dsl
 	
-	echo "${BOLD}[sys] Add Haswell LPC${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt ./DSDT/decompiled/DSDT.dsl
+#	echo "${BOLD}[sys] Add Haswell LPC${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt${OFF}"
+#	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/misc/misc_Haswell-LPC.txt ./DSDT/decompiled/DSDT.dsl
 	
 	echo "${BOLD}Audio Layout${OFF} - ${GREEN}/DSDT/patches/audio_HDEF-layout1.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/audio_HDEF-layout1.txt ./DSDT/decompiled/DSDT.dsl
@@ -130,8 +126,6 @@ patch_dsdt()
 	echo "${BOLD}Remove GLAN device${OFF} - ${GREEN}/DSDT/patches/remove_glan.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/remove_glan.txt ./DSDT/decompiled/DSDT.dsl
 
-	echo "${BOLD}[usb] Fix USB _PRW${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/usb/usb_prw_0x0d_xhc.txt${OFF}"
-	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./externals/Laptop-DSDT-Patch/usb/usb_prw_0x0d_xhc.txt ./DSDT/decompiled/DSDT.dsl
 	
 	########################
 	# SSDT-DptfTabl Patches
@@ -154,7 +148,7 @@ patch_dsdt()
 	echo "${BOLD}[gfx] Rename GFX0 to IGPU${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./externals/Laptop-DSDT-Patch/graphics/graphics_Rename-GFX0.txt ${SSDT_SaSsdt}
 
-	echo "${BOLD}Haswell HD4400/HD4600/HD5000 (Yosemite - Modified)${OFF} - ${GREEN}/DSDT/patches/graphics_Intel_HD4600.txt${OFF}"
+	echo "${BOLD}Haswell HD4400/HD4600/HD5000${OFF} - ${GREEN}/DSDT/patches/graphics_Intel_HD4600.txt${OFF}"
 	./tools/patchmatic ${SSDT_SaSsdt} ./DSDT/patches/graphics_Intel_HD4600.txt ${SSDT_SaSsdt}
 
 	echo "${BOLD}[gfx] Brightness fix (Haswell)${OFF} - ${GREEN}/externals/Laptop-DSDT-Patch/graphics/graphics_PNLF_haswell.txt${OFF}"
@@ -220,23 +214,23 @@ compile_dsdt()
 
 	# Additional custom SSDT
 	# ssdtPRgen (P-states / C-states)
-	echo "${BLUE}[PRgen]${OFF}: Compiling ssdtPRgen to ./DSDT/compiled"
-	
 	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4702HQ"* ]]
 	then
-		echo "${BLUE}[PRgen]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
-		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4702HQ.dsl
+		echo "${BLUE}[SSDT-pr]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
+		echo "${BLUE}[SSDT-pr]${OFF}: Installing SSDT-pr (CPU P-States / C-States) to ./DSDT/compiled"
+		cp ./DSDT/custom/CpuPm-4702HQ.aml ./DSDT/compiled/SSDT-pr.aml
 	fi
 	
 	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4712HQ"* ]]
 	then
-		echo "${BLUE}[PRgen]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
-		./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-pr.aml ./DSDT/custom/SSDT-pr-i7-4712HQ.dsl
+		echo "${BLUE}[SSDT-pr]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
+		echo "${BLUE}[SSDT-pr]${OFF}: Installing SSDT-pr (CPU P-States / C-States) to ./DSDT/compiled"
+		cp ./DSDT/custom/CpuPm-4712HQ.aml ./DSDT/compiled/SSDT-pr.aml
 	fi
 	
 	# Rehabman NullEthernet.kext
-	echo "${BLUE}[RMNE]${OFF}: Compiling SSDT-rmne to ./DSDT/compiled"
-	./tools/iasl -vr -w1 -ve -p ./DSDT/compiled/SSDT-rmne.aml ./DSDT/custom/SSDT-rmne.dsl	
+	echo "${BLUE}[RMNE]${OFF}: Installing SSDT-rmne (Rehabmans NullEthernet) to ./DSDT/compiled"
+		cp ./DSDT/custom/SSDT-rmne.aml ./DSDT/compiled/SSDT-rmne.aml
 }
 
 patch_iokit_execute()

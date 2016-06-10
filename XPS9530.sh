@@ -304,47 +304,47 @@ patch_iokit()
 
 patch_hda()
 {
-	echo "${GREEN}[HDA]${OFF}: Creating AppleHDA injection kernel extension for ${BOLD}ALC668${OFF}"
-	cd "${REPO}"
-	
-	plist=./audio/AppleHDA_ALC668.kext/Contents/Info.plist
-	
-	echo "       --> ${BOLD}Creating AppleHDA_ALC668 file layout${OFF}"
-	rm -R ./audio/AppleHDA_ALC668.kext 2&>/dev/null
-	
-	cp -R /System/Library/Extensions/AppleHDA.kext ./audio/AppleHDA_ALC668.kext
-	rm -R ./audio/AppleHDA_ALC668.kext/Contents/Resources/*
-	rm -R ./audio/AppleHDA_ALC668.kext/Contents/PlugIns
-	rm -R ./audio/AppleHDA_ALC668.kext/Contents/_CodeSignature
-	rm -R ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
-	rm ./audio/AppleHDA_ALC668.kext/Contents/version.plist
-	ln -s /System/Library/Extensions/AppleHDA.kext/Contents/MacOS/AppleHDA ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
-
-	echo "       --> ${BOLD}Copying AppleHDA_ALC668 audio platform & layouts${OFF}"
-	cp ./audio/*.zlib ./audio/AppleHDA_ALC668.kext/Contents/Resources/
-
-	echo "       --> ${BOLD}Configuring AppleHDA_ALC668 Info.plist${OFF}"
-	replace=`/usr/libexec/plistbuddy -c "Print :NSHumanReadableCopyright" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-	/usr/libexec/plistbuddy -c "Set :NSHumanReadableCopyright '$replace'" $plist
-	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleGetInfoString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-	/usr/libexec/plistbuddy -c "Set :CFBundleGetInfoString '$replace'" $plist
-	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleVersion" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-	/usr/libexec/plistbuddy -c "Set :CFBundleVersion '$replace'" $plist
-	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleShortVersionString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-	/usr/libexec/plistbuddy -c "Set :CFBundleShortVersionString '$replace'" $plist
-	/usr/libexec/plistbuddy -c "Add ':HardwareConfigDriver_Temp' dict" $plist
-	/usr/libexec/plistbuddy -c "Merge /System/Library/Extensions/AppleHDA.kext/Contents/PlugIns/AppleHDAHardwareConfigDriver.kext/Contents/Info.plist ':HardwareConfigDriver_Temp'" $plist
-	/usr/libexec/plistbuddy -c "Copy ':HardwareConfigDriver_Temp:IOKitPersonalities:HDA Hardware Config Resource' ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
-	/usr/libexec/plistbuddy -c "Delete ':HardwareConfigDriver_Temp'" $plist
-	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:HDAConfigDefault'" $plist
-	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:PostConstructionInitialization'" $plist
-	/usr/libexec/plistbuddy -c "Add ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' integer" $plist
-	/usr/libexec/plistbuddy -c "Set ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' 2000" $plist
-	/usr/libexec/plistbuddy -c "Merge ./audio/ahhcd.plist ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
-    
-	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
-	sudo cp -r ./audio/AppleHDA_ALC668.kext /Library/Extensions
-	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /Library/Extensions${OFF}"
+#	echo "${GREEN}[HDA]${OFF}: Creating AppleHDA injection kernel extension for ${BOLD}ALC668${OFF}"
+#	cd "${REPO}"
+#	
+#	plist=./audio/AppleHDA_ALC668.kext/Contents/Info.plist
+#	
+#	echo "       --> ${BOLD}Creating AppleHDA_ALC668 file layout${OFF}"
+#	rm -R ./audio/AppleHDA_ALC668.kext 2&>/dev/null
+#	
+#	cp -R /System/Library/Extensions/AppleHDA.kext ./audio/AppleHDA_ALC668.kext
+#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/Resources/*
+#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/PlugIns
+#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/_CodeSignature
+#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
+#	rm ./audio/AppleHDA_ALC668.kext/Contents/version.plist
+#	ln -s /System/Library/Extensions/AppleHDA.kext/Contents/MacOS/AppleHDA ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
+#
+#	echo "       --> ${BOLD}Copying AppleHDA_ALC668 audio platform & layouts${OFF}"
+#	cp ./audio/*.zlib ./audio/AppleHDA_ALC668.kext/Contents/Resources/
+#
+#	echo "       --> ${BOLD}Configuring AppleHDA_ALC668 Info.plist${OFF}"
+#	replace=`/usr/libexec/plistbuddy -c "Print :NSHumanReadableCopyright" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+#	/usr/libexec/plistbuddy -c "Set :NSHumanReadableCopyright '$replace'" $plist
+#	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleGetInfoString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+#	/usr/libexec/plistbuddy -c "Set :CFBundleGetInfoString '$replace'" $plist
+#	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleVersion" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+#	/usr/libexec/plistbuddy -c "Set :CFBundleVersion '$replace'" $plist
+#	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleShortVersionString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+#	/usr/libexec/plistbuddy -c "Set :CFBundleShortVersionString '$replace'" $plist
+#	/usr/libexec/plistbuddy -c "Add ':HardwareConfigDriver_Temp' dict" $plist
+#	/usr/libexec/plistbuddy -c "Merge /System/Library/Extensions/AppleHDA.kext/Contents/PlugIns/AppleHDAHardwareConfigDriver.kext/Contents/Info.plist ':HardwareConfigDriver_Temp'" $plist
+#	/usr/libexec/plistbuddy -c "Copy ':HardwareConfigDriver_Temp:IOKitPersonalities:HDA Hardware Config Resource' ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
+#	/usr/libexec/plistbuddy -c "Delete ':HardwareConfigDriver_Temp'" $plist
+#	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:HDAConfigDefault'" $plist
+#	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:PostConstructionInitialization'" $plist
+#	/usr/libexec/plistbuddy -c "Add ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' integer" $plist
+#	/usr/libexec/plistbuddy -c "Set ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' 2000" $plist
+#	/usr/libexec/plistbuddy -c "Merge ./audio/ahhcd.plist ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
+#    
+#	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
+#	sudo cp -r ./audio/AppleHDA_ALC668.kext /Library/Extensions
+#	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /Library/Extensions${OFF}"
 	sudo cp -r ./audio/CodecCommander.kext /Library/Extensions
 	echo "       --> ${BOLD}Installed CodecCommander.kext to /Library/Extensions${OFF}"
 }
@@ -387,7 +387,7 @@ case "$1" in
 		RETVAL=1
 		;;
 	*)
-		echo "${BOLD}Dell XPS 9530${OFF} - Yosemite 10.10.4 (14E46)"
+		echo "${BOLD}Dell XPS 9530${OFF} - El Capitan 10.11.5 (15F34)"
 		echo "https://github.com/robvanoostenrijk/XPS9530-OSX"
 		echo
 		echo "\t${BOLD}--update${OFF}: Update to latest git version (including externals)"
@@ -402,6 +402,7 @@ case "$1" in
 		echo "${BLUE}Laptop-DSDT${OFF}: https://github.com/RehabMan/Laptop-DSDT-Patch"
 		echo "${BLUE}ssdtPRgen${OFF}: https://github.com/Piker-Alpha/ssdtPRGen.sh"
 		echo "${BLUE}AppleHDA ALC668${OFF}: https://github.com/vbourachot/Dell-XPS13-9333-DSDT-Patch/"
+		echo "${BLUE}AppleALC${OFF}: https://github.com/vit9696/AppleALC"
 		echo
 		RETVAL=1
 	    ;;

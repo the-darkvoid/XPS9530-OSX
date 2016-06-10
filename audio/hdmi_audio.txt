@@ -1,0 +1,31 @@
+Framebuffer Ports:
+	
+	AppleIntelFramebuffer@0
+	LVDS / eDP 
+		audio-codec-info, Data, <00 00 00 00>
+		audio-device-mvalue, Data, <04 00 00 00>
+		audio-device-nvalue, Data, <5a 00 00 00>
+		av-signal-type, Data, <00 00 00 00>
+		boot-gamma-restored, Data, <00 00 00 00>
+		built-in, Data, <>
+		connector-type, Data, <02 00 00 00>
+		port-number, Number, 0x0
+	
+	AppleIntelFramebuffer@1
+	HDMI
+		audio-codec-info, Data, <00 01 05 00>
+		audio-device-mvalue, Data, <04 00 00 00>
+		audio-device-nvalue, Data, <5a 00 00 00>
+		audio-selector, Data, <64 70 42 46>
+		av-signal-type, Data, <08 00 00 00>
+		connector-type, Data, <00 04 00 00>
+		port-number, Number, 0x5
+
+	AppleIntelFramebuffer@2
+	mini-DP
+		audio-codec-info, Data, <00 01 06 00>
+		audio-device-mvalue, Data, <04 00 00 00>
+		audio-device-nvalue, Data, <5a 00 00 00>
+		av-signal-type, Data, <02 00 00 00>
+		connector-type, Data, <00 04 00 00>
+		port-number, Number, 0x6

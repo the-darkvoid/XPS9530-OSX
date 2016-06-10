@@ -8,8 +8,8 @@ Method (_DSM, 4, NotSerialized)\n
     If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }\n
     Return (Package()\n
     {\n
-        "hda-gfx", Buffer() { "onboard-1" },\n
-        "device-id", Buffer() { 0x0c, 0x0a, 0x0, 0x0 }\n
+        "layout-id", Buffer() { 0x01, 0x00, 0x00, 0x00 },\n
+        "hda-gfx", Buffer() { "onboard-1" }\n
     })\n
 }\n
 end;

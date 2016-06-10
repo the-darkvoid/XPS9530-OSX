@@ -181,6 +181,8 @@
 			<dict>
 				<key>Comment</key>
 				<string>Enable 160MB BIOS, 48MB Framebuffer, 48MB Cursor for Azul framebuffer 0x0a260006</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				BgAmCgEDAwMAAAACAAAwAQAAYAA=
@@ -194,7 +196,41 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>eDP, port 0000, 0x0a260005 0x0a260006 0x0a2e0008 0x0a1600c0</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AAAIAAIAAAAwAAAAAQUJAAAEAAA=
+				</data>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				AAAIAAQAAAAwAAAAAQUJAAAEAAA=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>HDMI-audio, port 0105, 0x0a260005 0x0a260006, 0x0d220003, 0x0a2e000a, 0x0a26000a</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AQUJAAAEAACHAAAA
+				</data>
+				<key>Name</key>
+				<string>AppleIntelFramebufferAzul</string>
+				<key>Replace</key>
+				<data>
+				AQUJAAAIAACHAAAA
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>IOBluetoothFamily - Continuity &amp; Hand-off</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				SIX/dEdIiwc=
@@ -209,6 +245,8 @@
 			<dict>
 				<key>Comment</key>
 				<string>AirPortBrcm4360 5ghz</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				QYP8/3QsSA==
@@ -222,21 +260,9 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Enable HD4600 HDMI Audio</string>
-				<key>Find</key>
-				<data>
-				PQwKAAA=
-				</data>
-				<key>Name</key>
-				<string>AppleHDAController</string>
-				<key>Replace</key>
-				<data>
-				PQwMAAA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Boot graphics glitch, 10.10.x/10.11.x (credit lisai9093, cecekpawon)</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				AQAAdRc=

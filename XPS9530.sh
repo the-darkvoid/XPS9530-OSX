@@ -17,7 +17,7 @@ SSDT_DptfTabl=""
 SSDT_SaSsdt=""
 SSDT_SgPeg=""
 SSDT_OptTabl=""
-
+	
 locate_ssdt()
 {
 	SSDT_DptfTabl=$(grep -l "DptfTabl" $1/*.dsl)	
@@ -126,6 +126,8 @@ patch_dsdt()
 	echo "${BOLD}Remove GLAN device${OFF} - ${GREEN}/DSDT/patches/remove_glan.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/remove_glan.txt ./DSDT/decompiled/DSDT.dsl
 
+	echo "${BOLD}Renaming PNP devices${OFF} - ${GREEN}/DSDT/patches/misc_devices.txt${OFF}"
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/misc_devices.txt ./DSDT/decompiled/DSDT.dsl
 	
 	########################
 	# SSDT-DptfTabl Patches
@@ -235,8 +237,17 @@ compile_dsdt()
 
 patch_iokit_execute()
 {
+	# OS X - 10.9, 10.10, 10.11
 	sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
 	sudo codesign -f -s - /System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit
+	echo "         Patched"
+}
+
+patch_coredisplay_execute()
+{
+	# OS X - 10.12
+	sudo perl -i.bak -pe 's|\xB8\x01\x00\x00\x00\xF6\xC1\x01\x0F\x85|\x33\xC0\x90\x90\x90\x90\x90\x90\x90\xE9|sg' /System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay
+	sudo codesign -f -s - /System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay
 	echo "         Patched"
 }
 
@@ -284,6 +295,10 @@ patch_iokit()
 		echo "         --> El Capitan 10.11.5 IOKit (${GREEN}unpatched${OFF})"
 		patch_iokit_execute
 		;;
+		"2c22a2f92d07ba79bb1c76c0ebdff9a3")
+		echo "         --> Sierra 10.12 DP1 IOKit (${GREEN}unpatched${OFF})"
+		patch_iokit_execute_v2
+		;;
 		*)
 		echo "         --> Unknown IOKit version or already patched (${RED}no action taken${OFF})"
 		echo "         Do you want to try and apply the patch nontheless?"
@@ -302,51 +317,91 @@ patch_iokit()
 	esac
 }
 
+patch_coredisplay()
+{
+	coredisplay_md5=$(md5 -q "/System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay")
+	
+	echo "${GREEN}[CoreDisplay]${OFF}: Patching CoreDisplay for maximum pixel clock"
+	echo "${BLUE}[CoreDisplay]${OFF}: Current CoreDisplay md5 is ${BOLD}${coredisplay_md5}${OFF}"
+	
+	case $coredisplay_md5 in
+		"0550cc0b513fa07ff93f1e5762aa1839")
+		echo "         --> Sierra 10.12 DP1 IOKit (${GREEN}unpatched${OFF})"
+		patch_coredisplay_execute
+		;;
+		*)
+		echo "         --> Unknown IOKit version or already patched (${RED}no action taken${OFF})"
+		echo "         Do you want to try and apply the patch nontheless?"
+			select yn in "Yes" "No"; do
+				case $yn in
+					Yes)
+					patch_coredisplay_execute;
+					break
+					;;
+					No)
+					exit
+					;;
+				esac
+			done
+		;;
+	esac
+}
+
+patch_pixel_clock()
+{
+	if [ -f /System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay ]
+	then
+		patch_coredisplay
+	fi
+	
+	patch_iokit
+}
+
 patch_hda()
 {
-#	echo "${GREEN}[HDA]${OFF}: Creating AppleHDA injection kernel extension for ${BOLD}ALC668${OFF}"
-#	cd "${REPO}"
-#	
-#	plist=./audio/AppleHDA_ALC668.kext/Contents/Info.plist
-#	
-#	echo "       --> ${BOLD}Creating AppleHDA_ALC668 file layout${OFF}"
-#	rm -R ./audio/AppleHDA_ALC668.kext 2&>/dev/null
-#	
-#	cp -R /System/Library/Extensions/AppleHDA.kext ./audio/AppleHDA_ALC668.kext
-#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/Resources/*
-#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/PlugIns
-#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/_CodeSignature
-#	rm -R ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
-#	rm ./audio/AppleHDA_ALC668.kext/Contents/version.plist
-#	ln -s /System/Library/Extensions/AppleHDA.kext/Contents/MacOS/AppleHDA ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
-#
-#	echo "       --> ${BOLD}Copying AppleHDA_ALC668 audio platform & layouts${OFF}"
-#	cp ./audio/*.zlib ./audio/AppleHDA_ALC668.kext/Contents/Resources/
-#
-#	echo "       --> ${BOLD}Configuring AppleHDA_ALC668 Info.plist${OFF}"
-#	replace=`/usr/libexec/plistbuddy -c "Print :NSHumanReadableCopyright" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-#	/usr/libexec/plistbuddy -c "Set :NSHumanReadableCopyright '$replace'" $plist
-#	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleGetInfoString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-#	/usr/libexec/plistbuddy -c "Set :CFBundleGetInfoString '$replace'" $plist
-#	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleVersion" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-#	/usr/libexec/plistbuddy -c "Set :CFBundleVersion '$replace'" $plist
-#	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleShortVersionString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
-#	/usr/libexec/plistbuddy -c "Set :CFBundleShortVersionString '$replace'" $plist
-#	/usr/libexec/plistbuddy -c "Add ':HardwareConfigDriver_Temp' dict" $plist
-#	/usr/libexec/plistbuddy -c "Merge /System/Library/Extensions/AppleHDA.kext/Contents/PlugIns/AppleHDAHardwareConfigDriver.kext/Contents/Info.plist ':HardwareConfigDriver_Temp'" $plist
-#	/usr/libexec/plistbuddy -c "Copy ':HardwareConfigDriver_Temp:IOKitPersonalities:HDA Hardware Config Resource' ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
-#	/usr/libexec/plistbuddy -c "Delete ':HardwareConfigDriver_Temp'" $plist
-#	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:HDAConfigDefault'" $plist
-#	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:PostConstructionInitialization'" $plist
-#	/usr/libexec/plistbuddy -c "Add ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' integer" $plist
-#	/usr/libexec/plistbuddy -c "Set ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' 2000" $plist
-#	/usr/libexec/plistbuddy -c "Merge ./audio/ahhcd.plist ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
-#    
-#	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
-#	sudo cp -r ./audio/AppleHDA_ALC668.kext /Library/Extensions
-#	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /Library/Extensions${OFF}"
-	sudo cp -r ./audio/CodecCommander.kext /Library/Extensions
-	echo "       --> ${BOLD}Installed CodecCommander.kext to /Library/Extensions${OFF}"
+	echo "${GREEN}[HDA]${OFF}: Creating AppleHDA injection kernel extension for ${BOLD}ALC668${OFF}"
+	cd "${REPO}"
+	
+	plist=./audio/AppleHDA_ALC668.kext/Contents/Info.plist
+	
+	echo "       --> ${BOLD}Creating AppleHDA_ALC668 file layout${OFF}"
+	rm -R ./audio/AppleHDA_ALC668.kext 2&>/dev/null
+	
+	cp -R /System/Library/Extensions/AppleHDA.kext ./audio/AppleHDA_ALC668.kext
+	rm -R ./audio/AppleHDA_ALC668.kext/Contents/Resources/*
+	rm -R ./audio/AppleHDA_ALC668.kext/Contents/PlugIns
+	rm -R ./audio/AppleHDA_ALC668.kext/Contents/_CodeSignature
+	rm -R ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
+	rm ./audio/AppleHDA_ALC668.kext/Contents/version.plist
+	ln -s /System/Library/Extensions/AppleHDA.kext/Contents/MacOS/AppleHDA ./audio/AppleHDA_ALC668.kext/Contents/MacOS/AppleHDA
+
+	echo "       --> ${BOLD}Copying AppleHDA_ALC668 audio platform & layouts${OFF}"
+	cp ./audio/*.zlib ./audio/AppleHDA_ALC668.kext/Contents/Resources/
+
+	echo "       --> ${BOLD}Configuring AppleHDA_ALC668 Info.plist${OFF}"
+	replace=`/usr/libexec/plistbuddy -c "Print :NSHumanReadableCopyright" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+	/usr/libexec/plistbuddy -c "Set :NSHumanReadableCopyright '$replace'" $plist
+	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleGetInfoString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+	/usr/libexec/plistbuddy -c "Set :CFBundleGetInfoString '$replace'" $plist
+	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleVersion" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+	/usr/libexec/plistbuddy -c "Set :CFBundleVersion '$replace'" $plist
+	replace=`/usr/libexec/plistbuddy -c "Print :CFBundleShortVersionString" $plist | perl -Xpi -e 's/(\d*\.\d*)/9\1/'`
+	/usr/libexec/plistbuddy -c "Set :CFBundleShortVersionString '$replace'" $plist
+	/usr/libexec/plistbuddy -c "Add ':HardwareConfigDriver_Temp' dict" $plist
+	/usr/libexec/plistbuddy -c "Merge /System/Library/Extensions/AppleHDA.kext/Contents/PlugIns/AppleHDAHardwareConfigDriver.kext/Contents/Info.plist ':HardwareConfigDriver_Temp'" $plist
+	/usr/libexec/plistbuddy -c "Copy ':HardwareConfigDriver_Temp:IOKitPersonalities:HDA Hardware Config Resource' ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
+	/usr/libexec/plistbuddy -c "Delete ':HardwareConfigDriver_Temp'" $plist
+	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:HDAConfigDefault'" $plist
+	/usr/libexec/plistbuddy -c "Delete ':IOKitPersonalities:HDA Hardware Config Resource:PostConstructionInitialization'" $plist
+	/usr/libexec/plistbuddy -c "Add ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' integer" $plist
+	/usr/libexec/plistbuddy -c "Set ':IOKitPersonalities:HDA Hardware Config Resource:IOProbeScore' 2000" $plist
+	/usr/libexec/plistbuddy -c "Merge ./audio/ahhcd.plist ':IOKitPersonalities:HDA Hardware Config Resource'" $plist
+    
+	echo "       --> ${BOLD}Created AppleHDA_ALC668.kext${OFF}"
+	sudo cp -r ./audio/AppleHDA_ALC668.kext /Library/Extensions
+	echo "       --> ${BOLD}Installed AppleHDA_ALC668.kext to /Library/Extensions${OFF}"
+#	sudo cp -r ./audio/CodecCommander.kext /Library/Extensions
+#	echo "       --> ${BOLD}Installed CodecCommander.kext to /Library/Extensions${OFF}"
 }
 
 enable_trim()
@@ -374,8 +429,8 @@ case "$1" in
 		patch_dsdt
 		RETVAL=1
 		;;
-	--patch-iokit)
-		patch_iokit
+	--patch-pixelclock)
+		patch_pixel_clock
 		RETVAL=1
 		;;
 	--patch-hda)
@@ -394,7 +449,7 @@ case "$1" in
 		echo "\t${BOLD}--decompile-dsdt${OFF}: Decompile DSDT files in ./DSDT/raw"
 		echo "\t${BOLD}--patch-dsdt${OFF}: Patch DSDT files in ./DSDT/decompiled"
 		echo "\t${BOLD}--compile-dsdt${OFF}: Compile DSDT files to ./DSDT/compiled"
-		echo "\t${BOLD}--patch-iokit${OFF}: Patch maximum pixel clock in IOKit"
+		echo "\t${BOLD}--patch-pixelclock${OFF}: Patch maximum pixel clock in IOKit / CoreDisplay"
 		echo "\t${BOLD}--patch-hda${OFF}: Create AppleHDA injector kernel extension"
 		echo "\t${BOLD}--enable-trim${OFF}: Enable trim support for 3rd party SSD"
 		echo

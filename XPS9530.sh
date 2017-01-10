@@ -254,7 +254,7 @@ patch_coredisplay_execute()
 patch_iokit()
 {
 	iokit_md5=$(md5 -q "/System/Library/Frameworks/IOKit.framework/Versions/Current/IOKit")
-	
+
 	echo "${GREEN}[IOKit]${OFF}: Patching IOKit for maximum pixel clock"
 	echo "${BLUE}[IOKit]${OFF}: Current IOKit md5 is ${BOLD}${iokit_md5}${OFF}"
 	
@@ -319,18 +319,18 @@ patch_iokit()
 
 patch_coredisplay()
 {
-	coredisplay_md5=$(md5 -q "/System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay")
-	
+	coredisplay_md5=$(otool -t "/System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay" | tail -n +3 | md5)
+
 	echo "${GREEN}[CoreDisplay]${OFF}: Patching CoreDisplay for maximum pixel clock"
 	echo "${BLUE}[CoreDisplay]${OFF}: Current CoreDisplay md5 is ${BOLD}${coredisplay_md5}${OFF}"
 	
 	case $coredisplay_md5 in
-		"0550cc0b513fa07ff93f1e5762aa1839")
-		echo "         --> Sierra 10.12 DP1 IOKit (${GREEN}unpatched${OFF})"
+		"079c6486d738f8df31c79c65f596af77")
+		echo "         --> Sierra 10.12.2 CoreDisplay (${GREEN}unpatched${OFF})"
 		patch_coredisplay_execute
 		;;
 		*)
-		echo "         --> Unknown IOKit version or already patched (${RED}no action taken${OFF})"
+		echo "         --> Unknown CoreDisplay version (${coredisplay_md5}) or already patched (${RED}no action taken${OFF})"
 		echo "         Do you want to try and apply the patch nontheless?"
 			select yn in "Yes" "No"; do
 				case $yn in
@@ -352,9 +352,9 @@ patch_pixel_clock()
 	if [ -f /System/Library/Frameworks/CoreDisplay.framework/Versions/Current/CoreDisplay ]
 	then
 		patch_coredisplay
+	else
+		patch_iokite	
 	fi
-	
-	patch_iokit
 }
 
 patch_hda()
@@ -410,6 +410,12 @@ enable_trim()
 	sudo trimforce enable
 }
 
+enable_3rdparty()
+{
+	echo "${GREEN}[3rd Party${OFF}: Enabling ${BOLD}3rd Party${OFF} application support"
+	sudo spctl --master-disable
+}
+
 RETVAL=0
 
 case "$1" in
@@ -441,8 +447,12 @@ case "$1" in
 		enable_trim
 		RETVAL=1
 		;;
+	--enable-3rdparty)
+		enable_3rdparty
+		RETVAL=1
+		;;
 	*)
-		echo "${BOLD}Dell XPS 9530${OFF} - El Capitan 10.11.5 (15F34)"
+		echo "${BOLD}Dell XPS 9530${OFF} - El Capitan 10.12.2 (16C68)"
 		echo "https://github.com/robvanoostenrijk/XPS9530-OSX"
 		echo
 		echo "\t${BOLD}--update${OFF}: Update to latest git version (including externals)"
@@ -452,6 +462,7 @@ case "$1" in
 		echo "\t${BOLD}--patch-pixelclock${OFF}: Patch maximum pixel clock in IOKit / CoreDisplay"
 		echo "\t${BOLD}--patch-hda${OFF}: Create AppleHDA injector kernel extension"
 		echo "\t${BOLD}--enable-trim${OFF}: Enable trim support for 3rd party SSD"
+		echo "\t${BOLD}--enable-3rdparty${OFF}: Enable 3rd party application support (run app from anywhere)"
 		echo
 		echo "Credits:"
 		echo "${BLUE}Laptop-DSDT${OFF}: https://github.com/RehabMan/Laptop-DSDT-Patch"

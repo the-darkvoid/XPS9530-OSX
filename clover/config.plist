@@ -49,9 +49,13 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>kext-dev-mode=1 dart=0 nv_disable=1</string>
+		<string>dart=0 msgbuf=1024000</string>
+		<key>Debug</key>
+		<false/>
 		<key>Legacy</key>
 		<string>LegacyBiosDefault</string>
+		<key>NeverDoRecovery</key>
+		<true/>
 		<key>NoEarlyProgress</key>
 		<true/>
 		<key>Secure</key>
@@ -138,6 +142,8 @@
 			<true/>
 			<key>Legacy</key>
 			<false/>
+			<key>Linux</key>
+			<false/>
 			<key>Tool</key>
 			<true/>
 		</dict>
@@ -146,6 +152,8 @@
 	</dict>
 	<key>Graphics</key>
 	<dict>
+		<key>BootDisplay</key>
+		<integer>1</integer>
 		<key>Inject</key>
 		<dict>
 			<key>ATI</key>
@@ -158,7 +166,7 @@
 		<key>NvidiaSingle</key>
 		<false/>
 		<key>ig-platform-id</key>
-		<string>0x0a260006</string>
+		<string>0x0d26000f</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
@@ -187,6 +195,8 @@
 				<data>
 				BgAmCgEDAwMAAAACAAAwAQAAYAA=
 				</data>
+				<key>MatchOS</key>
+				<string>10.11</string>
 				<key>Name</key>
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
@@ -196,34 +206,26 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>eDP, port 0000, 0x0a260005 0x0a260006 0x0a2e0008 0x0a1600c0</string>
+				<string>Enable 160MB BIOS, 48MB Framebuffer, 48MB Cursor, HDMI @ 0105 for Azul framebuffer 0x0d26000f</string>
 				<key>Disabled</key>
 				<false/>
 				<key>Find</key>
 				<data>
-				AAAIAAIAAAAwAAAAAQUJAAAEAAA=
+				DwAmDQEDAQEAAAAGAAAgAgAAUAEAAABgoQcAAKEHAAAA
+				AAAAAAAAAAAACAACAAAAMAAAAP8AAAABAAAAQAAAAP8A
+				AAABAAAAQAAAAP8AAAABAAAAQAAAAB4AAAAFBQkCAAAA
+				ADIAAAAOAAAAAAAAAP////8=
 				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
 				<key>Name</key>
 				<string>AppleIntelFramebufferAzul</string>
 				<key>Replace</key>
 				<data>
-				AAAIAAQAAAAwAAAAAQUJAAAEAAA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>HDMI-audio, port 0105, 0x0a260005 0x0a260006, 0x0d220003, 0x0a2e000a, 0x0a26000a</string>
-				<key>Disabled</key>
-				<false/>
-				<key>Find</key>
-				<data>
-				AQUJAAAEAACHAAAA
-				</data>
-				<key>Name</key>
-				<string>AppleIntelFramebufferAzul</string>
-				<key>Replace</key>
-				<data>
-				AQUJAAAIAACHAAAA
+				DwAmDQEDAwMAAAAKAAAAAwAAAAMAAABg2QoAANkKAAAA
+				AAAAAAAAAAAACAACAAAAMAAAAAEFEgAACAAAhwAAAAIE
+				CQAABAAAhwAAAP8AAAABAAAAQAAAAA8AAAABAQAABAAA
+				AAAAAAAOAAAAAAAAAP////8=
 				</data>
 			</dict>
 			<dict>
@@ -235,6 +237,8 @@
 				<data>
 				SIX/dEdIiwc=
 				</data>
+				<key>MatchOS</key>
+				<string>10.11,10.12</string>
 				<key>Name</key>
 				<string>IOBluetoothFamily</string>
 				<key>Replace</key>
@@ -251,6 +255,8 @@
 				<data>
 				QYP8/3QsSA==
 				</data>
+				<key>MatchOS</key>
+				<string>10.11,10.12</string>
 				<key>Name</key>
 				<string>AirPortBrcm4360</string>
 				<key>Replace</key>
@@ -267,11 +273,121 @@
 				<data>
 				AQAAdRc=
 				</data>
+				<key>MatchOS</key>
+				<string>10.10,10.11</string>
 				<key>Name</key>
 				<string>IOGraphicsFamily</string>
 				<key>Replace</key>
 				<data>
 				AQAA6xc=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Boot graphics glitch, 10.12.dp1 (credit denskop)</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AQAAdSU=
+				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
+				<key>Name</key>
+				<string>IOGraphicsFamily</string>
+				<key>Replace</key>
+				<data>
+				AQAA6yU=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #1</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				hAjsEA==
+				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #2</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				hQjsEA==
+				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #3</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				gxnUEQ==
+				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				AAAAAA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable Realtek ALC668 #4</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				hBnUEQ==
+				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				aAbsEA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>AirPortBrcm4360 - BCM94352</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				gflSqgAAdSk=
+				</data>
+				<key>MatchOS</key>
+				<string>10.12</string>
+				<key>Name</key>
+				<string>AirPortBrcm4360</string>
+				<key>Replace</key>
+				<data>
+				gflSqgAAZpA=
 				</data>
 			</dict>
 		</array>

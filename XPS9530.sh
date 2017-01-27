@@ -128,7 +128,13 @@ patch_dsdt()
 
 	echo "${BOLD}Renaming PNP devices${OFF} - ${GREEN}/DSDT/patches/misc_devices.txt${OFF}"
 	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/misc_devices.txt ./DSDT/decompiled/DSDT.dsl
-	
+
+	echo "${BOLD}System Deep Idle${OFF} - ${GREEN}/DSDT/patches/system_deep_idle.txt${OFF}"
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_deep_idle.txt ./DSDT/decompiled/DSDT.dsl
+
+	echo "${BOLD}System Deep Sleep${OFF} - ${GREEN}/DSDT/patches/system_deep_sleep.txt${OFF}"
+	./tools/patchmatic ./DSDT/decompiled/DSDT.dsl ./DSDT/patches/system_deep_sleep.txt ./DSDT/decompiled/DSDT.dsl
+
 	########################
 	# SSDT-DptfTabl Patches
 	########################

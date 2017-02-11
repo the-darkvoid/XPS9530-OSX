@@ -335,6 +335,13 @@ patch_coredisplay()
 		echo "         --> Sierra 10.12.2 CoreDisplay (${GREEN}unpatched${OFF})"
 		patch_coredisplay_execute
 		;;
+		"ce726e38a99d9a6958c8694b1f5f57cb")
+		echo "         --> Sierra 10.12.3 CoreDisplay (${GREEN}unpatched${OFF})"
+		patch_coredisplay_execute
+		;;
+		"079c6486d738f8df31c79c65f596af77")
+		echo "         --> Sierra 10.12.3 CoreDisplay (${RED}already patched${OFF})"
+		;;
 		*)
 		echo "         --> Unknown CoreDisplay version (${coredisplay_md5}) or already patched (${RED}no action taken${OFF})"
 		echo "         Do you want to try and apply the patch nontheless?"
@@ -359,7 +366,7 @@ patch_pixel_clock()
 	then
 		patch_coredisplay
 	else
-		patch_iokite	
+		patch_iokit	
 	fi
 }
 

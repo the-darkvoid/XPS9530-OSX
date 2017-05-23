@@ -342,6 +342,20 @@ patch_coredisplay()
 		"079c6486d738f8df31c79c65f596af77")
 		echo "         --> Sierra 10.12.3 CoreDisplay (${RED}already patched${OFF})"
 		;;
+		"c9013fcb63e494db278eebedefb2f9a0")
+		echo "         --> Sierra 10.12.4 CoreDisplay (${GREEN}unpatched${OFF})"
+		patch_coredisplay_execute
+		;;
+		"8880d8a0cbfcd8590d8ff689b20009d6")
+		echo "         --> Sierra 10.12.4 CoreDisplay (${RED}already patched${OFF})"
+		;;
+		"e83c022c40e3bb1db2ca999a27b5eaef")
+		echo "         --> Sierra 10.12.5 CoreDisplay (${GREEN}unpatched${OFF})"
+		patch_coredisplay_execute
+		;;
+		"8d4dee6b0bc6df6280657d4ac1e1a771")
+		echo "         --> Sierra 10.12.5 CoreDisplay (${RED}already patched${OFF})"
+		;;
 		*)
 		echo "         --> Unknown CoreDisplay version (${coredisplay_md5}) or already patched (${RED}no action taken${OFF})"
 		echo "         Do you want to try and apply the patch nontheless?"

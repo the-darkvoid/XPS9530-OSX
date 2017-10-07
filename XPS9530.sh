@@ -222,19 +222,19 @@ compile_dsdt()
 
 	# Additional custom SSDT
 	# ssdtPRgen (P-states / C-states)
-	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4702HQ"* ]]
-	then
-		echo "${BLUE}[SSDT-pr]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
-		echo "${BLUE}[SSDT-pr]${OFF}: Installing SSDT-pr (CPU P-States / C-States) to ./DSDT/compiled"
-		cp ./DSDT/custom/CpuPm-4702HQ.aml ./DSDT/compiled/SSDT-pr.aml
-	fi
+#	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4702HQ"* ]]
+#	then
+#		echo "${BLUE}[SSDT-pr]${OFF}: Intel ${BOLD}i7-4702HQ${OFF} processor found"
+#		echo "${BLUE}[SSDT-pr]${OFF}: Installing SSDT-pr (CPU P-States / C-States) to ./DSDT/compiled"
+#		cp ./DSDT/custom/CpuPm-4702HQ.aml ./DSDT/compiled/SSDT-pr.aml
+#	fi
 	
-	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4712HQ"* ]]
-	then
-		echo "${BLUE}[SSDT-pr]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
-		echo "${BLUE}[SSDT-pr]${OFF}: Installing SSDT-pr (CPU P-States / C-States) to ./DSDT/compiled"
-		cp ./DSDT/custom/CpuPm-4712HQ.aml ./DSDT/compiled/SSDT-pr.aml
-	fi
+#	if [[ `sysctl machdep.cpu.brand_string` == *"i7-4712HQ"* ]]
+#	then
+#		echo "${BLUE}[SSDT-pr]${OFF}: Intel ${BOLD}i7-4712HQ${OFF} processor found"
+#		echo "${BLUE}[SSDT-pr]${OFF}: Installing SSDT-pr (CPU P-States / C-States) to ./DSDT/compiled"
+#		cp ./DSDT/custom/CpuPm-4712HQ.aml ./DSDT/compiled/SSDT-pr.aml
+#	fi
 	
 	# Rehabman NullEthernet.kext
 	echo "${BLUE}[RMNE]${OFF}: Installing SSDT-rmne (Rehabmans NullEthernet) to ./DSDT/compiled"
@@ -362,6 +362,13 @@ patch_coredisplay()
 		;;
 		"11c758b3faa252c998cb3624c81b3d09")
 		echo "         --> Sierra 10.12.6 CoreDisplay (${RED}already patched${OFF})"
+		;;
+		"f2a57f30bf9595f4a78aa8cdacf1a853")
+		echo "         --> High Sierra 10.13.0 CoreDisplay (${GREEN}unpatched${OFF})"
+		patch_coredisplay_execute
+		;;
+		"21ff29bdb15d544ce7c9619d8a028774")
+		echo "         --> High Sierra 10.13.0 CoreDisplay (${RED}already patched${OFF})"
 		;;
 		*)
 		echo "         --> Unknown CoreDisplay version (${coredisplay_md5}) or already patched (${RED}no action taken${OFF})"

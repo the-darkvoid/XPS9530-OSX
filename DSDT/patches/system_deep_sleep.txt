@@ -1,9 +1,0 @@
-into scope label \ insert
-begin
-Name (SLTP, Zero)\n
-\n
-Method (_TTS, 1, NotSerialized)\n
-{\n
-Store (Arg0, SLTP)\n
-}\n
-end;

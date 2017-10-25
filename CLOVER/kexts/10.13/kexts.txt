@@ -1,0 +1,43 @@
+- Lilu.kext - v1.2.0
+  An open source kernel extension bringing a platform for arbitrary kext, library, and program patching throughout the system for macOS.
+  https://github.com/vit9696/Lilu
+- AppleALC.kext - v1.2.0
+  Native macOS HD audio for not officially supported codecs
+  https://github.com/vit9696/AppleALC
+- AirportBrcmFixup - v1.1.0
+  Lilu plugin providing a set of patches for Airport Wi-Fi cards
+  https://sourceforge.net/projects/airportbrcmfixup/
+- CoreDisplayFixup.kext - v1.3.2
+  Enable 4K or greater resolution for all graphics under macOS
+  https://github.com/PMheart/CoreDisplayFixup
+- IntelGraphicsFixup.kext - v1.2.0
+  An open source kernel extension providing patches for Intel GPUs
+  https://sourceforge.net/projects/intelgraphicsfixup/
+- BT4LEContiunityFixup.kext - v1.1.0
+  Lilu plugin providing a set of patches for Bluetooth
+  https://sourceforge.net/projects/bt4lecontiunityfixup/
+- FakeSMC.kext - v2017-1017
+  FakeSMC is an open source SMC device driver/emulator developed by netkas.
+  https://bitbucket.org/RehabMan/os-x-fakesmc-kozlek
+- ACPIBatteryManager.kext - v2017-1001
+  ACPIBatteryManager by RehabMan
+  https://bitbucket.org/RehabMan/os-x-acpi-battery-driver
+- VoodooPS2Controller.kext - v2017-0901
+  Modified VoodooPS2Controller by RehabMan
+  https://bitbucket.org/RehabMan/os-x-voodoo-ps2-controller
+- FakePCIID.kext - v2017-0527
+  FakePCIID_Intel_HDMI_Audio.kext - v2017-0527
+  The purpose of this kext is to attach to any IOPCIDevice so it can provide alternate PCI ID when another driver attached to the same device requests them. This technique can be used instead of patching binaries that may check for supported device-ids (or other PCI IDs) in their IOService::probe or IOService::start method.
+  https://bitbucket.org/RehabMan/os-x-fake-pci-id
+- ACPIBacklight.kext - v2015-1001
+  ACPIBacklight by RehabMan
+  https://bitbucket.org/RehabMan/os-x-acpi-backlight
+- IntelBacklight.kext - v2017-0226
+  IntelBacklight by RehabMan
+  https://bitbucket.org/RehabMan/os-x-intel-backlight
+- USBInjectAll.kext - v2017-0724
+  USB Injection for macOS 10.11+
+  https://bitbucket.org/RehabMan/os-x-usb-inject-all
+- UVC2FaceTimeHD.kext
+  Make webcam identify as Apple FaceTimeHD
+  https://www.tonymacx86.com/threads/guide-dell-xps-13-9350-macos-10-12-1.204730/page-35#post-1386360

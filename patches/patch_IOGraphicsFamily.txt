@@ -1,6 +1,0 @@
-#
-# NOTE: This patch is already done through Clover, its just kept here for completeness
-#
-# Run the following commands in order to patch IOGraphicsFamily to resolve bootup graphics glitches
-sudo perl -i.bak -pe 's|\x85\xc0\x74\x5d\x48|\x31\xc0\x74\x5b\x48|sg' /System/Library/Extensions/IOGraphicsFamily.kext
-sudo perl -pe 's|\x41\x88\xc4\xeb\x03|\x41\x88\xc4\xeb\x23|sg' /System/Library/Extensions/IOGraphicsFamily.kext

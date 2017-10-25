@@ -33,7 +33,7 @@
 			<key>Path</key>
 			<string>font.png</string>
 			<key>Type</key>
-			<string>Load</string>
+			<string>Grey</string>
 		</dict>
 		<key>Selection</key>
 		<dict>

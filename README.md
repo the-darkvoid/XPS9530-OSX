@@ -1,11 +1,11 @@
-OS X Yosemite on Dell XPS 15 (9530)
+mac OS High Sierra on Dell XPS 15 (9530)
 ====================================
 
-This repository contains documentation and research on the installation of OS X Yosemite (10.10) on the [Dell XPS 15 (9530)](http://www.dell.com/us/p/xps-15-9530/pd) 
+This repository contains documentation and research on the installation of OS X High Sierra (10.13) on the [Dell XPS 15 (9530)](http://www.dell.com/us/p/xps-15-9530/pd) 
 
-Covered topics in the [wiki](https://github.com/robvanoostenrijk/XPS9530-OSX/wiki):
+Covered topics in the [wiki](https://github.com/the-darkvoid/XPS9530-OSX/wiki):
 
-  * [Unlocking the BIOS](https://github.com/robvanoostenrijk/XPS9530-OSX/wiki/Unlocking%20the%20BIOS)
-  * [BIOS configuration](https://github.com/robvanoostenrijk/XPS9530-OSX/wiki/BIOS%20Configuration)
-  * [OS X Installation](https://github.com/robvanoostenrijk/XPS9530-OSX/wiki/Installation)
-  * [Post Installation](https://github.com/robvanoostenrijk/XPS9530-OSX/wiki/Post%20Installation)
+  * [Unlocking the BIOS](https://github.com/the-darkvoid/XPS9530-OSX/wiki/Unlocking%20the%20BIOS)
+  * [BIOS configuration](https://github.com/the-darkvoid/XPS9530-OSX/wiki/BIOS%20Configuration)
+
+  * [Installation Guide](https://www.tonymacx86.com/threads/guide-dell-xps-9530-clover-uefi-hotpatch.235558/)

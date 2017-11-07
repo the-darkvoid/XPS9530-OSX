@@ -437,7 +437,7 @@
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string>C0xxxxxxxxxxxxxxx</string<
+		<string>C0xxxxxxxxxxxxxxx</string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>ChassisAssetTag</key>
